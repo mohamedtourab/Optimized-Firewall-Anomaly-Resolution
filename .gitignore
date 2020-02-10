@@ -1,5 +1,5 @@
 .idea/
-/.setting/
+.settings/
 *.classpath
 *.project
-/OFAR/OFAR.iml
+OFAR.iml

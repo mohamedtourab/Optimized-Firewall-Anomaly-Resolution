@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="rules">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="rule" type="ruleType" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="ruleType">
+        <xsd:sequence>
+            <xsd:element name="priority" type="xsd:positiveInteger"/>
+            <xsd:element name="IPsrc" type="xsd:string"/>
+            <!--Psrc cannot integers because we usually use "*" to represent all ports and this cannot be used in integers-->
+            <xsd:element name="Psrc" type="xsd:string"/>
+            <xsd:element name="IPdst" type="xsd:string"/>
+            <xsd:element name="Pdst" type="xsd:string"/>
+            <xsd:element name="Protocol" type="xsd:string"/>
+            <xsd:element name="Action">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="ALLOW"/>
+                        <xsd:enumeration value="DENY"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+		<xsd:attribute name="ruleID" type="xsd:positiveInteger" use="required"/>
+	</xsd:complexType>
+</xsd:schema>
