@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<Anomalies xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+           xsd:noNamespaceSchemaLocation="conflict_schema.xsd">
+
+    <!--Zero or more repetitions:-->
+    <Anomaly AnomalyName="Irrelevance" AnomalyID="201">
+        <!--Zero or more repetitions:-->
+        <ruleID>201</ruleID>
+    </Anomaly>
+
+    <Anomaly AnomalyName="Contradiction" AnomalyID="202">
+        <!--Zero or more repetitions:-->
+        <ruleID>201</ruleID>
+        <ruleID>203</ruleID>
+    </Anomaly>
+
+</Anomalies>
