@@ -123,4 +123,12 @@ public class AnomalyType {
         this.anomalyID = value;
     }
 
+    @Override
+    public String toString() {
+        return "AnomalyType{" +
+                "ruleID=" + ruleID +
+                ", anomalyName=" + anomalyName +
+                ", anomalyID=" + anomalyID +
+                '}';
+    }
 }

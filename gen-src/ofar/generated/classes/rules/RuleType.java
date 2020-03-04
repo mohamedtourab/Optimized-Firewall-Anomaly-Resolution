@@ -266,4 +266,17 @@ public class RuleType {
         this.ruleID = value;
     }
 
+    @Override
+    public String toString() {
+        return "RuleType{" +
+                "priority=" + priority +
+                ", iPsrc='" + iPsrc + '\'' +
+                ", psrc='" + psrc + '\'' +
+                ", iPdst='" + iPdst + '\'' +
+                ", pdst='" + pdst + '\'' +
+                ", protocol='" + protocol + '\'' +
+                ", action='" + action + '\'' +
+                ", ruleID=" + ruleID +
+                '}';
+    }
 }
