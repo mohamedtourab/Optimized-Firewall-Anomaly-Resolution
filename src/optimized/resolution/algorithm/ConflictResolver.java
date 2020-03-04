@@ -1,5 +1,6 @@
 package optimized.resolution.algorithm;
 
+import com.sun.javafx.css.Rule;
 import ofar.generated.classes.conflicts.Anomalies;
 import ofar.generated.classes.conflicts.AnomalyNames;
 import ofar.generated.classes.conflicts.AnomalyType;
@@ -7,9 +8,14 @@ import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ConflictResolver {
+
+    private List<AnomalyType> removedAnomalies = new ArrayList<>();
+    private List<RuleType> removedRules = new ArrayList<>();
 
     private Rules rules;
     private Anomalies anomalies;
@@ -28,6 +34,7 @@ public class ConflictResolver {
         //add some values in the rules list and anomalies list
         createAnomalies();
         createRules();
+        removeIrrelevanceAnomaly();
         rules.getRule().forEach(System.out::println);
         anomalies.getAnomaly().forEach(System.out::println);
     }
@@ -540,6 +547,45 @@ public class ConflictResolver {
         ConflictResolver conflictResolver = new ConflictResolver();
         conflictResolver.resolveAnomalies();
     }
+
+    private RuleType getRuleUsingRuleID(List<RuleType> listOfRules, int ruleID) {
+        for (RuleType rule : listOfRules) {
+            if (rule.getRuleID().intValue() == ruleID)
+                return rule;
+        }
+        return null;
+    }
+
+    private void removeIrrelevanceAnomaly() {
+        List<AnomalyType> listOfAnomalies = new ArrayList<>(anomalies.getAnomaly());
+        Rules originalRules = rules;
+        Anomalies originalAnomalies = anomalies;
+
+        //Remove Irrelevance Anomalies
+        for (AnomalyType anomaly : listOfAnomalies) {
+            if (anomaly.getAnomalyName().equals(AnomalyNames.IRRELEVANCE)) {
+                int ruleID = anomaly.getRuleID().get(0).intValue();
+                RuleType ruleToBeRemoved = getRuleUsingRuleID(rules.getRule(), ruleID);
+                if (ruleToBeRemoved != null) {
+                    removedRules.add(ruleToBeRemoved);
+                }
+                rules.getRule().remove(ruleToBeRemoved);
+            }
+        }
+
+        for (RuleType item : removedRules) {
+            for (AnomalyType anomaly : listOfAnomalies) {
+                for (BigInteger ruleID : anomaly.getRuleID()) {
+                    if (ruleID.equals(item.getRuleID())) {
+                        removedAnomalies.add(anomaly);
+                        anomalies.getAnomaly().remove(anomaly);
+                    }
+                }
+            }
+        }
+    }
+
+
 }
 
 
