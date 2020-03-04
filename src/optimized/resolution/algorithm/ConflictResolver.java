@@ -14,29 +14,43 @@ import java.util.List;
 
 public class ConflictResolver {
 
-    private List<AnomalyType> removedAnomalies = new ArrayList<>();
-    private List<RuleType> removedRules = new ArrayList<>();
-
+    private List<AnomalyType> removedAnomalies;
+    private List<RuleType> removedRules;
+    private List<AnomalyType> listOfAnomalies;
     private Rules rules;
     private Anomalies anomalies;
-
+    private Rules originalRules;
+    private Anomalies originalAnomalies;
     public ConflictResolver() {
         rules = new Rules();
         anomalies = new Anomalies();
+        removedAnomalies = new ArrayList<>();
+        removedRules = new ArrayList<>();
     }
 
     public ConflictResolver(Rules rules, Anomalies anomalies) {
         this.anomalies = anomalies;
         this.rules = rules;
+        originalAnomalies=anomalies;
+        originalRules=rules;
+        removedAnomalies = new ArrayList<>();
+        removedRules = new ArrayList<>();
     }
 
     public void resolveAnomalies() {
         //add some values in the rules list and anomalies list
         createAnomalies();
         createRules();
+        originalRules = rules;
+        originalAnomalies = anomalies;
         removeIrrelevanceAnomaly();
+        removeDuplicationAnomaly();
         rules.getRule().forEach(System.out::println);
         anomalies.getAnomaly().forEach(System.out::println);
+
+        System.out.println("\nThe removed rules and anomalies");
+        removedRules.forEach(System.out::println);
+        removedAnomalies.forEach(System.out::println);
     }
 
     public Rules getRules() {
@@ -309,6 +323,28 @@ public class ConflictResolver {
         ruleType23.setProtocol("*");
         ruleType23.setAction("DENY");
         rules.getRule().add(ruleType23);
+        //Rule 24
+        RuleType ruleType24 = new RuleType();
+        ruleType24.setRuleID(BigInteger.valueOf(24));
+        ruleType24.setPriority(BigInteger.valueOf(24));
+        ruleType24.setIPsrc("10.10.10.*");
+        ruleType24.setPsrc("*");
+        ruleType24.setIPdst("10.10.10.*");
+        ruleType24.setPdst("*");
+        ruleType24.setProtocol("*");
+        ruleType24.setAction("DENY");
+        rules.getRule().add(ruleType24);
+        //Rule 25
+        RuleType ruleType25 = new RuleType();
+        ruleType25.setRuleID(BigInteger.valueOf(25));
+        ruleType25.setPriority(BigInteger.valueOf(25));
+        ruleType25.setIPsrc("10.10.10.*");
+        ruleType25.setPsrc("*");
+        ruleType25.setIPdst("10.10.10.*");
+        ruleType25.setPdst("*");
+        ruleType25.setProtocol("*");
+        ruleType25.setAction("DENY");
+        rules.getRule().add(ruleType25);
     }
 
     private void createAnomalies() {
@@ -541,6 +577,13 @@ public class ConflictResolver {
         anomaly33.getRuleID().add(BigInteger.valueOf(16));
         anomaly33.getRuleID().add(BigInteger.valueOf(19));
         anomalies.getAnomaly().add(anomaly33);
+        //Anomaly 34
+        AnomalyType anomaly34 = new AnomalyType();
+        anomaly34.setAnomalyID(BigInteger.valueOf(34));
+        anomaly34.setAnomalyName(AnomalyNames.DUPLICATION);
+        anomaly34.getRuleID().add(BigInteger.valueOf(24));
+        anomaly34.getRuleID().add(BigInteger.valueOf(25));
+        anomalies.getAnomaly().add(anomaly34);
     }
 
     public static void main(String[] args) {
@@ -557,10 +600,7 @@ public class ConflictResolver {
     }
 
     private void removeIrrelevanceAnomaly() {
-        List<AnomalyType> listOfAnomalies = new ArrayList<>(anomalies.getAnomaly());
-        Rules originalRules = rules;
-        Anomalies originalAnomalies = anomalies;
-
+        listOfAnomalies = new ArrayList<>(anomalies.getAnomaly());
         //Remove Irrelevance Anomalies
         for (AnomalyType anomaly : listOfAnomalies) {
             if (anomaly.getAnomalyName().equals(AnomalyNames.IRRELEVANCE)) {
@@ -581,6 +621,33 @@ public class ConflictResolver {
                         anomalies.getAnomaly().remove(anomaly);
                     }
                 }
+            }
+        }
+    }
+
+    private void removeDuplicationAnomaly(){
+        listOfAnomalies = new ArrayList<>(anomalies.getAnomaly());
+        //Remove Irrelevance Anomalies
+        for (AnomalyType anomaly : listOfAnomalies) {
+            if (anomaly.getAnomalyName().equals(AnomalyNames.DUPLICATION)) {
+                int firstRuleID = anomaly.getRuleID().get(0).intValue();
+                int secondRuleID = anomaly.getRuleID().get(1).intValue();
+                System.out.println(firstRuleID);
+                System.out.println(secondRuleID );
+                RuleType firstRuleToBeRemoved = getRuleUsingRuleID(rules.getRule(), firstRuleID);
+                RuleType secondRuleToBeRemoved = getRuleUsingRuleID(rules.getRule(), secondRuleID);
+
+                if( firstRuleToBeRemoved.getPriority().intValue()>secondRuleToBeRemoved.getPriority().intValue() ){
+                    System.out.println(firstRuleToBeRemoved.getPriority().intValue());
+                    System.out.println(secondRuleToBeRemoved.getPriority().intValue());
+                    removedRules.add(secondRuleToBeRemoved);
+                    rules.getRule().remove(secondRuleToBeRemoved);
+                }else{
+                    removedRules.add(firstRuleToBeRemoved);
+                    rules.getRule().remove(firstRuleToBeRemoved);
+                }
+                removedAnomalies.add(anomaly);
+                anomalies.getAnomaly().remove(anomaly);
             }
         }
     }
