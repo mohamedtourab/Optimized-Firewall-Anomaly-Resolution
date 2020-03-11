@@ -1,6 +1,8 @@
 
 package ofar.generated.classes.conflicts;
 
+import ofar.generated.classes.rules.RuleType;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,5 +132,14 @@ public class AnomalyType {
                 ", anomalyName=" + anomalyName +
                 ", anomalyID=" + anomalyID +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==null)return false;
+        if(!(obj instanceof AnomalyType)) return false;
+        AnomalyType other=(AnomalyType) obj;
+        return other.anomalyName.compareTo(this.anomalyName)==0&&
+                other.ruleID.equals(this.ruleID);
     }
 }

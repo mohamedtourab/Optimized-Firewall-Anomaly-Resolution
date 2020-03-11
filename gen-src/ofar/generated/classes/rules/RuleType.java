@@ -279,4 +279,18 @@ public class RuleType {
                 ", ruleID=" + ruleID +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==null)return false;
+        if(!(obj instanceof RuleType)) return false;
+        RuleType other=(RuleType) obj;
+        return other.action.compareTo(this.action)==0 &&
+                other.priority.compareTo(this.priority)==0 &&
+                other.iPdst.compareTo(this.iPdst)==0 &&
+                other.iPsrc.compareTo(this.iPsrc)==0 &&
+                other.psrc.compareTo(this.psrc)==0 &&
+                other.pdst.compareTo(this.pdst)==0 &&
+                other.protocol.compareTo(this.protocol)==0;
+    }
 }
