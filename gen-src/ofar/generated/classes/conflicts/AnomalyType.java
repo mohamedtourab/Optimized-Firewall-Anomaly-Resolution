@@ -139,7 +139,7 @@ public class AnomalyType {
         if(obj==null)return false;
         if(!(obj instanceof AnomalyType)) return false;
         AnomalyType other=(AnomalyType) obj;
-        return other.anomalyName.compareTo(this.anomalyName)==0&&
+        return other.anomalyName.equals(this.anomalyName)&&
                 other.ruleID.equals(this.ruleID);
     }
 
