@@ -285,13 +285,21 @@ public class RuleType {
         if(obj==null)return false;
         if(!(obj instanceof RuleType)) return false;
         RuleType other=(RuleType) obj;
-        return other.action.compareTo(this.action)==0 &&
-                other.priority.compareTo(this.priority)==0 &&
-                other.iPdst.compareTo(this.iPdst)==0 &&
-                other.iPsrc.compareTo(this.iPsrc)==0 &&
-                other.psrc.compareTo(this.psrc)==0 &&
-                other.pdst.compareTo(this.pdst)==0 &&
-                other.protocol.compareTo(this.protocol)==0;
+        if(other.getAction().equals(this.action)) return false;
+        if( other.getPriority().equals(this.priority)) return false;
+        if(other.getIPdst().equals(this.iPdst))return false;
+        if(other.getIPsrc().equals(this.iPsrc))return false;
+        if(other.getPsrc().equals(this.psrc))return false;
+        if(other.getPdst().equals(this.pdst))return false;
+        if(other.getProtocol().equals(this.protocol))return false;
+        return true;
+        /*return other.getAction().compareTo(this.action)==0 &&
+                other.getPriority().compareTo(this.priority)==0 &&
+                other.getIPdst().compareTo(this.iPdst)==0 &&
+                other.getIPsrc().compareTo(this.iPsrc)==0 &&
+                other.getPsrc().compareTo(this.psrc)==0 &&
+                other.getPdst().compareTo(this.pdst)==0 &&
+                other.getProtocol().compareTo(this.protocol)==0;*/
     }
 
     @Override
