@@ -16,9 +16,8 @@ import java.util.stream.Collectors;
 
 public class ConflictResolver {
 
-    private List<AnomalyType> removedAnomalies;
-    private List<RuleType> removedRules;
-    private HashSet<BigInteger> removedRulesIDs;
+    private HashSet<AnomalyType> removedAnomalies;
+    private HashSet<RuleType> removedRules;
 
     private Rules rules;
     private Anomalies anomalies;
@@ -27,19 +26,19 @@ public class ConflictResolver {
     public ConflictResolver(Rules rules, Anomalies anomalies) {
         this.anomalies = anomalies;
         this.rules = rules;
-        removedAnomalies = new ArrayList<>();
-        removedRules = new ArrayList<>();
-        removedRulesIDs = new HashSet<>();
+        removedAnomalies = new HashSet<>();
+        removedRules = new HashSet<>();
     }
 
     public void resolveAnomalies() {
         removeIrrelevanceAnomaly();
         //removeDuplicationAnomaly();
         rules.getRule().forEach(System.out::println);
-        //anomalies.getAnomaly().forEach(System.out::println);
+        anomalies.getAnomaly().forEach(System.out::println);
 
-        System.out.println("\nThe removed rules and anomalies");
+        System.out.println("\nThe removed rules");
         removedRules.forEach(System.out::println);
+        System.out.println("The removed anomalies are: ");
         removedAnomalies.forEach(System.out::println);
     }
 
@@ -57,50 +56,17 @@ public class ConflictResolver {
                 rules.getRule().remove(ruleToBeRemoved);
             }
         }
-        //Remove irrelevance anomalies
-        List<AnomalyType> upatedAnomalies = anomalies.getAnomaly().stream()
-                .filter(anomaly -> {
-                    anomaly.getRuleID().stream().filter(ruleId->{
-                        
-                    });
 
-
-                })
-                .collect(Collectors.toList());
-        upatedAnomalies.stream().forEach(System.out::println);
-
-
-/*
-
-        checkRule(anomaly, rulesIdsToRemove){
-            List<BigInteger> rulesInAnomaly = anomaly.getRuleId();
-            for(BigInteger i : rulesInAnomay){
-                if(rulesIds.contains(i)){
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        List<AnomalyType> upatedAnomalies = listOfAnomalies.stream()
-                .filter(anomaly -> checkRule(anomaly, rulesIdsToRemove))
-                .collect(Collectors.toList());
-
-  */
-
-
-/*
-        for (RuleType item : removedRules) {
-            for (AnomalyType anomaly : listOfAnomalies) {
-                for (BigInteger ruleID : anomaly.getRuleID()) {
-                    if (ruleID.equals(item.getRuleID())) {
-                        removedAnomalies.add(anomaly);
-                        anomalies.getAnomaly().remove(anomaly);
-                    }
-                }
-            }
-        }
-*/
+        //Remove all anomalies caused the removed rules
+        removedRules.forEach(oneRule -> {
+            anomalies.getAnomaly().forEach(oneAnomaly -> {
+                if (oneAnomaly.getRuleID().contains(oneRule.getRuleID()))
+                    removedAnomalies.add(oneAnomaly);
+            });
+        });
+        removedAnomalies.forEach(a -> {
+            anomalies.getAnomaly().remove(a);
+        });
     }
 
     /*private void removeDuplicationAnomaly(){
