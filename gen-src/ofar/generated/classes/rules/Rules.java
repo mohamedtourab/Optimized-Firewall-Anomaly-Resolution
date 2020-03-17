@@ -66,4 +66,10 @@ public class Rules {
         return this.rule;
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Rules cloned = new Rules();
+        cloned.getRule().addAll(this.getRule());
+        return cloned;
+    }
 }

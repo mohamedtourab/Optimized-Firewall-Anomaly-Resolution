@@ -21,11 +21,15 @@ public class ConflictResolver {
 
     private Rules rules;
     private Anomalies anomalies;
+    private Rules clonedRules;
+    private Anomalies clonedAnomalies;
 
 
-    public ConflictResolver(Rules rules, Anomalies anomalies) {
+    public ConflictResolver(Rules rules, Anomalies anomalies) throws CloneNotSupportedException {
         this.anomalies = anomalies;
         this.rules = rules;
+        clonedAnomalies =(Anomalies) this.anomalies.clone();
+        clonedRules =(Rules) this.rules.clone();
         removedAnomalies = new HashSet<>();
         removedRules = new HashSet<>();
     }
@@ -42,12 +46,45 @@ public class ConflictResolver {
         removedAnomalies.forEach(System.out::println);
     }
 
-
     private void removeIrrelevanceAnomaly() {
 
         //Remove Irrelevance Rules
         for (AnomalyType anomaly : anomalies.getAnomaly()) {
             if (anomaly.getAnomalyName().equals(AnomalyNames.IRRELEVANCE)) {
+                int ruleID = anomaly.getRuleID().get(0).intValue();
+                RuleType ruleToBeRemoved = getRuleUsingRuleID(rules.getRule(), ruleID);
+                if (ruleToBeRemoved != null) {
+                    removedRules.add(ruleToBeRemoved);
+                }
+                rules.getRule().remove(ruleToBeRemoved);
+
+            }
+        }
+        removedRules.forEach(oneRule -> {
+            clonedAnomalies.getAnomaly().forEach(oneAnomaly -> {
+                if (oneAnomaly.getRuleID().contains(oneRule.getRuleID())){
+                    anomalies.getAnomaly().remove(oneAnomaly);
+                    removedAnomalies.add(oneAnomaly);
+                }
+
+            });
+        });
+//        //Remove all anomalies caused the removed rules
+//        removedRules.forEach(oneRule -> {
+//            anomalies.getAnomaly().forEach(oneAnomaly -> {
+//                if (oneAnomaly.getRuleID().contains(oneRule.getRuleID()))
+//                    removedAnomalies.add(oneAnomaly);
+//            });
+//        });
+//        removedAnomalies.forEach(a -> {
+//            anomalies.getAnomaly().remove(a);
+//        });
+    }
+
+    private void removeDuplicationAnomaly() {
+        //Remove Irrelevance Rules
+        for (AnomalyType anomaly : anomalies.getAnomaly()) {
+            if (anomaly.getAnomalyName().equals(AnomalyNames.DUPLICATION)) {
                 int ruleID = anomaly.getRuleID().get(0).intValue();
                 RuleType ruleToBeRemoved = getRuleUsingRuleID(rules.getRule(), ruleID);
                 if (ruleToBeRemoved != null) {
@@ -69,33 +106,8 @@ public class ConflictResolver {
         });
     }
 
-    /*private void removeDuplicationAnomaly(){
-        listOfAnomalies = new ArrayList<>(anomalies.getAnomaly());
-        //Remove Irrelevance Anomalies
-        for (AnomalyType anomaly : listOfAnomalies) {
-            if (anomaly.getAnomalyName().equals(AnomalyNames.DUPLICATION)) {
-                int firstRuleID = anomaly.getRuleID().get(0).intValue();
-                int secondRuleID = anomaly.getRuleID().get(1).intValue();
-                System.out.println(firstRuleID);
-                System.out.println(secondRuleID );
-                RuleType firstRuleToBeRemoved = getRuleUsingRuleID(rules.getRule(), firstRuleID);
-                RuleType secondRuleToBeRemoved = getRuleUsingRuleID(rules.getRule(), secondRuleID);
 
-                if( firstRuleToBeRemoved.getPriority().intValue()>secondRuleToBeRemoved.getPriority().intValue() ){
-                    System.out.println(firstRuleToBeRemoved.getPriority().intValue());
-                    System.out.println(secondRuleToBeRemoved.getPriority().intValue());
-                    removedRules.add(secondRuleToBeRemoved);
-                    rules.getRule().remove(secondRuleToBeRemoved);
-                }else{
-                    removedRules.add(firstRuleToBeRemoved);
-                    rules.getRule().remove(firstRuleToBeRemoved);
-                }
-                removedAnomalies.add(anomaly);
-                anomalies.getAnomaly().remove(anomaly);
-            }
-        }
-    }
-*/
+
     private RuleType getRuleUsingRuleID(List<RuleType> listOfRules, int ruleID) {
         for (RuleType rule : listOfRules) {
             if (rule.getRuleID().intValue() == ruleID)
@@ -122,7 +134,7 @@ public class ConflictResolver {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
 
         ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
         conflictResolver.resolveAnomalies();

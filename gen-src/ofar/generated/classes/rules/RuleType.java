@@ -293,4 +293,9 @@ public class RuleType {
                 other.pdst.compareTo(this.pdst)==0 &&
                 other.protocol.compareTo(this.protocol)==0;
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

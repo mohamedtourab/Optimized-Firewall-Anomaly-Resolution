@@ -142,4 +142,9 @@ public class AnomalyType {
         return other.anomalyName.compareTo(this.anomalyName)==0&&
                 other.ruleID.equals(this.ruleID);
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

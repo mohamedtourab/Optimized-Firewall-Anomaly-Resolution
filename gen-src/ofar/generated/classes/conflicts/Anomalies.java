@@ -68,4 +68,10 @@ public class Anomalies {
         return this.anomaly;
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Anomalies cloned = new Anomalies();
+        cloned.getAnomaly().addAll(this.getAnomaly());
+        return cloned;
+    }
 }
