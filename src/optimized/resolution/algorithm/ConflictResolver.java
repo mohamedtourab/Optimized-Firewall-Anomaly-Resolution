@@ -24,16 +24,18 @@ public class ConflictResolver {
 
     public void resolveAnomalies() {
         final RemovedEntries irrelevanceRemovedEntries = removeIrrelevanceAnomaly();
-        final RemovedEntries duplicateRemovedEntries = removeDuplicationAnomaly();
+        final RemovedEntries duplicateRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
+        final RemovedEntries shadowingRedundancyRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
+
         final Rules removedRules = new Rules();
         final Anomalies removedAnomalies = new Anomalies();
 
         removedRules.getRule().addAll(Stream
-                .of(irrelevanceRemovedEntries.getRemovedRules(), duplicateRemovedEntries.getRemovedRules())
+                .of(irrelevanceRemovedEntries.getRemovedRules(), duplicateRemovedEntries.getRemovedRules(), shadowingRedundancyRemovedEntries.getRemovedRules())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
         removedAnomalies.getAnomaly().addAll(Stream
-                .of(irrelevanceRemovedEntries.getRemovedAnomalies(), duplicateRemovedEntries.getRemovedAnomalies())
+                .of(irrelevanceRemovedEntries.getRemovedAnomalies(), duplicateRemovedEntries.getRemovedAnomalies(),shadowingRedundancyRemovedEntries.getRemovedAnomalies())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
     }
@@ -64,14 +66,15 @@ public class ConflictResolver {
         return new RemovedEntries(removedRules, removedAnomalies);
     }
 
-    private RemovedEntries removeDuplicationAnomaly() {
+    private RemovedEntries removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames anomalyName) {
         final Set<RuleType> removedRules = new HashSet<>();
         final Set<AnomalyType> removedAnomalies = new HashSet<>();
         final HashSet<AnomalyType> localRemovedAnomalies = new HashSet<>();
         final HashSet<RuleType> localRemovedRules = new HashSet<>();
+
         //Remove Irrelevance Rules
         for (AnomalyType anomaly : anomalies.getAnomaly()) {
-            if (anomaly.getAnomalyName().equals(AnomalyNames.DUPLICATION)) {
+            if (anomaly.getAnomalyName().equals(anomalyName)) {
                 BigInteger firstRuleId = anomaly.getRuleID().get(0);
                 BigInteger secondRuleId = anomaly.getRuleID().get(1);
                 RuleType rule1 = getRuleUsingRuleID(rules.getRule(), firstRuleId);
