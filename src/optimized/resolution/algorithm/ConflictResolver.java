@@ -2,6 +2,7 @@ package optimized.resolution.algorithm;
 
 import ofar.generated.classes.*;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -89,10 +90,62 @@ public class ConflictResolver {
         return new RemovedEntries(removedRules, removedAnomalies);
     }
 
+    private List<AnomalyType> getConflictAnomalies() {
+        return anomalies.getAnomaly().stream().filter(a -> {
+            AnomalyNames anomalyName = a.getAnomalyName();
+            return anomalyName.equals(AnomalyNames.CONTRADICTION) || anomalyName.equals(AnomalyNames.SHADOWING_CONFLICT) || anomalyName.equals(AnomalyNames.CORRELATION);
+        }).collect(Collectors.toList());
+    }
+
+    private void executeSolveRequest(SolveRequest solveRequest) {
+        final Set<RuleType> removedRules = new HashSet<>();
+        final Set<AnomalyType> removedAnomalies = new HashSet<>();
+
+        //Solve Contradiction
+        removedRules.addAll(solveRequest.getContradictionSolutions().stream().filter(ContradictionSolutionType::isToRemove).map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId()))).collect(Collectors.toSet()));
+
+        //Solve Shadowing Conflict
+        //Perform the first solution to get the rules to be deleted
+        removedRules.addAll(solveRequest.getShadowingConflictSolutions().stream().filter(ShadowingConflictSolutionType::isToRemove).map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId()))).collect(Collectors.toSet()));
+        //Perform the second solution to flip the order
+        solveRequest.getShadowingConflictSolutions().stream().filter(ShadowingConflictSolutionType::isToChangeOrder).forEach(l -> {
+            AnomalyType anomaly = getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(l.getAnomalyId()));
+            int rule2Index=rules.getRule().indexOf(anomaly.getRule().get(0));
+            int rule1Index=rules.getRule().indexOf(anomaly.getRule().get(1));
+            BigInteger temp = anomaly.getRule().get(0).getPriority();
+            anomaly.getRule().get(0).setPriority(anomaly.getRule().get(1).getPriority());
+            anomaly.getRule().get(1).setPriority(temp);
+            Collections.swap(rules.getRule(),rule1Index,rule2Index);
+        });
+
+        //Solve Correlation
+
+
+    }
+
+    private RuleType getRuleUsingRuleID(List<RuleType> listOfRules, BigInteger ruleID) {
+        RuleType r = new RuleType();
+        for (RuleType rule : listOfRules) {
+            if (rule.getRuleID().equals(ruleID))
+                r = rule;
+        }
+        return r;
+    }
+
+    private AnomalyType getAnomalyUsingAnomalyID(List<AnomalyType> listOfAnomalies, BigInteger anomalyId) {
+        AnomalyType a = new AnomalyType();
+        for (AnomalyType anomaly : listOfAnomalies) {
+            if (anomaly.getAnomalyID().equals(anomalyId))
+                a = anomaly;
+        }
+        return a;
+    }
+
     public static void main(String[] args) {
 
         ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
         conflictResolver.resolveAnomalies();
+        conflictResolver.getConflictAnomalies();
     }
 
 }
