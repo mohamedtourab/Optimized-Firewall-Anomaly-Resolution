@@ -4,3 +4,4 @@
 *.project
 OFAR.iml
 bin/
+out/

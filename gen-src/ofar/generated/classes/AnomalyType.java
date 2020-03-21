@@ -1,7 +1,5 @@
 
-package ofar.generated.classes.conflicts;
-
-import ofar.generated.classes.rules.RuleType;
+package ofar.generated.classes;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="ruleID" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="rule" type="{}ruleType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="AnomalyName" use="required" type="{}AnomalyNames" />
  *       &lt;attribute name="AnomalyID" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
@@ -36,12 +34,11 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AnomalyType", propOrder = {
-    "ruleID"
+    "rule"
 })
 public class AnomalyType {
 
-    @XmlSchemaType(name = "positiveInteger")
-    protected List<BigInteger> ruleID;
+    protected List<RuleType> rule;
     @XmlAttribute(name = "AnomalyName", required = true)
     protected AnomalyNames anomalyName;
     @XmlAttribute(name = "AnomalyID", required = true)
@@ -49,32 +46,32 @@ public class AnomalyType {
     protected BigInteger anomalyID;
 
     /**
-     * Gets the value of the ruleID property.
+     * Gets the value of the rule property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ruleID property.
+     * This is why there is not a <CODE>set</CODE> method for the rule property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRuleID().add(newItem);
+     *    getRule().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link BigInteger }
+     * {@link RuleType }
      * 
      * 
      */
-    public List<BigInteger> getRuleID() {
-        if (ruleID == null) {
-            ruleID = new ArrayList<BigInteger>();
+    public List<RuleType> getRule() {
+        if (rule == null) {
+            rule = new ArrayList<RuleType>();
         }
-        return this.ruleID;
+        return this.rule;
     }
 
     /**
@@ -124,11 +121,10 @@ public class AnomalyType {
     public void setAnomalyID(BigInteger value) {
         this.anomalyID = value;
     }
-
     @Override
     public String toString() {
         return "AnomalyType{" +
-                "ruleID=" + ruleID +
+                "ruleID=" + rule +
                 ", anomalyName=" + anomalyName +
                 ", anomalyID=" + anomalyID +
                 '}';
@@ -140,7 +136,7 @@ public class AnomalyType {
         if(!(obj instanceof AnomalyType)) return false;
         AnomalyType other=(AnomalyType) obj;
         return other.anomalyName.equals(this.anomalyName)&&
-                other.ruleID.equals(this.ruleID);
+                other.rule.equals(this.rule);
     }
 
     @Override

@@ -1,5 +1,5 @@
 
-package ofar.generated.classes.rules;
+package ofar.generated.classes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,6 @@ public class Rules {
         }
         return this.rule;
     }
-
     @Override
     public Object clone() throws CloneNotSupportedException {
         Rules cloned = new Rules();

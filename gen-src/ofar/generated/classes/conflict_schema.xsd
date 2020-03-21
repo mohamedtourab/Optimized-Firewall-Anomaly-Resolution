@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
+    <xsd:include schemaLocation="firewall_rules.xsd"/>
     <xsd:element name="Anomalies">
         <xsd:complexType>
             <xsd:sequence>
@@ -20,7 +20,7 @@
 
     <xsd:complexType name="AnomalyType">
         <xsd:sequence>
-            <xsd:element name="ruleID" type="xsd:positiveInteger" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="rule" type="ruleType" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
         <xsd:attribute name="AnomalyName" type="AnomalyNames" use="required"/>
         <xsd:attribute name="AnomalyID" type="xsd:positiveInteger" use="required"/>

@@ -1,5 +1,5 @@
 
-package ofar.generated.classes.rules;
+package ofar.generated.classes;
 
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -265,7 +265,6 @@ public class RuleType {
     public void setRuleID(BigInteger value) {
         this.ruleID = value;
     }
-
     @Override
     public String toString() {
         return "RuleType{" +
@@ -298,4 +297,5 @@ public class RuleType {
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
 }

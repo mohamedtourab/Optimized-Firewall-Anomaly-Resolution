@@ -1,5 +1,5 @@
 
-package ofar.generated.classes.conflicts;
+package ofar.generated.classes;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AnomalyNames.
- *
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
+ * 
  */
 @XmlType(name = "AnomalyNames")
 @XmlEnum
@@ -54,7 +55,7 @@ public enum AnomalyNames {
     }
 
     public static AnomalyNames fromValue(String v) {
-        for (AnomalyNames c : AnomalyNames.values()) {
+        for (AnomalyNames c: AnomalyNames.values()) {
             if (c.value.equals(v)) {
                 return c;
             }
