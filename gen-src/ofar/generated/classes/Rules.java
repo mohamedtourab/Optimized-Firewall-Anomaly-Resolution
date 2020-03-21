@@ -71,4 +71,5 @@ public class Rules {
         cloned.getRule().addAll(this.getRule());
         return cloned;
     }
+
 }

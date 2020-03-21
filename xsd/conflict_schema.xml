@@ -6,13 +6,37 @@
     <!--Zero or more repetitions:-->
     <Anomaly AnomalyName="Irrelevance" AnomalyID="201">
         <!--Zero or more repetitions:-->
-        <ruleID>201</ruleID>
+        <rule ruleID="1">
+            <priority>201</priority>
+            <IPsrc>string</IPsrc>
+            <Psrc>string</Psrc>
+            <IPdst>string</IPdst>
+            <Pdst>string</Pdst>
+            <Protocol>string</Protocol>
+            <Action>DENY</Action>
+        </rule>
     </Anomaly>
 
     <Anomaly AnomalyName="Contradiction" AnomalyID="202">
         <!--Zero or more repetitions:-->
-        <ruleID>201</ruleID>
-        <ruleID>203</ruleID>
+        <rule ruleID="2">
+            <priority>201</priority>
+            <IPsrc>string</IPsrc>
+            <Psrc>string</Psrc>
+            <IPdst>string</IPdst>
+            <Pdst>string</Pdst>
+            <Protocol>string</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="3">
+            <priority>201</priority>
+            <IPsrc>string</IPsrc>
+            <Psrc>string</Psrc>
+            <IPdst>string</IPdst>
+            <Pdst>string</Pdst>
+            <Protocol>string</Protocol>
+            <Action>DENY</Action>
+        </rule>
     </Anomaly>
 
 </Anomalies>

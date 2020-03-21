@@ -1,10 +1,6 @@
 package optimized.resolution.algorithm;
 
-import ofar.generated.classes.Anomalies;
-import ofar.generated.classes.AnomalyNames;
-import ofar.generated.classes.AnomalyType;
-import ofar.generated.classes.RuleType;
-import ofar.generated.classes.Rules;
+import ofar.generated.classes.*;
 
 import java.math.BigInteger;
 

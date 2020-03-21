@@ -45,20 +45,4 @@ public class ObjectFactory {
         return new RuleType();
     }
 
-    /**
-     * Create an instance of {@link Anomalies }
-     * 
-     */
-    public Anomalies createAnomalies() {
-        return new Anomalies();
-    }
-
-    /**
-     * Create an instance of {@link AnomalyType }
-     * 
-     */
-    public AnomalyType createAnomalyType() {
-        return new AnomalyType();
-    }
-
 }

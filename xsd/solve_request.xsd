@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="contradict_solution.xsd"/>
+    <xsd:include schemaLocation="correlation_solution.xsd"/>
+    <xsd:include schemaLocation="shadowing_conflict_solution.xsd"/>
+    <xsd:element name="SolveRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="contradictionSolutions" type="ContradictionSolutionType" maxOccurs="unbounded" minOccurs="0"/>
+                <xsd:element name="shadowingConflictSolutions" type="ShadowingConflictSolutionType" maxOccurs="unbounded" minOccurs="0"/>
+                <xsd:element name="correlationSolutions" type="CorrelationSolutionType" maxOccurs="unbounded" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
