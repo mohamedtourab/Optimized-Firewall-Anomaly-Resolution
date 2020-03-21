@@ -93,17 +93,6 @@ public class ConflictResolver {
         localRemovedRules.forEach(r -> rules.getRule().remove(r));
         return new RemovedEntries(removedRules, removedAnomalies);
     }
-    private void solveContradictionAnomalies(){
-
-    }
-    private RuleType getRuleUsingRuleID(List<RuleType> listOfRules, BigInteger ruleID) {
-        RuleType r = new RuleType();
-        for (RuleType rule : listOfRules) {
-            if (rule.getRuleID().equals(ruleID))
-                r = rule;
-        }
-        return r;
-    }
 
     public static void main(String[] args) {
 
