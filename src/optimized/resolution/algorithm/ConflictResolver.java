@@ -119,7 +119,17 @@ public class ConflictResolver {
         });
 
         //Solve Correlation
-
+        solveRequest.getCorrelationSolutions().stream().filter(CorrelationSolutionType::isToChange).forEach(a->{
+            RuleType rule = getRuleUsingRuleID(rules.getRule(),BigInteger.valueOf(a.getRuleId()));
+            rule.setPriority(a.getUpdatedRule().getPriority());
+            rule.setAction(a.getUpdatedRule().getAction());
+            rule.setIPdst(a.getUpdatedRule().getIPdst());
+            rule.setIPsrc(a.getUpdatedRule().getIPsrc());
+            rule.setPdst(a.getUpdatedRule().getPdst());
+            rule.setProtocol(a.getUpdatedRule().getProtocol());
+            rule.setPsrc(a.getUpdatedRule().getPsrc());
+            rule.setRuleID(a.getUpdatedRule().getRuleID());
+        });
 
     }
 
