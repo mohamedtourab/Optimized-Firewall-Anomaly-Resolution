@@ -97,30 +97,44 @@ public class ConflictResolver {
         }).collect(Collectors.toList());
     }
 
-    private void executeSolveRequest(SolveRequest solveRequest) {
+    private RemovedEntries executeSolveRequest(SolveRequest solveRequest) {
         final Set<RuleType> removedRules = new HashSet<>();
         final Set<AnomalyType> removedAnomalies = new HashSet<>();
 
         //Solve Contradiction
-        removedRules.addAll(solveRequest.getContradictionSolutions().stream().filter(ContradictionSolutionType::isToRemove).map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId()))).collect(Collectors.toSet()));
+        removedRules.addAll(solveRequest.getContradictionSolutions().stream()
+                .filter(ContradictionSolutionType::isToRemove)
+                .map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId())))
+                .collect(Collectors.toSet()));
 
         //Solve Shadowing Conflict
+
         //Perform the first solution to get the rules to be deleted
-        removedRules.addAll(solveRequest.getShadowingConflictSolutions().stream().filter(ShadowingConflictSolutionType::isToRemove).map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId()))).collect(Collectors.toSet()));
+        removedRules.addAll(solveRequest.getShadowingConflictSolutions().stream()
+                .filter(ShadowingConflictSolutionType::isToRemove)
+                .map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId())))
+                .collect(Collectors.toSet()));
+
         //Perform the second solution to flip the order
         solveRequest.getShadowingConflictSolutions().stream().filter(ShadowingConflictSolutionType::isToChangeOrder).forEach(l -> {
             AnomalyType anomaly = getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(l.getAnomalyId()));
-            int rule2Index=rules.getRule().indexOf(anomaly.getRule().get(0));
-            int rule1Index=rules.getRule().indexOf(anomaly.getRule().get(1));
+            int rule2Index = rules.getRule().indexOf(anomaly.getRule().get(0));
+            int rule1Index = rules.getRule().indexOf(anomaly.getRule().get(1));
             BigInteger temp = anomaly.getRule().get(0).getPriority();
             anomaly.getRule().get(0).setPriority(anomaly.getRule().get(1).getPriority());
             anomaly.getRule().get(1).setPriority(temp);
-            Collections.swap(rules.getRule(),rule1Index,rule2Index);
+            Collections.swap(rules.getRule(), rule1Index, rule2Index);
         });
 
+        //Remove anomalies due to flip solution
+        removedAnomalies.addAll(solveRequest.getShadowingConflictSolutions().stream()
+                .filter(ShadowingConflictSolutionType::isToChangeOrder)
+                .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(a.getAnomalyId())))
+                .collect(Collectors.toSet()));
+
         //Solve Correlation
-        solveRequest.getCorrelationSolutions().stream().filter(CorrelationSolutionType::isToChange).forEach(a->{
-            RuleType rule = getRuleUsingRuleID(rules.getRule(),BigInteger.valueOf(a.getRuleId()));
+        solveRequest.getCorrelationSolutions().stream().filter(CorrelationSolutionType::isToChange).forEach(a -> {
+            RuleType rule = getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId()));
             rule.setPriority(a.getUpdatedRule().getPriority());
             rule.setAction(a.getUpdatedRule().getAction());
             rule.setIPdst(a.getUpdatedRule().getIPdst());
@@ -131,7 +145,26 @@ public class ConflictResolver {
             rule.setRuleID(a.getUpdatedRule().getRuleID());
         });
 
+        //Remove anomalies due to changing the rules solution
+        removedAnomalies.addAll(solveRequest.getCorrelationSolutions().stream()
+                .filter(CorrelationSolutionType::isToChange)
+                .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(a.getAnomalyId())))
+                .collect(Collectors.toSet()));
+
+
+        removedRules.forEach(r -> rules.getRule().remove(r));
+        //Remove all anomalies caused by the removed rules
+        removedRules.forEach(oneRule -> anomalies.getAnomaly().forEach(oneAnomaly -> {
+            if (oneAnomaly.getRule().contains(oneRule)) {
+                removedAnomalies.add(oneAnomaly);
+            }
+        }));
+        removedAnomalies.forEach(a -> anomalies.getAnomaly().remove(a));
+        return new RemovedEntries(removedRules, removedAnomalies);
     }
+
+//TODO Remove unnecessary Anomalies
+
 
     private RuleType getRuleUsingRuleID(List<RuleType> listOfRules, BigInteger ruleID) {
         RuleType r = new RuleType();
