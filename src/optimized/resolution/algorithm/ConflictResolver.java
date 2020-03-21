@@ -163,8 +163,6 @@ public class ConflictResolver {
         return new RemovedEntries(removedRules, removedAnomalies);
     }
 
-//TODO Remove unnecessary Anomalies
-
 
     private RuleType getRuleUsingRuleID(List<RuleType> listOfRules, BigInteger ruleID) {
         RuleType r = new RuleType();
