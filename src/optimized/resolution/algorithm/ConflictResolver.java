@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class ConflictResolver {
+public class ConflictResolver implements Resolver {
     private Rules rules;
     private Anomalies anomalies;
 
@@ -18,6 +18,7 @@ public class ConflictResolver {
         this.rules = rules;
     }
 
+    @Override
     public void resolveAnomalies() {
         final RemovedEntries irrelevanceRemovedEntries = removeIrrelevanceAnomaly();
         final RemovedEntries duplicateRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
@@ -36,7 +37,8 @@ public class ConflictResolver {
                 .collect(Collectors.toList()));
     }
 
-    private RemovedEntries removeIrrelevanceAnomaly() {
+    @Override
+    public RemovedEntries removeIrrelevanceAnomaly() {
         final Set<RuleType> removedRules = new HashSet<>();
         final Set<AnomalyType> removedAnomalies = new HashSet<>();
         //Remove Irrelevance Rules
@@ -57,7 +59,8 @@ public class ConflictResolver {
         return new RemovedEntries(removedRules, removedAnomalies);
     }
 
-    private RemovedEntries removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames anomalyName) {
+    @Override
+    public RemovedEntries removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames anomalyName) {
         final Set<RuleType> removedRules = new HashSet<>();
         final Set<AnomalyType> removedAnomalies = new HashSet<>();
         final HashSet<AnomalyType> localRemovedAnomalies = new HashSet<>();
@@ -90,14 +93,18 @@ public class ConflictResolver {
         return new RemovedEntries(removedRules, removedAnomalies);
     }
 
-    private List<AnomalyType> getConflictAnomalies() {
-        return anomalies.getAnomaly().stream().filter(a -> {
+    @Override
+    public Anomalies getConflictAnomalies() {
+        Anomalies returnData = new Anomalies();
+        returnData.getAnomaly().addAll(anomalies.getAnomaly().stream().filter(a -> {
             AnomalyNames anomalyName = a.getAnomalyName();
             return anomalyName.equals(AnomalyNames.CONTRADICTION) || anomalyName.equals(AnomalyNames.SHADOWING_CONFLICT) || anomalyName.equals(AnomalyNames.CORRELATION);
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toList()));
+        return returnData;
     }
 
-    private RemovedEntries executeSolveRequest(SolveRequest solveRequest) {
+    @Override
+    public RemovedEntries executeSolveRequest(SolveRequest solveRequest) {
         final Set<RuleType> removedRules = new HashSet<>();
         final Set<AnomalyType> removedAnomalies = new HashSet<>();
 
