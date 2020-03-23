@@ -1,5 +1,5 @@
 
-package ofar.generated.classes;
+package ofar.generated.classes.conflicts;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;

@@ -1,5 +1,7 @@
 
-package ofar.generated.classes;
+package ofar.generated.classes.correlation;
+
+import ofar.generated.classes.rules.RuleType;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,9 +11,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for CorrelationSolutionType complex type.
- *
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * 
  * <pre>
  * &lt;complexType name="CorrelationSolutionType">
  *   &lt;complexContent>
@@ -26,15 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CorrelationSolutionType", propOrder = {
-        "toChange",
-        "ruleId",
-        "anomalyId",
-        "updatedRule"
+    "toChange",
+    "ruleId",
+    "anomalyId",
+    "updatedRule"
 })
 public class CorrelationSolutionType {
 
@@ -46,7 +48,7 @@ public class CorrelationSolutionType {
 
     /**
      * Gets the value of the toChange property.
-     *
+     * 
      */
     public boolean isToChange() {
         return toChange;
@@ -54,7 +56,7 @@ public class CorrelationSolutionType {
 
     /**
      * Sets the value of the toChange property.
-     *
+     * 
      */
     public void setToChange(boolean value) {
         this.toChange = value;
@@ -62,7 +64,7 @@ public class CorrelationSolutionType {
 
     /**
      * Gets the value of the ruleId property.
-     *
+     * 
      */
     public int getRuleId() {
         return ruleId;
@@ -70,7 +72,7 @@ public class CorrelationSolutionType {
 
     /**
      * Sets the value of the ruleId property.
-     *
+     * 
      */
     public void setRuleId(int value) {
         this.ruleId = value;
@@ -78,7 +80,7 @@ public class CorrelationSolutionType {
 
     /**
      * Gets the value of the anomalyId property.
-     *
+     * 
      */
     public int getAnomalyId() {
         return anomalyId;
@@ -86,7 +88,7 @@ public class CorrelationSolutionType {
 
     /**
      * Sets the value of the anomalyId property.
-     *
+     * 
      */
     public void setAnomalyId(int value) {
         this.anomalyId = value;
@@ -94,11 +96,11 @@ public class CorrelationSolutionType {
 
     /**
      * Gets the value of the updatedRule property.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link RuleType }
-     *
+     *     
      */
     public RuleType getUpdatedRule() {
         return updatedRule;
@@ -106,11 +108,11 @@ public class CorrelationSolutionType {
 
     /**
      * Sets the value of the updatedRule property.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link RuleType }
-     *
+     *     
      */
     public void setUpdatedRule(RuleType value) {
         this.updatedRule = value;

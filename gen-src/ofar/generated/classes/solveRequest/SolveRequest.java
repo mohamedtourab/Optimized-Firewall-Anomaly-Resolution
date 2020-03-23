@@ -1,5 +1,9 @@
 
-package ofar.generated.classes;
+package ofar.generated.classes.solveRequest;
+
+import ofar.generated.classes.contradiction.ContradictionSolutionType;
+import ofar.generated.classes.correlation.CorrelationSolutionType;
+import ofar.generated.classes.shadowingConflict.ShadowingConflictSolutionType;
 
 import java.util.ArrayList;
 import java.util.List;

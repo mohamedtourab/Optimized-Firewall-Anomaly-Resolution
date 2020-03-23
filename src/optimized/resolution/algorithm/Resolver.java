@@ -1,11 +1,8 @@
 package optimized.resolution.algorithm;
 
-import ofar.generated.classes.Anomalies;
-import ofar.generated.classes.AnomalyNames;
-import ofar.generated.classes.AnomalyType;
-import ofar.generated.classes.SolveRequest;
-
-import java.util.List;
+import ofar.generated.classes.conflicts.Anomalies;
+import ofar.generated.classes.conflicts.AnomalyNames;
+import ofar.generated.classes.solveRequest.SolveRequest;
 
 public interface Resolver {
     /**

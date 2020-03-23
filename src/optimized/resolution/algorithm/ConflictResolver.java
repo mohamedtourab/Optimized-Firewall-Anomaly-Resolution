@@ -1,6 +1,15 @@
 package optimized.resolution.algorithm;
 
-import ofar.generated.classes.*;
+
+import ofar.generated.classes.conflicts.Anomalies;
+import ofar.generated.classes.conflicts.AnomalyNames;
+import ofar.generated.classes.conflicts.AnomalyType;
+import ofar.generated.classes.contradiction.ContradictionSolutionType;
+import ofar.generated.classes.correlation.CorrelationSolutionType;
+import ofar.generated.classes.rules.RuleType;
+import ofar.generated.classes.rules.Rules;
+import ofar.generated.classes.shadowingConflict.ShadowingConflictSolutionType;
+import ofar.generated.classes.solveRequest.SolveRequest;
 
 import java.math.BigInteger;
 import java.util.*;

@@ -1,8 +1,7 @@
 
-package ofar.generated.classes;
+package ofar.generated.classes.rules;
 
 import java.math.BigInteger;
-import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -266,41 +265,5 @@ public class RuleType {
     public void setRuleID(BigInteger value) {
         this.ruleID = value;
     }
-    @Override
-    public String toString() {
-        return "RuleType{" +
-                "priority=" + priority +
-                ", iPsrc='" + iPsrc + '\'' +
-                ", psrc='" + psrc + '\'' +
-                ", iPdst='" + iPdst + '\'' +
-                ", pdst='" + pdst + '\'' +
-                ", protocol='" + protocol + '\'' +
-                ", action='" + action + '\'' +
-                ", ruleID=" + ruleID +
-                '}';
-    }
 
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (!(obj instanceof RuleType)) return false;
-        RuleType other = (RuleType) obj;
-
-        return other.getAction().equals(this.action) &&
-                other.getPriority().equals(this.priority) &&
-                other.getIPdst().equals(this.iPdst) &&
-                other.getIPsrc().equals(this.iPsrc) &&
-                other.getPsrc().equals(this.psrc) &&
-                other.getPdst().equals(this.pdst) &&
-                other.getProtocol().equals(this.protocol);
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(priority, iPsrc, psrc, iPdst, pdst, protocol, action, ruleID);
-    }
 }

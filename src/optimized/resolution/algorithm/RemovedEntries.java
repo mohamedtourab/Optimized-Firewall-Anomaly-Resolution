@@ -1,7 +1,7 @@
 package optimized.resolution.algorithm;
 
-import ofar.generated.classes.AnomalyType;
-import ofar.generated.classes.RuleType;
+import ofar.generated.classes.conflicts.AnomalyType;
+import ofar.generated.classes.rules.RuleType;
 
 import java.util.Set;
 
