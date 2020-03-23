@@ -1,4 +1,4 @@
-package optimized.resolution.algorithm;
+package optimized.resolution.algorithm.classes;
 
 import ofar.generated.classes.conflicts.Anomalies;
 import ofar.generated.classes.conflicts.AnomalyNames;

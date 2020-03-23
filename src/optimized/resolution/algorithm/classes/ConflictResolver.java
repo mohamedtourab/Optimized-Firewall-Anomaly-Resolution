@@ -1,4 +1,4 @@
-package optimized.resolution.algorithm;
+package optimized.resolution.algorithm.classes;
 
 
 import ofar.generated.classes.conflicts.Anomalies;
@@ -10,6 +10,7 @@ import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
 import ofar.generated.classes.shadowingConflict.ShadowingConflictSolutionType;
 import ofar.generated.classes.solveRequest.SolveRequest;
+import optimized.resolution.algorithm.interfaces.Resolver;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -118,54 +119,59 @@ public class ConflictResolver implements Resolver {
         final Set<AnomalyType> removedAnomalies = new HashSet<>();
 
         //Solve Contradiction
-        removedRules.addAll(solveRequest.getContradictionSolutions().stream()
-                .filter(ContradictionSolutionType::isToRemove)
-                .map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId())))
-                .collect(Collectors.toSet()));
+        if (solveRequest.getContradictionSolutions().size() > 0) {
+            removedRules.addAll(solveRequest.getContradictionSolutions().stream()
+                    .filter(ContradictionSolutionType::isToRemove)
+                    .map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId())))
+                    .collect(Collectors.toSet()));
+        }
 
         //Solve Shadowing Conflict
+        if (solveRequest.getShadowingConflictSolutions().size() > 0) {
+            //Perform the first solution to get the rules to be deleted
+            removedRules.addAll(solveRequest.getShadowingConflictSolutions().stream()
+                    .filter(ShadowingConflictSolutionType::isToRemove)
+                    .map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId())))
+                    .collect(Collectors.toSet()));
 
-        //Perform the first solution to get the rules to be deleted
-        removedRules.addAll(solveRequest.getShadowingConflictSolutions().stream()
-                .filter(ShadowingConflictSolutionType::isToRemove)
-                .map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId())))
-                .collect(Collectors.toSet()));
+            //Perform the second solution to flip the order
+            solveRequest.getShadowingConflictSolutions().stream().filter(ShadowingConflictSolutionType::isToChangeOrder).forEach(l -> {
+                AnomalyType anomaly = getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(l.getAnomalyId()));
+                int rule2Index = rules.getRule().indexOf(anomaly.getRule().get(0));
+                int rule1Index = rules.getRule().indexOf(anomaly.getRule().get(1));
+                BigInteger temp = anomaly.getRule().get(0).getPriority();
+                anomaly.getRule().get(0).setPriority(anomaly.getRule().get(1).getPriority());
+                anomaly.getRule().get(1).setPriority(temp);
+                Collections.swap(rules.getRule(), rule1Index, rule2Index);
+            });
+            //Remove anomalies due to flip solution
+            removedAnomalies.addAll(solveRequest.getShadowingConflictSolutions().stream()
+                    .filter(ShadowingConflictSolutionType::isToChangeOrder)
+                    .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(a.getAnomalyId())))
+                    .collect(Collectors.toSet()));
 
-        //Perform the second solution to flip the order
-        solveRequest.getShadowingConflictSolutions().stream().filter(ShadowingConflictSolutionType::isToChangeOrder).forEach(l -> {
-            AnomalyType anomaly = getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(l.getAnomalyId()));
-            int rule2Index = rules.getRule().indexOf(anomaly.getRule().get(0));
-            int rule1Index = rules.getRule().indexOf(anomaly.getRule().get(1));
-            BigInteger temp = anomaly.getRule().get(0).getPriority();
-            anomaly.getRule().get(0).setPriority(anomaly.getRule().get(1).getPriority());
-            anomaly.getRule().get(1).setPriority(temp);
-            Collections.swap(rules.getRule(), rule1Index, rule2Index);
-        });
+        }
+        if (solveRequest.getCorrelationSolutions().size() > 0) {
+            //Solve Correlation
+            solveRequest.getCorrelationSolutions().stream().filter(CorrelationSolutionType::isToChange).forEach(a -> {
+                RuleType rule = getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId()));
+                rule.setPriority(a.getUpdatedRule().getPriority());
+                rule.setAction(a.getUpdatedRule().getAction());
+                rule.setIPdst(a.getUpdatedRule().getIPdst());
+                rule.setIPsrc(a.getUpdatedRule().getIPsrc());
+                rule.setPdst(a.getUpdatedRule().getPdst());
+                rule.setProtocol(a.getUpdatedRule().getProtocol());
+                rule.setPsrc(a.getUpdatedRule().getPsrc());
+                rule.setRuleID(a.getUpdatedRule().getRuleID());
+            });
+            //Remove anomalies due to changing the rules solution
+            removedAnomalies.addAll(solveRequest.getCorrelationSolutions().stream()
+                    .filter(CorrelationSolutionType::isToChange)
+                    .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(a.getAnomalyId())))
+                    .collect(Collectors.toSet()));
 
-        //Remove anomalies due to flip solution
-        removedAnomalies.addAll(solveRequest.getShadowingConflictSolutions().stream()
-                .filter(ShadowingConflictSolutionType::isToChangeOrder)
-                .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(a.getAnomalyId())))
-                .collect(Collectors.toSet()));
 
-        //Solve Correlation
-        solveRequest.getCorrelationSolutions().stream().filter(CorrelationSolutionType::isToChange).forEach(a -> {
-            RuleType rule = getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId()));
-            rule.setPriority(a.getUpdatedRule().getPriority());
-            rule.setAction(a.getUpdatedRule().getAction());
-            rule.setIPdst(a.getUpdatedRule().getIPdst());
-            rule.setIPsrc(a.getUpdatedRule().getIPsrc());
-            rule.setPdst(a.getUpdatedRule().getPdst());
-            rule.setProtocol(a.getUpdatedRule().getProtocol());
-            rule.setPsrc(a.getUpdatedRule().getPsrc());
-            rule.setRuleID(a.getUpdatedRule().getRuleID());
-        });
-
-        //Remove anomalies due to changing the rules solution
-        removedAnomalies.addAll(solveRequest.getCorrelationSolutions().stream()
-                .filter(CorrelationSolutionType::isToChange)
-                .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(a.getAnomalyId())))
-                .collect(Collectors.toSet()));
+        }
 
 
         removedRules.forEach(r -> rules.getRule().remove(r));
@@ -202,7 +208,17 @@ public class ConflictResolver implements Resolver {
 
         ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
         conflictResolver.resolveAnomalies();
-        conflictResolver.getConflictAnomalies();
+        Anomalies anomalylist = conflictResolver.getConflictAnomalies();
+        SolveRequest solveRequest = new SolveRequest();
+        ShadowingConflictSolutionType svSol = new ShadowingConflictSolutionType();
+        svSol.setAnomalyId(16);
+        svSol.setToRemove(false);
+        svSol.setToChangeOrder(true);
+        solveRequest.getShadowingConflictSolutions().add(svSol);
+        conflictResolver.executeSolveRequest(solveRequest);
+        anomalylist = conflictResolver.getConflictAnomalies();
+
+
     }
 
 }

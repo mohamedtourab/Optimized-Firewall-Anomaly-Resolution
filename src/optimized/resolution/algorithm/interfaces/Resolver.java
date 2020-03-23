@@ -1,8 +1,9 @@
-package optimized.resolution.algorithm;
+package optimized.resolution.algorithm.interfaces;
 
 import ofar.generated.classes.conflicts.Anomalies;
 import ofar.generated.classes.conflicts.AnomalyNames;
 import ofar.generated.classes.solveRequest.SolveRequest;
+import optimized.resolution.algorithm.classes.RemovedEntries;
 
 public interface Resolver {
     /**
