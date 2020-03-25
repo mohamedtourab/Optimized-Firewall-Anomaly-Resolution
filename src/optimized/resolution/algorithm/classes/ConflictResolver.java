@@ -6,6 +6,7 @@ import ofar.generated.classes.conflicts.AnomalyNames;
 import ofar.generated.classes.conflicts.AnomalyType;
 import ofar.generated.classes.contradiction.ContradictionSolutionType;
 import ofar.generated.classes.correlation.CorrelationSolutionType;
+import ofar.generated.classes.input.ServiceInput;
 import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
 import ofar.generated.classes.shadowingConflict.ShadowingConflictSolutionType;
@@ -217,7 +218,6 @@ public class ConflictResolver implements Resolver {
         solveRequest.getShadowingConflictSolutions().add(svSol);
         conflictResolver.executeSolveRequest(solveRequest);
         anomalylist = conflictResolver.getConflictAnomalies();
-
 
     }
 

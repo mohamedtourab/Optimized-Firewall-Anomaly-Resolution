@@ -12,9 +12,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ruleType complex type.
- *
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * 
  * <pre>
  * &lt;complexType name="ruleType">
  *   &lt;complexContent>
@@ -40,16 +40,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ruleType", propOrder = {
-        "priority",
-        "iPsrc",
-        "psrc",
-        "iPdst",
-        "pdst",
-        "protocol",
-        "action"
+    "priority",
+    "iPsrc",
+    "psrc",
+    "iPdst",
+    "pdst",
+    "protocol",
+    "action"
 })
 public class RuleType {
 
@@ -74,9 +76,11 @@ public class RuleType {
 
     /**
      * Gets the value of the priority property.
-     *
-     * @return possible object is
-     * {@link BigInteger }
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
      */
     public BigInteger getPriority() {
         return priority;
@@ -84,9 +88,11 @@ public class RuleType {
 
     /**
      * Sets the value of the priority property.
-     *
-     * @param value allowed object is
-     *              {@link BigInteger }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
      */
     public void setPriority(BigInteger value) {
         this.priority = value;
@@ -94,9 +100,11 @@ public class RuleType {
 
     /**
      * Gets the value of the iPsrc property.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getIPsrc() {
         return iPsrc;
@@ -104,9 +112,11 @@ public class RuleType {
 
     /**
      * Sets the value of the iPsrc property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setIPsrc(String value) {
         this.iPsrc = value;
@@ -114,9 +124,11 @@ public class RuleType {
 
     /**
      * Gets the value of the psrc property.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPsrc() {
         return psrc;
@@ -124,9 +136,11 @@ public class RuleType {
 
     /**
      * Sets the value of the psrc property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPsrc(String value) {
         this.psrc = value;
@@ -134,9 +148,11 @@ public class RuleType {
 
     /**
      * Gets the value of the iPdst property.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getIPdst() {
         return iPdst;
@@ -144,9 +160,11 @@ public class RuleType {
 
     /**
      * Sets the value of the iPdst property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setIPdst(String value) {
         this.iPdst = value;
@@ -154,9 +172,11 @@ public class RuleType {
 
     /**
      * Gets the value of the pdst property.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getPdst() {
         return pdst;
@@ -164,9 +184,11 @@ public class RuleType {
 
     /**
      * Sets the value of the pdst property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setPdst(String value) {
         this.pdst = value;
@@ -174,9 +196,11 @@ public class RuleType {
 
     /**
      * Gets the value of the protocol property.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getProtocol() {
         return protocol;
@@ -184,9 +208,11 @@ public class RuleType {
 
     /**
      * Sets the value of the protocol property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setProtocol(String value) {
         this.protocol = value;
@@ -194,9 +220,11 @@ public class RuleType {
 
     /**
      * Gets the value of the action property.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getAction() {
         return action;
@@ -204,9 +232,11 @@ public class RuleType {
 
     /**
      * Sets the value of the action property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setAction(String value) {
         this.action = value;
@@ -214,9 +244,11 @@ public class RuleType {
 
     /**
      * Gets the value of the ruleID property.
-     *
-     * @return possible object is
-     * {@link BigInteger }
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
      */
     public BigInteger getRuleID() {
         return ruleID;
@@ -224,13 +256,16 @@ public class RuleType {
 
     /**
      * Sets the value of the ruleID property.
-     *
-     * @param value allowed object is
-     *              {@link BigInteger }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
      */
     public void setRuleID(BigInteger value) {
         this.ruleID = value;
     }
+
 
     @Override
     public String toString() {
@@ -245,5 +280,7 @@ public class RuleType {
                 ", ruleID=" + ruleID +
                 '}';
     }
+
+
 
 }

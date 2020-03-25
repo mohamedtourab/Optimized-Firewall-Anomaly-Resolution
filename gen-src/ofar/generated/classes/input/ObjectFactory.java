@@ -1,6 +1,8 @@
 
-package ofar.generated.classes.conflicts;
+package ofar.generated.classes.input;
 
+import ofar.generated.classes.conflicts.Anomalies;
+import ofar.generated.classes.conflicts.AnomalyType;
 import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
 
@@ -13,7 +15,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the ofar.generated.classes.conflicts package. 
+ * generated in the ofar.generated.classes.input package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -31,7 +33,7 @@ public class ObjectFactory {
     private final static QName _Anomalies_QNAME = new QName("", "Anomalies");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ofar.generated.classes.conflicts
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ofar.generated.classes.input
      * 
      */
     public ObjectFactory() {
@@ -43,6 +45,14 @@ public class ObjectFactory {
      */
     public Rules createRules() {
         return new Rules();
+    }
+
+    /**
+     * Create an instance of {@link ServiceInput }
+     * 
+     */
+    public ServiceInput createServiceInput() {
+        return new ServiceInput();
     }
 
     /**

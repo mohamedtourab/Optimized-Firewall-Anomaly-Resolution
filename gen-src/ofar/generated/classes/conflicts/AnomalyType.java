@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for AnomalyType complex type.
- *
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * 
  * <pre>
  * &lt;complexType name="AnomalyType">
  *   &lt;complexContent>
@@ -31,10 +31,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AnomalyType", propOrder = {
-        "rule"
+    "rule"
 })
 public class AnomalyType {
 
@@ -47,23 +49,25 @@ public class AnomalyType {
 
     /**
      * Gets the value of the rule property.
-     *
+     * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the rule property.
-     *
+     * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getRule().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link RuleType }
+     * 
+     * 
      */
     public List<RuleType> getRule() {
         if (rule == null) {
@@ -74,9 +78,11 @@ public class AnomalyType {
 
     /**
      * Gets the value of the anomalyName property.
-     *
-     * @return possible object is
-     * {@link AnomalyNames }
+     * 
+     * @return
+     *     possible object is
+     *     {@link AnomalyNames }
+     *     
      */
     public AnomalyNames getAnomalyName() {
         return anomalyName;
@@ -84,9 +90,11 @@ public class AnomalyType {
 
     /**
      * Sets the value of the anomalyName property.
-     *
-     * @param value allowed object is
-     *              {@link AnomalyNames }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AnomalyNames }
+     *     
      */
     public void setAnomalyName(AnomalyNames value) {
         this.anomalyName = value;
@@ -94,9 +102,11 @@ public class AnomalyType {
 
     /**
      * Gets the value of the anomalyID property.
-     *
-     * @return possible object is
-     * {@link BigInteger }
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
      */
     public BigInteger getAnomalyID() {
         return anomalyID;
@@ -104,9 +114,11 @@ public class AnomalyType {
 
     /**
      * Sets the value of the anomalyID property.
-     *
-     * @param value allowed object is
-     *              {@link BigInteger }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
      */
     public void setAnomalyID(BigInteger value) {
         this.anomalyID = value;
