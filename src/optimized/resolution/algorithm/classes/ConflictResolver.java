@@ -22,6 +22,21 @@ public class ConflictResolver implements Resolver {
     private Rules rules;
     private Anomalies anomalies;
 
+    public Rules getRules() {
+        return rules;
+    }
+
+    public void setRules(Rules rules) {
+        this.rules = rules;
+    }
+
+    public Anomalies getAnomalies() {
+        return anomalies;
+    }
+
+    public void setAnomalies(Anomalies anomalies) {
+        this.anomalies = anomalies;
+    }
 
     public ConflictResolver(Rules rules, Anomalies anomalies) {
         this.anomalies = anomalies;
