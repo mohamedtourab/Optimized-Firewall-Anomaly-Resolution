@@ -6,6 +6,7 @@ import ofar.generated.classes.rules.Rules;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -24,6 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="DefectedRules" type="{}Rules"/>
  *         &lt;element name="AnomaliesList" type="{}Anomalies"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -43,6 +45,8 @@ public class ServiceInput {
     protected Rules defectedRules;
     @XmlElement(name = "AnomaliesList", required = true)
     protected Anomalies anomaliesList;
+    @XmlAttribute(name = "id")
+    protected Integer id;
 
     /**
      * Gets the value of the defectedRules property.
@@ -90,6 +94,30 @@ public class ServiceInput {
      */
     public void setAnomaliesList(Anomalies value) {
         this.anomaliesList = value;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setId(Integer value) {
+        this.id = value;
     }
 
 }

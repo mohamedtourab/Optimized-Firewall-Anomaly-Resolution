@@ -1,0 +1,48 @@
+<ServiceInput id="3" xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+              xsd:noNamespaceSchemaLocation="webservice_input_schema.xsd">
+    <DefectedRules>
+        <!--Zero or more repetitions:-->
+        <rule ruleID="201">
+            <priority>201</priority>
+            <IPsrc>string</IPsrc>
+            <Psrc>string</Psrc>
+            <IPdst>string</IPdst>
+            <Pdst>string</Pdst>
+            <Protocol>string</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="202">
+            <priority>201</priority>
+            <IPsrc>string</IPsrc>
+            <Psrc>string</Psrc>
+            <IPdst>string</IPdst>
+            <Pdst>string</Pdst>
+            <Protocol>string</Protocol>
+            <Action>DENY</Action>
+        </rule>
+    </DefectedRules>
+    <AnomaliesList>
+        <!--Zero or more repetitions:-->
+        <Anomaly AnomalyName="Contradiction" AnomalyID="201">
+            <!--Zero or more repetitions:-->
+            <rule ruleID="201">
+                <priority>201</priority>
+                <IPsrc>string</IPsrc>
+                <Psrc>string</Psrc>
+                <IPdst>string</IPdst>
+                <Pdst>string</Pdst>
+                <Protocol>string</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+            <rule ruleID="202">
+                <priority>201</priority>
+                <IPsrc>string</IPsrc>
+                <Psrc>string</Psrc>
+                <IPdst>string</IPdst>
+                <Pdst>string</Pdst>
+                <Protocol>string</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+    </AnomaliesList>
+</ServiceInput>

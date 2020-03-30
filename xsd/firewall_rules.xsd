@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
     <xsd:element name="rules" type="Rules">
         <xsd:unique name="ruleIdUniqueness">
             <xsd:selector xpath="rule"/>
@@ -31,6 +32,6 @@
                 </xsd:simpleType>
             </xsd:element>
         </xsd:sequence>
-		<xsd:attribute name="ruleID" type="xsd:positiveInteger" use="required"/>
-	</xsd:complexType>
+        <xsd:attribute name="ruleID" type="xsd:positiveInteger" use="required"/>
+    </xsd:complexType>
 </xsd:schema>

@@ -3,12 +3,14 @@
 
     <xsd:include schemaLocation="firewall_rules.xsd"/>
     <xsd:include schemaLocation="conflict_schema.xsd"/>
+
     <xsd:element name="ServiceInput">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="DefectedRules" type="Rules"/>
                 <xsd:element name="AnomaliesList" type="Anomalies"/>
             </xsd:sequence>
+            <xsd:attribute name = "id" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
 
