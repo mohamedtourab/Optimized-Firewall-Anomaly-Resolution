@@ -41,6 +41,8 @@ public class OptimizerResource {
         ServiceInput serviceInput= Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(),serviceInput.getAnomaliesList());
         conflictResolver.removeIrrelevanceAnomaly();
+        Database.getEntry(id).setDefectedRules(conflictResolver.getRules());
+        Database.getEntry(id).setAnomaliesList(conflictResolver.getAnomalies());
         return conflictResolver.getRules();
     }
     @GET
@@ -50,6 +52,8 @@ public class OptimizerResource {
         ServiceInput serviceInput= Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(),serviceInput.getAnomaliesList());
         conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
+        Database.getEntry(id).setDefectedRules(conflictResolver.getRules());
+        Database.getEntry(id).setAnomaliesList(conflictResolver.getAnomalies());
         return conflictResolver.getRules();
     }
     @GET
@@ -59,8 +63,11 @@ public class OptimizerResource {
         ServiceInput serviceInput= Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(),serviceInput.getAnomaliesList());
         conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
+        Database.getEntry(id).setDefectedRules(conflictResolver.getRules());
+        Database.getEntry(id).setAnomaliesList(conflictResolver.getAnomalies());
         return conflictResolver.getRules();
     }
+
 
 }
 
