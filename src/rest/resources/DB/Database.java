@@ -12,10 +12,11 @@ public class Database {
             return null;
         }
         serviceInput.setId(dbHashMap.size());
-        dbHashMap.put(dbHashMap.size(),serviceInput);
+        dbHashMap.put(dbHashMap.size(), serviceInput);
         return serviceInput;
     }
-    public static ServiceInput getEntry(int key){
+
+    public static ServiceInput getEntry(int key) {
         return dbHashMap.get(key);
     }
 }

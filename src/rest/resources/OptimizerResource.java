@@ -10,7 +10,6 @@ import rest.resources.DB.Database;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import javax.xml.crypto.Data;
 import java.net.URI;
 
 @Path("/optimizer")
@@ -35,8 +34,12 @@ public class OptimizerResource {
     public Anomalies getUnresolvedAnomalies(@PathParam("id") int id) {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+        conflictResolver.removeIrrelevanceAnomaly();
+        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
+        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
         return conflictResolver.getConflictAnomalies();
     }
+
     @GET
     @Path("getServiceInput/{id}")
     @Produces(MediaType.APPLICATION_XML)
@@ -53,7 +56,7 @@ public class OptimizerResource {
         conflictResolver.removeIrrelevanceAnomaly();
         serviceInput.setDefectedRules(conflictResolver.getRules());
         serviceInput.setAnomaliesList(conflictResolver.getAnomalies());
-        Database.dbHashMap.put(id,serviceInput);
+        Database.dbHashMap.put(id, serviceInput);
         return conflictResolver.getRules();
     }
 
@@ -64,8 +67,9 @@ public class OptimizerResource {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
         conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
-        Database.getEntry(id).setDefectedRules(conflictResolver.getRules());
-        Database.getEntry(id).setAnomaliesList(conflictResolver.getAnomalies());
+        serviceInput.setDefectedRules(conflictResolver.getRules());
+        serviceInput.setAnomaliesList(conflictResolver.getAnomalies());
+        Database.dbHashMap.put(id, serviceInput);
         return conflictResolver.getRules();
     }
 
@@ -76,20 +80,22 @@ public class OptimizerResource {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
         conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
-        Database.getEntry(id).setDefectedRules(conflictResolver.getRules());
-        Database.getEntry(id).setAnomaliesList(conflictResolver.getAnomalies());
+        serviceInput.setDefectedRules(conflictResolver.getRules());
+        serviceInput.setAnomaliesList(conflictResolver.getAnomalies());
+        Database.dbHashMap.put(id, serviceInput);
         return conflictResolver.getRules();
     }
 
     @PUT
     @Path("solveConflicts/{id}")
     @Produces(MediaType.APPLICATION_XML)
-    public Rules solveConflicts(SolveRequest solveRequest,@PathParam("id") int id){
+    public Rules solveConflicts(SolveRequest solveRequest, @PathParam("id") int id) {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
         conflictResolver.executeSolveRequest(solveRequest);
-        Database.getEntry(id).setDefectedRules(conflictResolver.getRules());
-        Database.getEntry(id).setAnomaliesList(conflictResolver.getAnomalies());
+        serviceInput.setDefectedRules(conflictResolver.getRules());
+        serviceInput.setAnomaliesList(conflictResolver.getAnomalies());
+        Database.dbHashMap.put(id, serviceInput);
         return conflictResolver.getRules();
     }
 
