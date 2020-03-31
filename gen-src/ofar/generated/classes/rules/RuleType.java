@@ -266,7 +266,6 @@ public class RuleType {
         this.ruleID = value;
     }
 
-
     @Override
     public String toString() {
         return "RuleType{" +
@@ -280,7 +279,6 @@ public class RuleType {
                 ", ruleID=" + ruleID +
                 '}';
     }
-
 
 
 }

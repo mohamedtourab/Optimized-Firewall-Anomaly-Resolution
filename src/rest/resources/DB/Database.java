@@ -5,7 +5,7 @@ import ofar.generated.classes.input.ServiceInput;
 import java.util.HashMap;
 
 public class Database {
-    static HashMap<Integer, ServiceInput> dbHashMap = new HashMap<>();
+    public static HashMap<Integer, ServiceInput> dbHashMap = new HashMap<>();
 
     public static ServiceInput insertEntry(ServiceInput serviceInput) {
         if (serviceInput == null) {

@@ -10,6 +10,7 @@ import rest.resources.DB.Database;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import javax.xml.crypto.Data;
 import java.net.URI;
 
 @Path("/optimizer")
@@ -36,6 +37,12 @@ public class OptimizerResource {
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
         return conflictResolver.getConflictAnomalies();
     }
+    @GET
+    @Path("getServiceInput/{id}")
+    @Produces(MediaType.APPLICATION_XML)
+    public ServiceInput getSingleServiceInput(@PathParam("id") int id) {
+        return Database.getEntry(id);
+    }
 
     @GET
     @Path("/solveIrrelevance/{id}")
@@ -44,8 +51,11 @@ public class OptimizerResource {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
         conflictResolver.removeIrrelevanceAnomaly();
-        Database.getEntry(id).setDefectedRules(conflictResolver.getRules());
-        Database.getEntry(id).setAnomaliesList(conflictResolver.getAnomalies());
+        serviceInput.setDefectedRules(conflictResolver.getRules());
+        serviceInput.setAnomaliesList(conflictResolver.getAnomalies());
+        Database.dbHashMap.put(id,serviceInput);
+//        Database.getEntry(id).setDefectedRules(conflictResolver.getRules());
+//        Database.getEntry(id).setAnomaliesList(conflictResolver.getAnomalies());
         return conflictResolver.getRules();
     }
 
