@@ -25,7 +25,6 @@ public class DataMarshaller {
             File file = new File(outputFilePath);
             m.marshal(data, file);
         } catch (JAXBException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 }
