@@ -72,11 +72,8 @@ public class ConflictResolver implements Resolver {
                 RuleType rule = anomaly.getRule().get(0);
                 removedRules.add(rule);
                 rules.getRule().remove(rule);
-                System.out.println("Removed rule "+rule.getRuleID());
             }
         }
-        rules.getRule().forEach(System.out::println);
-
         //Remove all anomalies caused by the removed rules
         removedRules.forEach(oneRule -> anomalies.getAnomaly().forEach(oneAnomaly -> {
             if (oneAnomaly.getRule().contains(oneRule))

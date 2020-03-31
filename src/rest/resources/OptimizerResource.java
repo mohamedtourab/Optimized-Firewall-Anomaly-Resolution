@@ -54,8 +54,6 @@ public class OptimizerResource {
         serviceInput.setDefectedRules(conflictResolver.getRules());
         serviceInput.setAnomaliesList(conflictResolver.getAnomalies());
         Database.dbHashMap.put(id,serviceInput);
-//        Database.getEntry(id).setDefectedRules(conflictResolver.getRules());
-//        Database.getEntry(id).setAnomaliesList(conflictResolver.getAnomalies());
         return conflictResolver.getRules();
     }
 

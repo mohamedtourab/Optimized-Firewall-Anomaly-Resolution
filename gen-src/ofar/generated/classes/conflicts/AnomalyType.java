@@ -133,4 +133,14 @@ public class AnomalyType {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof AnomalyType)) return false;
+        AnomalyType other = (AnomalyType) obj;
+        return other.anomalyName.equals(this.anomalyName) &&
+                other.rule.equals(this.rule);
+    }
+
+
 }
