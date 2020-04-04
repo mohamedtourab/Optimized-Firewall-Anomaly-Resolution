@@ -7,17 +7,18 @@ import ofar.generated.classes.rules.Rules;
 import ofar.generated.classes.solveRequest.SolveRequest;
 import optimized.resolution.algorithm.classes.ConflictResolver;
 import rest.resources.DB.Database;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
+import java.util.Collection;
+
 
 @Path("/optimizer")
 public class OptimizerResource {
+
     @POST
-    @Path("/createResource")
-    @Produces(MediaType.APPLICATION_XML)
-    @Consumes(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Response createOptimizer(ServiceInput serviceInput, @Context UriInfo uriInfo) {
         if (serviceInput == null) {
             //throw new ForbiddenException("Empty Input");
@@ -29,8 +30,20 @@ public class OptimizerResource {
     }
 
     @GET
-    @Path("/getConflictAnomalies/{id}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public Collection<ServiceInput> getAllServiceInput() {
+        return Database.dbHashMap.values();
+    }
+    @DELETE
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    public ServiceInput deleteOptimizer(@PathParam("id") int id) {
+        return Database.dbHashMap.remove(id);
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Anomalies getUnresolvedAnomalies(@PathParam("id") int id) {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
@@ -41,15 +54,8 @@ public class OptimizerResource {
     }
 
     @GET
-    @Path("getServiceInput/{id}")
-    @Produces(MediaType.APPLICATION_XML)
-    public ServiceInput getSingleServiceInput(@PathParam("id") int id) {
-        return Database.getEntry(id);
-    }
-
-    @GET
     @Path("/solveIrrelevance/{id}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Rules solveIrrelevance(@PathParam("id") int id) {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
@@ -62,7 +68,7 @@ public class OptimizerResource {
 
     @GET
     @Path("/solveDuplication/{id}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Rules solveDuplication(@PathParam("id") int id) {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
@@ -75,7 +81,7 @@ public class OptimizerResource {
 
     @GET
     @Path("/solveShadowingRedundancy/{id}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Rules solveShadowingRedundancy(@PathParam("id") int id) {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
@@ -87,8 +93,9 @@ public class OptimizerResource {
     }
 
     @PUT
-    @Path("solveConflicts/{id}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
     public Rules solveConflicts(SolveRequest solveRequest, @PathParam("id") int id) {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
@@ -98,7 +105,6 @@ public class OptimizerResource {
         Database.dbHashMap.put(id, serviceInput);
         return conflictResolver.getRules();
     }
-
 }
 
 
