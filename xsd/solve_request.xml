@@ -1,0 +1,60 @@
+<SolveRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+              xsd:noNamespaceSchemaLocation="solve_request.xsd">
+
+    <shadowingConflictSolutions>
+        <anomalyId>16</anomalyId>
+        <toChangeOrder>true</toChangeOrder>
+    </shadowingConflictSolutions>
+
+    <shadowingConflictSolutions>
+        <anomalyId>20</anomalyId>
+        <toChangeOrder>true</toChangeOrder>
+    </shadowingConflictSolutions>
+
+    <shadowingConflictSolutions>
+        <anomalyId>21</anomalyId>
+        <toChangeOrder>true</toChangeOrder>
+    </shadowingConflictSolutions>
+
+    <shadowingConflictSolutions>
+        <anomalyId>22</anomalyId>
+        <toChangeOrder>true</toChangeOrder>
+    </shadowingConflictSolutions>
+
+    <shadowingConflictSolutions>
+        <anomalyId>24</anomalyId>
+        <toChangeOrder>true</toChangeOrder>
+    </shadowingConflictSolutions>
+
+    <shadowingConflictSolutions>
+        <anomalyId>27</anomalyId>
+        <toChangeOrder>true</toChangeOrder>
+    </shadowingConflictSolutions>
+
+    <shadowingConflictSolutions>
+        <anomalyId>29</anomalyId>
+        <toChangeOrder>true</toChangeOrder>
+    </shadowingConflictSolutions>
+
+    <correlationSolutions>
+        <toChange>false</toChange>
+        <anomalyId>6</anomalyId>
+    </correlationSolutions>
+
+    <correlationSolutions>
+        <toChange>false</toChange>
+        <anomalyId>7</anomalyId>
+    </correlationSolutions>
+
+    <correlationSolutions>
+        <toChange>false</toChange>
+        <anomalyId>8</anomalyId>
+    </correlationSolutions>
+
+    <correlationSolutions>
+        <toChange>false</toChange>
+        <anomalyId>9</anomalyId>
+    </correlationSolutions>
+
+
+</SolveRequest>

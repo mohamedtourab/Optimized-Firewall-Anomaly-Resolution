@@ -3,10 +3,10 @@
     <xsd:element name="ShadowingConflictSolution" type="ShadowingConflictSolutionType"/>
     <xsd:complexType name="ShadowingConflictSolutionType">
         <xsd:sequence>
-            <xsd:element name="ruleId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="ruleId" type="xsd:int" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="anomalyId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
-            <xsd:element name="toRemove" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
-            <xsd:element name="toChangeOrder" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="toRemove" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="toChangeOrder" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
 

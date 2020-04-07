@@ -34,6 +34,15 @@ public class OptimizerResource {
     public Collection<ServiceInput> getAllServiceInput() {
         return Database.dbHashMap.values();
     }
+
+
+    @GET
+    @Path("hello")
+    @Produces("text/plain")
+    public String getHello() {
+        return "Hello";
+    }
+
     @DELETE
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})

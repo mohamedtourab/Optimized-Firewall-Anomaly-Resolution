@@ -20,6 +20,16 @@
         </xsd:unique>
     </xsd:element>
 
+    <xsd:complexType name="Anomalies">
+        <xsd:sequence>
+            <xsd:element name="Anomaly" type="AnomalyType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:unique name="ruleIDUniqueness">
+                    <xsd:selector xpath="ruleID"/>
+                    <xsd:field xpath="."/>
+                </xsd:unique>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
 
     <xsd:complexType name="AnomalyType">
         <xsd:sequence>
