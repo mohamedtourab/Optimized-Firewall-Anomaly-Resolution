@@ -3,41 +3,49 @@
 
     <shadowingConflictSolutions>
         <anomalyId>16</anomalyId>
+        <toRemove>false</toRemove>
         <toChangeOrder>true</toChangeOrder>
     </shadowingConflictSolutions>
 
     <shadowingConflictSolutions>
         <anomalyId>20</anomalyId>
+        <toRemove>false</toRemove>
         <toChangeOrder>true</toChangeOrder>
     </shadowingConflictSolutions>
 
     <shadowingConflictSolutions>
         <anomalyId>21</anomalyId>
+        <toRemove>false</toRemove>
         <toChangeOrder>true</toChangeOrder>
     </shadowingConflictSolutions>
 
     <shadowingConflictSolutions>
         <anomalyId>22</anomalyId>
+        <toRemove>false</toRemove>
         <toChangeOrder>true</toChangeOrder>
     </shadowingConflictSolutions>
 
     <shadowingConflictSolutions>
         <anomalyId>24</anomalyId>
+        <toRemove>false</toRemove>
         <toChangeOrder>true</toChangeOrder>
     </shadowingConflictSolutions>
 
     <shadowingConflictSolutions>
         <anomalyId>27</anomalyId>
+        <toRemove>false</toRemove>
         <toChangeOrder>true</toChangeOrder>
     </shadowingConflictSolutions>
 
     <shadowingConflictSolutions>
         <anomalyId>29</anomalyId>
+        <toRemove>false</toRemove>
         <toChangeOrder>true</toChangeOrder>
     </shadowingConflictSolutions>
 
     <correlationSolutions>
         <toChange>false</toChange>
+
         <anomalyId>6</anomalyId>
     </correlationSolutions>
 

@@ -3,6 +3,7 @@ package ofar.generated.classes.shadowingConflict;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -18,8 +19,8 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="ruleId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="anomalyId" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="toRemove" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="toChangeOrder" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         &lt;element name="toRemove" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="toChangeOrder" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,10 +38,13 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ShadowingConflictSolutionType {
 
+    @XmlElement(defaultValue = "-1")
     protected Integer ruleId;
     protected int anomalyId;
-    protected Boolean toRemove;
-    protected Boolean toChangeOrder;
+    @XmlElement(defaultValue = "false")
+    protected boolean toRemove;
+    @XmlElement(defaultValue = "false")
+    protected boolean toChangeOrder;
 
     /**
      * Gets the value of the ruleId property.
@@ -85,48 +89,32 @@ public class ShadowingConflictSolutionType {
     /**
      * Gets the value of the toRemove property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
      */
-    public Boolean isToRemove() {
+    public boolean isToRemove() {
         return toRemove;
     }
 
     /**
      * Sets the value of the toRemove property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
      */
-    public void setToRemove(Boolean value) {
+    public void setToRemove(boolean value) {
         this.toRemove = value;
     }
 
     /**
      * Gets the value of the toChangeOrder property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
      */
-    public Boolean isToChangeOrder() {
+    public boolean isToChangeOrder() {
         return toChangeOrder;
     }
 
     /**
      * Sets the value of the toChangeOrder property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
      */
-    public void setToChangeOrder(Boolean value) {
+    public void setToChangeOrder(boolean value) {
         this.toChangeOrder = value;
     }
 

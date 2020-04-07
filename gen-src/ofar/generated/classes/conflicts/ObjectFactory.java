@@ -4,7 +4,10 @@ package ofar.generated.classes.conflicts;
 import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
+import javax.xml.namespace.QName;
 
 
 /**
@@ -24,6 +27,8 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _Rules_QNAME = new QName("", "rules");
+    private final static QName _Anomalies_QNAME = new QName("", "Anomalies");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ofar.generated.classes.conflicts
@@ -41,14 +46,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RuleType }
-     * 
-     */
-    public RuleType createRuleType() {
-        return new RuleType();
-    }
-
-    /**
      * Create an instance of {@link Anomalies }
      * 
      */
@@ -57,11 +54,37 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link RuleType }
+     * 
+     */
+    public RuleType createRuleType() {
+        return new RuleType();
+    }
+
+    /**
      * Create an instance of {@link AnomalyType }
      * 
      */
     public AnomalyType createAnomalyType() {
         return new AnomalyType();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Rules }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "rules")
+    public JAXBElement<Rules> createRules(Rules value) {
+        return new JAXBElement<Rules>(_Rules_QNAME, Rules.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Anomalies }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "Anomalies")
+    public JAXBElement<Anomalies> createAnomalies(Anomalies value) {
+        return new JAXBElement<Anomalies>(_Anomalies_QNAME, Anomalies.class, null, value);
     }
 
 }

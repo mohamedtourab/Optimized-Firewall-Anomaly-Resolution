@@ -1,7 +1,10 @@
 
 package ofar.generated.classes.rules;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
+import javax.xml.namespace.QName;
 
 
 /**
@@ -21,6 +24,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _Rules_QNAME = new QName("", "rules");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ofar.generated.classes.rules
@@ -43,6 +47,15 @@ public class ObjectFactory {
      */
     public RuleType createRuleType() {
         return new RuleType();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Rules }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "rules")
+    public JAXBElement<Rules> createRules(Rules value) {
+        return new JAXBElement<Rules>(_Rules_QNAME, Rules.class, null, value);
     }
 
 }

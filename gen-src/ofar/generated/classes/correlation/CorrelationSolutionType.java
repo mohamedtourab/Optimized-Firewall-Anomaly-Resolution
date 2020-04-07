@@ -20,9 +20,9 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="toChange" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="ruleId" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="ruleId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="anomalyId" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="updatedRule" type="{}ruleType"/>
+ *         &lt;element name="updatedRule" type="{}ruleType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,10 +40,11 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class CorrelationSolutionType {
 
+    @XmlElement(defaultValue = "false")
     protected boolean toChange;
-    protected int ruleId;
+    @XmlElement(defaultValue = "-1")
+    protected Integer ruleId;
     protected int anomalyId;
-    @XmlElement(required = true)
     protected RuleType updatedRule;
 
     /**
@@ -65,16 +66,24 @@ public class CorrelationSolutionType {
     /**
      * Gets the value of the ruleId property.
      * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
-    public int getRuleId() {
+    public Integer getRuleId() {
         return ruleId;
     }
 
     /**
      * Sets the value of the ruleId property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
-    public void setRuleId(int value) {
+    public void setRuleId(Integer value) {
         this.ruleId = value;
     }
 

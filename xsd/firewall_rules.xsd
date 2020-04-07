@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-    <xsd:element name="rules">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="rule" type="ruleType" minOccurs="0" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
+    <xsd:element name="rules" type="Rules">
         <xsd:unique name="ruleIdUniqueness">
             <xsd:selector xpath="rule"/>
             <xsd:field xpath="@ruleID"/>
         </xsd:unique>
     </xsd:element>
-
     <xsd:complexType name="Rules">
         <xsd:sequence>
             <xsd:element name="rule" type="ruleType" minOccurs="0" maxOccurs="unbounded"/>

@@ -4,8 +4,8 @@
     <xsd:element name="CorrelationSolution" type="CorrelationSolutionType"/>
     <xsd:complexType name="CorrelationSolutionType">
         <xsd:sequence>
-            <xsd:element name="toChange" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
-            <xsd:element name="ruleId" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="toChange" type="xsd:boolean" minOccurs="1" maxOccurs="1" default="false"/>
+            <xsd:element name="ruleId" type="xsd:int" minOccurs="0" maxOccurs="1" default="-1"/>
             <xsd:element name="anomalyId" type="xsd:int" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="updatedRule" type="ruleType" minOccurs="0" maxOccurs="1"/>
         </xsd:sequence>

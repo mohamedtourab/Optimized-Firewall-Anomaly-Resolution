@@ -33,6 +33,7 @@ public class ObjectFactory {
     private final static QName _ContradictionSolution_QNAME = new QName("", "ContradictionSolution");
     private final static QName _CorrelationSolution_QNAME = new QName("", "CorrelationSolution");
     private final static QName _ShadowingConflictSolution_QNAME = new QName("", "ShadowingConflictSolution");
+    private final static QName _Rules_QNAME = new QName("", "rules");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ofar.generated.classes.solveRequest
@@ -114,6 +115,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "ShadowingConflictSolution")
     public JAXBElement<ShadowingConflictSolutionType> createShadowingConflictSolution(ShadowingConflictSolutionType value) {
         return new JAXBElement<ShadowingConflictSolutionType>(_ShadowingConflictSolution_QNAME, ShadowingConflictSolutionType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Rules }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "rules")
+    public JAXBElement<Rules> createRules(Rules value) {
+        return new JAXBElement<Rules>(_Rules_QNAME, Rules.class, null, value);
     }
 
 }
