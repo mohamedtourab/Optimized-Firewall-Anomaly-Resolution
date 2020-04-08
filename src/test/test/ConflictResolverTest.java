@@ -62,7 +62,7 @@ public class ConflictResolverTest {
 
         ConflictResolver conflictResolver1 = new ConflictResolver(rules, anomalies);
         RemovedEntries removedEntries1 = conflictResolver1.resolveAnomalies();
-        assertEquals(1,removedEntries1.getRemovedRules().size());
+        assertEquals(1, removedEntries1.getRemovedRules().size());
         assertEquals(1, removedEntries1.getRemovedAnomalies().size());
 
         assertThrows(IllegalArgumentException.class, () -> new ConflictResolver(null, null));
@@ -77,8 +77,8 @@ public class ConflictResolverTest {
         ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
         RemovedEntries removedEntries = conflictResolver.removeIrrelevanceAnomaly();
         //Test based on the initial created data
-        assertEquals(2,removedEntries.getRemovedRules().size());
-        assertEquals(6,removedEntries.getRemovedAnomalies().size());
+        assertEquals(2, removedEntries.getRemovedRules().size());
+        assertEquals(6, removedEntries.getRemovedAnomalies().size());
 
     }
 
@@ -87,8 +87,8 @@ public class ConflictResolverTest {
         ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
         RemovedEntries removedEntries = conflictResolver.removeUnnecessaryAnomaly();
         //Test based on the initial created data
-        assertEquals(6,removedEntries.getRemovedRules().size());
-        assertEquals(6,removedEntries.getRemovedAnomalies().size());
+        assertEquals(6, removedEntries.getRemovedRules().size());
+        assertEquals(6, removedEntries.getRemovedAnomalies().size());
     }
 
     @Test
@@ -130,18 +130,25 @@ public class ConflictResolverTest {
         anomalyType.getRule().add(ruleType1);
         anomalyType.getRule().add(ruleType);
         anomalies.getAnomaly().add(anomalyType);
-        conflictResolver = new ConflictResolver(rules,anomalies);
+        conflictResolver = new ConflictResolver(rules, anomalies);
         RemovedEntries removedEntries2 = conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
-        assertEquals(1,removedEntries2.getRemovedAnomalies().size());
-        assertEquals(1,removedEntries2.getRemovedRules().size());
+        assertEquals(1, removedEntries2.getRemovedAnomalies().size());
+        assertEquals(1, removedEntries2.getRemovedRules().size());
     }
 
     @Test
     public void testGetConflictAnomalies() {
+        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
+        Anomalies unresolvedAnomalies = conflictResolver.getConflictAnomalies();
+        //Test based on the initial created data
+        assertEquals(22, unresolvedAnomalies.getAnomaly().size());
     }
 
     @Test
     public void testExecuteSolveRequest() {
+        //TODO create data unmarshaller to create solveRequest Object
+        //TODO create validator to validate the data with respect to the schema
+
     }
 
 }

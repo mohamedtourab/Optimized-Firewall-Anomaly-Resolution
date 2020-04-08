@@ -145,6 +145,9 @@ public class ConflictResolver implements Resolver {
 
     @Override
     public RemovedEntries executeSolveRequest(SolveRequest solveRequest) {
+        if (solveRequest == null || isEmpty(solveRequest) ){
+            return null;
+        }
         final Set<RuleType> removedRules = new HashSet<>();
         final Set<AnomalyType> removedAnomalies = new HashSet<>();
 
@@ -215,6 +218,11 @@ public class ConflictResolver implements Resolver {
         return new RemovedEntries(removedRules, removedAnomalies);
     }
 
+    private boolean isEmpty(SolveRequest solveRequest){
+        return solveRequest.getShadowingConflictSolutions().size()==0
+                && solveRequest.getCorrelationSolutions().size()==0
+                && solveRequest.getContradictionSolutions().size()==0;
+    }
 
     private RuleType getRuleUsingRuleID(List<RuleType> listOfRules, BigInteger ruleID) {
         RuleType r = new RuleType();
