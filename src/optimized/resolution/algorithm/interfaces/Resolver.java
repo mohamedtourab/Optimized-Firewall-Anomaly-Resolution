@@ -23,6 +23,14 @@ public interface Resolver {
     RemovedEntries removeIrrelevanceAnomaly();
 
     /**
+     * This function removes all the unnecessary anomalies
+     * it doesn't take any parameters
+     * @return an object of type RemovedEntries which contains 2 sets i.e {set<RuleType>removedRules,set<AnomalyType>removedAnomalies}
+     * which contains all the anomalies and rules removed by this function.
+     */
+    RemovedEntries removeUnnecessaryAnomaly();
+
+    /**
      * This function removes the Duplicated rules and the anomalies caused by these rules or rules causing shadowing redundancy anomaly
      * @param anomalyName this parameter is used to specify which operation you want to do either(AnomalyNames.DUPLICATION or
      *                    AnomalyNames.SHADOWING_REDUNDANCY)

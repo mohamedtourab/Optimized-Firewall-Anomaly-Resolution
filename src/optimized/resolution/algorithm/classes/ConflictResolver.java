@@ -48,16 +48,17 @@ public class ConflictResolver implements Resolver {
         final RemovedEntries irrelevanceRemovedEntries = removeIrrelevanceAnomaly();
         final RemovedEntries duplicateRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
         final RemovedEntries shadowingRedundancyRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
+        final RemovedEntries unnecessaryRemovedEntries = removeUnnecessaryAnomaly();
 
         final Rules removedRules = new Rules();
         final Anomalies removedAnomalies = new Anomalies();
 
         removedRules.getRule().addAll(Stream
-                .of(irrelevanceRemovedEntries.getRemovedRules(), duplicateRemovedEntries.getRemovedRules(), shadowingRedundancyRemovedEntries.getRemovedRules())
+                .of(irrelevanceRemovedEntries.getRemovedRules(), duplicateRemovedEntries.getRemovedRules(), shadowingRedundancyRemovedEntries.getRemovedRules(), unnecessaryRemovedEntries.getRemovedRules())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
         removedAnomalies.getAnomaly().addAll(Stream
-                .of(irrelevanceRemovedEntries.getRemovedAnomalies(), duplicateRemovedEntries.getRemovedAnomalies(), shadowingRedundancyRemovedEntries.getRemovedAnomalies())
+                .of(irrelevanceRemovedEntries.getRemovedAnomalies(), duplicateRemovedEntries.getRemovedAnomalies(), shadowingRedundancyRemovedEntries.getRemovedAnomalies(), unnecessaryRemovedEntries.getRemovedAnomalies())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
     }
@@ -81,6 +82,29 @@ public class ConflictResolver implements Resolver {
         }));
         removedAnomalies.forEach(a -> anomalies.getAnomaly().remove(a));
         return new RemovedEntries(removedRules, removedAnomalies);
+    }
+
+    @Override
+    public RemovedEntries removeUnnecessaryAnomaly() {
+        final HashSet<AnomalyType> localAnomaliesToBeRemoved = new HashSet<>();
+
+        final HashSet<RuleType> localRulesToBeRemoved = anomalies.getAnomaly().stream().filter(s -> s.getAnomalyName().equals(AnomalyNames.UNNECESSARY)).map(anomalyType -> {
+            RuleType rule1 = anomalyType.getRule().get(0);
+            RuleType rule2 = anomalyType.getRule().get(1);
+            localAnomaliesToBeRemoved.add(anomalyType);
+            if (rule1.getPriority().compareTo(rule2.getPriority()) < 0) {
+                return rule1;
+            } else {
+                return rule2;
+            }
+        }).collect(Collectors.toCollection(HashSet::new));
+
+        //Update the original list of rules
+        localRulesToBeRemoved.forEach(rule -> rules.getRule().remove(rule));
+        //update the original list of anomalies
+        localAnomaliesToBeRemoved.forEach(anomaly -> anomalies.getAnomaly().remove(anomaly));
+
+        return new RemovedEntries(localRulesToBeRemoved, localAnomaliesToBeRemoved);
     }
 
     @Override

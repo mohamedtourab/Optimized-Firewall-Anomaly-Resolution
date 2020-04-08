@@ -117,6 +117,7 @@ public class OptimizerResource {
         ServiceInput serviceInput = Database.getEntry(id);
         ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
         conflictResolver.executeSolveRequest(solveRequest);
+        conflictResolver.removeUnnecessaryAnomaly();
         serviceInput.setDefectedRules(conflictResolver.getRules());
         serviceInput.setAnomaliesList(conflictResolver.getAnomalies());
         Database.dbHashMap.put(id, serviceInput);
