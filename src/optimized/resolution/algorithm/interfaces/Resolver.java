@@ -10,8 +10,10 @@ public interface Resolver {
      * This Method doesn't return anything it performs the first 3 anomaly types i.e {Irrelevant,Duplicate,Shadowing Redundancy}
      * This method uses the other two methods removeIrrelevanceAnomaly(),removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames anomalyName)
      * so If you used this function you don't have to use the two previously mentioned methods
+     * @return an object of type RemovedEntries which contains 2 sets i.e {set<RuleType>removedRules,set<AnomalyType>removedAnomalies}
+     * which contains all the anomalies and rules removed by this function.
      */
-    void resolveAnomalies();
+    RemovedEntries resolveAnomalies();
 
     /**
      * This function removes the irrelevant rules and the anomalies caused by these rules

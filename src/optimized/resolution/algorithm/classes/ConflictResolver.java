@@ -26,32 +26,26 @@ public class ConflictResolver implements Resolver {
         return rules;
     }
 
-    public void setRules(Rules rules) {
-        this.rules = rules;
-    }
-
     public Anomalies getAnomalies() {
         return anomalies;
     }
 
-    public void setAnomalies(Anomalies anomalies) {
-        this.anomalies = anomalies;
-    }
-
     public ConflictResolver(Rules rules, Anomalies anomalies) {
+        if (rules == null || anomalies == null || rules.getRule().size() == 0 || anomalies.getAnomaly().size() == 0) {
+            throw new IllegalArgumentException();
+        }
         this.anomalies = anomalies;
         this.rules = rules;
     }
 
     @Override
-    public void resolveAnomalies() {
+    public RemovedEntries resolveAnomalies() {
+        final Rules removedRules = new Rules();
+        final Anomalies removedAnomalies= new Anomalies();
         final RemovedEntries irrelevanceRemovedEntries = removeIrrelevanceAnomaly();
         final RemovedEntries duplicateRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
         final RemovedEntries shadowingRedundancyRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
         final RemovedEntries unnecessaryRemovedEntries = removeUnnecessaryAnomaly();
-
-        final Rules removedRules = new Rules();
-        final Anomalies removedAnomalies = new Anomalies();
 
         removedRules.getRule().addAll(Stream
                 .of(irrelevanceRemovedEntries.getRemovedRules(), duplicateRemovedEntries.getRemovedRules(), shadowingRedundancyRemovedEntries.getRemovedRules(), unnecessaryRemovedEntries.getRemovedRules())
@@ -61,6 +55,7 @@ public class ConflictResolver implements Resolver {
                 .of(irrelevanceRemovedEntries.getRemovedAnomalies(), duplicateRemovedEntries.getRemovedAnomalies(), shadowingRedundancyRemovedEntries.getRemovedAnomalies(), unnecessaryRemovedEntries.getRemovedAnomalies())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
+        return new RemovedEntries(new HashSet<RuleType>(removedRules.getRule()),new HashSet<AnomalyType>(removedAnomalies.getAnomaly()));
     }
 
     @Override
@@ -109,12 +104,12 @@ public class ConflictResolver implements Resolver {
 
     @Override
     public RemovedEntries removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames anomalyName) {
-        final Set<RuleType> removedRules = new HashSet<>();
-        final Set<AnomalyType> removedAnomalies = new HashSet<>();
+        if (anomalyName == null || !(anomalyName.equals(AnomalyNames.DUPLICATION) || anomalyName.equals(AnomalyNames.SHADOWING_REDUNDANCY))) {
+            return null;
+        }
         final HashSet<AnomalyType> localRemovedAnomalies = new HashSet<>();
         final HashSet<RuleType> localRemovedRules = new HashSet<>();
 
-        //Remove Irrelevance Rules
         for (AnomalyType anomaly : anomalies.getAnomaly()) {
             if (anomaly.getAnomalyName().equals(anomalyName)) {
                 RuleType rule1 = anomaly.getRule().get(0);
@@ -122,23 +117,20 @@ public class ConflictResolver implements Resolver {
                 //Determine which rule to remove based on the priority
                 if (rule1.getPriority().compareTo(rule2.getPriority()) > 0) {
                     localRemovedRules.add(rule1);
-                    removedRules.add(rule1);
                 } else {
                     localRemovedRules.add(rule2);
-                    removedRules.add(rule2);
                 }
             }
         }
         //Remove all anomalies caused by the removed rules
         localRemovedRules.forEach(oneRule -> anomalies.getAnomaly().forEach(oneAnomaly -> {
             if (oneAnomaly.getRule().contains(oneRule)) {
-                removedAnomalies.add(oneAnomaly);
                 localRemovedAnomalies.add(oneAnomaly);
             }
         }));
         localRemovedAnomalies.forEach(a -> anomalies.getAnomaly().remove(a));
         localRemovedRules.forEach(r -> rules.getRule().remove(r));
-        return new RemovedEntries(removedRules, removedAnomalies);
+        return new RemovedEntries(localRemovedRules, localRemovedAnomalies);
     }
 
     @Override
@@ -242,7 +234,7 @@ public class ConflictResolver implements Resolver {
         return a;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
         conflictResolver.resolveAnomalies();
@@ -256,6 +248,6 @@ public class ConflictResolver implements Resolver {
         conflictResolver.executeSolveRequest(solveRequest);
         anomalylist = conflictResolver.getConflictAnomalies();
 
-    }
+    }*/
 
 }
