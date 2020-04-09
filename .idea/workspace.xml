@@ -7,9 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68deff26-c911-40a5-90a8-b7c1c47634e1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/rest/resources/OptimizerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rest/resources/OptimizerResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/lib/jersey-bundle-1.18.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,7 +260,7 @@
       <workItem from="1586349824952" duration="12424000" />
       <workItem from="1586376200518" duration="7641000" />
       <workItem from="1586426412653" duration="16000" />
-      <workItem from="1586429412357" duration="1036000" />
+      <workItem from="1586429412357" duration="1441000" />
     </task>
     <servers />
   </component>
