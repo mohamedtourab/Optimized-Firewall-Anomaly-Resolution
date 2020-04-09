@@ -36,8 +36,8 @@ public class DataUnmarshaller {
         return solveRequest;
     }
 
-    public static void main(String[] args) throws JAXBException, SAXException {
+/*    public static void main(String[] args) throws JAXBException, SAXException {
         DataUnmarshaller.unmarshallData("xsd/solve_request.xml", "xsd/solve_request.xsd", "ofar.generated.classes.solveRequest");
-    }
+    }*/
 
 }

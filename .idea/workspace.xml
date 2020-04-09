@@ -8,12 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="68deff26-c911-40a5-90a8-b7c1c47634e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen-src/ofar/generated/classes/conflicts/AnomalyType.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen-src/ofar/generated/classes/conflicts/AnomalyType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen-src/ofar/generated/classes/contradiction/ContradictionSolutionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen-src/ofar/generated/classes/contradiction/ContradictionSolutionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/serializer/DataMarshaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/serializer/DataMarshaller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/serializer/DataUnmarshaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/serializer/DataUnmarshaller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/optimized/resolution/algorithm/classes/ConflictResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/optimized/resolution/algorithm/classes/ConflictResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/test/ConflictResolverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/test/ConflictResolverTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xsd/contradict_solution.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/xsd/contradict_solution.xsd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +40,6 @@
   <component name="ProjectId" id="1aEPuT9Fqu0VaFaMAMuIJyQ1IzO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -56,6 +51,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -194,8 +190,8 @@
     <list>
       <item itemvalue="Application.DataMarshaller" />
       <item itemvalue="Application.DataUnmarshaller" />
-      <item itemvalue="Tomcat Server.Tomcat 9.0.33" />
       <item itemvalue="JUnit.All in Optimized-Firewall-Anomaly-Resolution" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.33" />
     </list>
     <recent_temporary>
       <list>
@@ -204,28 +200,6 @@
         <item itemvalue="Application.DataUnmarshaller" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-            </expand>
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -242,12 +216,14 @@
       <workItem from="1586349824952" duration="12424000" />
       <workItem from="1586376200518" duration="7641000" />
       <workItem from="1586426412653" duration="16000" />
-      <workItem from="1586429412357" duration="16581000" />
+      <workItem from="1586429412357" duration="16996000" />
+      <workItem from="1586451491944" duration="536000" />
+      <workItem from="1586452135662" duration="608000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="280" y="0" key="#All_in_Optimized-Firewall-Anomaly-Resolution" timestamp="1586363880943">
@@ -318,54 +294,54 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1586435819552" />
-    <state width="1323" height="277" key="GridCell.Tab.0.bottom" timestamp="1586450794526">
+    <state width="1323" height="277" key="GridCell.Tab.0.bottom" timestamp="1586451342269">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="277" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586450794526" />
-    <state width="1323" height="277" key="GridCell.Tab.0.center" timestamp="1586450794526">
+    <state width="1323" height="277" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586451342269" />
+    <state width="1323" height="277" key="GridCell.Tab.0.center" timestamp="1586451342269">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="277" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586450794526" />
-    <state width="1323" height="277" key="GridCell.Tab.0.left" timestamp="1586450794526">
+    <state width="1323" height="277" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586451342269" />
+    <state width="1323" height="277" key="GridCell.Tab.0.left" timestamp="1586451342268">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="277" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586450794526" />
-    <state width="1323" height="277" key="GridCell.Tab.0.right" timestamp="1586450794526">
+    <state width="1323" height="277" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586451342268" />
+    <state width="1323" height="277" key="GridCell.Tab.0.right" timestamp="1586451342269">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="277" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586450794526" />
-    <state width="1323" height="243" key="GridCell.Tab.1.bottom" timestamp="1586450187795">
+    <state width="1323" height="277" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586451342269" />
+    <state width="905" height="217" key="GridCell.Tab.1.bottom" timestamp="1586451342266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="243" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586450187795" />
-    <state width="1323" height="243" key="GridCell.Tab.1.center" timestamp="1586450187795">
+    <state width="905" height="217" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
+    <state width="905" height="217" key="GridCell.Tab.1.center" timestamp="1586451342266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="243" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1586450187795" />
-    <state width="1323" height="243" key="GridCell.Tab.1.left" timestamp="1586450187795">
+    <state width="905" height="217" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
+    <state width="905" height="217" key="GridCell.Tab.1.left" timestamp="1586451342265">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="243" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1586450187795" />
-    <state width="1323" height="243" key="GridCell.Tab.1.right" timestamp="1586450187795">
+    <state width="905" height="217" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1586451342265" />
+    <state width="905" height="217" key="GridCell.Tab.1.right" timestamp="1586451342266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="243" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1586450187795" />
-    <state width="905" height="217" key="GridCell.Tab.2.bottom" timestamp="1586449601951">
+    <state width="905" height="217" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
+    <state width="905" height="217" key="GridCell.Tab.2.bottom" timestamp="1586451342266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="905" height="217" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586449601951" />
-    <state width="905" height="217" key="GridCell.Tab.2.center" timestamp="1586449601951">
+    <state width="905" height="217" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
+    <state width="905" height="217" key="GridCell.Tab.2.center" timestamp="1586451342266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="905" height="217" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1586449601951" />
-    <state width="905" height="217" key="GridCell.Tab.2.left" timestamp="1586449601951">
+    <state width="905" height="217" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
+    <state width="905" height="217" key="GridCell.Tab.2.left" timestamp="1586451342266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="905" height="217" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1586449601951" />
-    <state width="905" height="217" key="GridCell.Tab.2.right" timestamp="1586449601951">
+    <state width="905" height="217" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
+    <state width="905" height="217" key="GridCell.Tab.2.right" timestamp="1586451342266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="905" height="217" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1586449601951" />
+    <state width="905" height="217" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
     <state width="905" height="217" key="GridCell.Tab.3.bottom" timestamp="1586352775761">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -390,10 +366,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="499" y="142" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1586363557771" />
-    <state x="384" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1586426412111">
+    <state x="384" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1586451490932">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="384" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1586426412111" />
+    <state x="384" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1586451490932" />
     <state x="388" y="257" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1586380580242">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -432,15 +408,15 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$optimized_resolution_algorithm_in_Optimized_Firewall_Anomaly_Resolution.ic" NAME="optimized.resolution.algorithm in Optimized-Firewall-Anomaly-Resolution Coverage Results" MODIFIED="1586369627164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>optimized.resolution.algorithm.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$All_in_Optimized_Firewall_Anomaly_Resolution__2_.ic" NAME="All in Optimized-Firewall-Anomaly-Resolution (2) Coverage Results" MODIFIED="1586450465830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$All_in_Optimized_Firewall_Anomaly_Resolution.ic" NAME="All in Optimized-Firewall-Anomaly-Resolution Coverage Results" MODIFIED="1586455621638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$ofar_generated_classes_in_Optimized_Firewall_Anomaly_Resolution.ic" NAME="ofar.generated.classes in Optimized-Firewall-Anomaly-Resolution Coverage Results" MODIFIED="1586369734679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ofar.generated.classes.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$All_in_Optimized_Firewall_Anomaly_Resolution__1_.ic" NAME="All in Optimized-Firewall-Anomaly-Resolution (1) Coverage Results" MODIFIED="1586450440985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$optimized_resolution_algorithm_in_Optimized_Firewall_Anomaly_Resolution.ic" NAME="optimized.resolution.algorithm in Optimized-Firewall-Anomaly-Resolution Coverage Results" MODIFIED="1586369627164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>optimized.resolution.algorithm.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$All_in_Optimized_Firewall_Anomaly_Resolution.ic" NAME="All in Optimized-Firewall-Anomaly-Resolution Coverage Results" MODIFIED="1586450582682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$ConflictResolverTest.ic" NAME="ConflictResolverTest Coverage Results" MODIFIED="1586430337203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>

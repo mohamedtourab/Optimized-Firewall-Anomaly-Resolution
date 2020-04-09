@@ -39,7 +39,7 @@ public class DataMarshaller {
         }
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         //create the data to be serialized
         Rules rules = DataCreator.createRules();
         Anomalies anomalies = DataCreator.createAnomalies();
@@ -48,5 +48,5 @@ public class DataMarshaller {
         serviceInput.setDefectedRules(rules);
         String outputPath = "D:\\MohamedMamdouh\\Education\\PoliTo\\Projects\\Optimized-Firewall-Anomaly-Resolution\\src\\data\\serializer\\serviceInput.xml";
         marshalData(serviceInput, "ofar.generated.classes.input", outputPath,"xsd/webservice_input_schema.xsd");
-    }
+    }*/
 }
