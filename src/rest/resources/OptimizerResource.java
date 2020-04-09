@@ -24,7 +24,7 @@ public class OptimizerResource {
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response createOptimizer(ServiceInput serviceInput, @Context UriInfo uriInfo) {
         if (serviceInput == null) {
-            //throw new ForbiddenException("Empty Input");
+            throw new ForbiddenException("Empty Input");
         }
         ServiceInput savedInput = Database.insertEntry(serviceInput);
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();

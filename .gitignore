@@ -1,8 +1,0 @@
-.idea/
-.settings/
-*.classpath
-*.project
-OFAR.iml
-bin/
-out/
-.DS_Store

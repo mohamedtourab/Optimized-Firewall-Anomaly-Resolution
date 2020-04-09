@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceInput>
+    <DefectedRules>
+        <rule ruleID="1">
+            <priority>1</priority>
+            <IPsrc>10.1.0.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="2">
+            <priority>2</priority>
+            <IPsrc>10.1.0.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>TCP</Protocol>
+            <Action>ALLOW</Action>
+        </rule>
+        <rule ruleID="3">
+            <priority>3</priority>
+            <IPsrc>10.1.0.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.3.0.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>TCP</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="4">
+            <priority>4</priority>
+            <IPsrc>10.1.0.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.3.1.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>TCP</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="5">
+            <priority>5</priority>
+            <IPsrc>10.1.0.7</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.2.0.5</IPdst>
+            <Pdst>80</Pdst>
+            <Protocol>TCP</Protocol>
+            <Action>ALLOW</Action>
+        </rule>
+        <rule ruleID="6">
+            <priority>6</priority>
+            <IPsrc>10.2.0.5</IPsrc>
+            <Psrc>80</Psrc>
+            <IPdst>10.1.0.7</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>TCP</Protocol>
+            <Action>ALLOW</Action>
+        </rule>
+        <rule ruleID="7">
+            <priority>7</priority>
+            <IPsrc>10.2.0.5</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="8">
+            <priority>8</priority>
+            <IPsrc>*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.2.0.5</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="9">
+            <priority>9</priority>
+            <IPsrc>10.2.1.5</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="10">
+            <priority>10</priority>
+            <IPsrc>*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.2.1.5</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="11">
+            <priority>11</priority>
+            <IPsrc>10.3.1.5</IPsrc>
+            <Psrc>80</Psrc>
+            <IPdst>10.2.1.5</IPdst>
+            <Pdst>8080</Pdst>
+            <Protocol>TCP</Protocol>
+            <Action>ALLOW</Action>
+        </rule>
+        <rule ruleID="12">
+            <priority>12</priority>
+            <IPsrc>10.2.1.5</IPsrc>
+            <Psrc>8080</Psrc>
+            <IPdst>10.3.1.5</IPdst>
+            <Pdst>80</Pdst>
+            <Protocol>TCP</Protocol>
+            <Action>ALLOW</Action>
+        </rule>
+        <rule ruleID="13">
+            <priority>13</priority>
+            <IPsrc>10.2.0.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="14">
+            <priority>14</priority>
+            <IPsrc>*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.2.0.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="15">
+            <priority>15</priority>
+            <IPsrc>10.2.1.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="16">
+            <priority>16</priority>
+            <IPsrc>*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.2.1.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="17">
+            <priority>17</priority>
+            <IPsrc>10.2.0.5</IPsrc>
+            <Psrc>80</Psrc>
+            <IPdst>10.2.1.5</IPdst>
+            <Pdst>8080</Pdst>
+            <Protocol>TCP</Protocol>
+            <Action>ALLOW</Action>
+        </rule>
+        <rule ruleID="18">
+            <priority>18</priority>
+            <IPsrc>10.2.1.5</IPsrc>
+            <Psrc>8080</Psrc>
+            <IPdst>10.2.0.5</IPdst>
+            <Pdst>80</Pdst>
+            <Protocol>TCP</Protocol>
+            <Action>ALLOW</Action>
+        </rule>
+        <rule ruleID="19">
+            <priority>19</priority>
+            <IPsrc>10.2.0.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.2.1.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>ALLOW</Action>
+        </rule>
+        <rule ruleID="20">
+            <priority>20</priority>
+            <IPsrc>10.2.1.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.2.0.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>ALLOW</Action>
+        </rule>
+        <rule ruleID="21">
+            <priority>21</priority>
+            <IPsrc>10.3.*.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.2.*.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="22">
+            <priority>22</priority>
+            <IPsrc>10.2.*.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.3.*.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="23">
+            <priority>2147483647</priority>
+            <IPsrc>*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="24">
+            <priority>24</priority>
+            <IPsrc>10.10.10.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.10.10.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+        <rule ruleID="25">
+            <priority>25</priority>
+            <IPsrc>10.10.10.*</IPsrc>
+            <Psrc>*</Psrc>
+            <IPdst>10.10.10.*</IPdst>
+            <Pdst>*</Pdst>
+            <Protocol>*</Protocol>
+            <Action>DENY</Action>
+        </rule>
+    </DefectedRules>
+    <AnomaliesList>
+        <Anomaly AnomalyName="Irrelevance" AnomalyID="1">
+            <rule ruleID="3">
+                <priority>3</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.3.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Irrelevance" AnomalyID="2">
+            <rule ruleID="4">
+                <priority>4</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.3.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingRedundancy" AnomalyID="3">
+            <rule ruleID="1">
+                <priority>1</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="3">
+                <priority>3</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.3.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingRedundancy" AnomalyID="4">
+            <rule ruleID="1">
+                <priority>1</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="4">
+                <priority>4</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.3.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingRedundancy" AnomalyID="5">
+            <rule ruleID="2">
+                <priority>2</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+            <rule ruleID="5">
+                <priority>5</priority>
+                <IPsrc>10.1.0.7</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>80</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Correlation" AnomalyID="6">
+            <rule ruleID="7">
+                <priority>7</priority>
+                <IPsrc>10.2.0.5</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="19">
+                <priority>19</priority>
+                <IPsrc>10.2.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Correlation" AnomalyID="7">
+            <rule ruleID="8">
+                <priority>8</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="20">
+                <priority>20</priority>
+                <IPsrc>10.2.1.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Correlation" AnomalyID="8">
+            <rule ruleID="9">
+                <priority>9</priority>
+                <IPsrc>10.2.1.5</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="20">
+                <priority>20</priority>
+                <IPsrc>10.2.1.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Correlation" AnomalyID="9">
+            <rule ruleID="10">
+                <priority>10</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.5</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="19">
+                <priority>19</priority>
+                <IPsrc>10.2.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Unnecessary" AnomalyID="10">
+            <rule ruleID="7">
+                <priority>7</priority>
+                <IPsrc>10.2.0.5</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="13">
+                <priority>13</priority>
+                <IPsrc>10.2.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Unnecessary" AnomalyID="11">
+            <rule ruleID="8">
+                <priority>8</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="14">
+                <priority>14</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Unnecessary" AnomalyID="12">
+            <rule ruleID="17">
+                <priority>17</priority>
+                <IPsrc>10.2.0.5</IPsrc>
+                <Psrc>80</Psrc>
+                <IPdst>10.2.1.5</IPdst>
+                <Pdst>8080</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+            <rule ruleID="19">
+                <priority>19</priority>
+                <IPsrc>10.2.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Unnecessary" AnomalyID="13">
+            <rule ruleID="18">
+                <priority>18</priority>
+                <IPsrc>10.2.1.5</IPsrc>
+                <Psrc>8080</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>80</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+            <rule ruleID="20">
+                <priority>20</priority>
+                <IPsrc>10.2.1.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Unnecessary" AnomalyID="14">
+            <rule ruleID="21">
+                <priority>21</priority>
+                <IPsrc>10.3.*.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.*.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="23">
+                <priority>2147483647</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Unnecessary" AnomalyID="15">
+            <rule ruleID="22">
+                <priority>22</priority>
+                <IPsrc>10.2.*.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.3.*.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="23">
+                <priority>2147483647</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="16">
+            <rule ruleID="1">
+                <priority>1</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="2">
+                <priority>2</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="17">
+            <rule ruleID="1">
+                <priority>1</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="5">
+                <priority>5</priority>
+                <IPsrc>10.1.0.7</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>80</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="18">
+            <rule ruleID="2">
+                <priority>2</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+            <rule ruleID="3">
+                <priority>3</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.3.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="19">
+            <rule ruleID="2">
+                <priority>2</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+            <rule ruleID="4">
+                <priority>4</priority>
+                <IPsrc>10.1.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.3.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="20">
+            <rule ruleID="7">
+                <priority>7</priority>
+                <IPsrc>10.2.0.5</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="17">
+                <priority>17</priority>
+                <IPsrc>10.2.0.5</IPsrc>
+                <Psrc>80</Psrc>
+                <IPdst>10.2.1.5</IPdst>
+                <Pdst>8080</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="21">
+            <rule ruleID="8">
+                <priority>8</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="18">
+                <priority>18</priority>
+                <IPsrc>10.2.1.5</IPsrc>
+                <Psrc>8080</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>80</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="22">
+            <rule ruleID="9">
+                <priority>9</priority>
+                <IPsrc>10.2.1.5</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="12">
+                <priority>12</priority>
+                <IPsrc>10.2.1.5</IPsrc>
+                <Psrc>8080</Psrc>
+                <IPdst>10.3.1.5</IPdst>
+                <Pdst>80</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="23">
+            <rule ruleID="9">
+                <priority>9</priority>
+                <IPsrc>10.2.1.5</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="18">
+                <priority>18</priority>
+                <IPsrc>10.2.1.5</IPsrc>
+                <Psrc>8080</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>80</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="24">
+            <rule ruleID="10">
+                <priority>10</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.5</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="11">
+                <priority>11</priority>
+                <IPsrc>10.3.1.5</IPsrc>
+                <Psrc>80</Psrc>
+                <IPdst>10.2.1.5</IPdst>
+                <Pdst>8080</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="25">
+            <rule ruleID="10">
+                <priority>10</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.5</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="17">
+                <priority>17</priority>
+                <IPsrc>10.2.0.5</IPsrc>
+                <Psrc>80</Psrc>
+                <IPdst>10.2.1.5</IPdst>
+                <Pdst>8080</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="26">
+            <rule ruleID="13">
+                <priority>13</priority>
+                <IPsrc>10.2.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="17">
+                <priority>17</priority>
+                <IPsrc>10.2.0.5</IPsrc>
+                <Psrc>80</Psrc>
+                <IPdst>10.2.1.5</IPdst>
+                <Pdst>8080</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="27">
+            <rule ruleID="13">
+                <priority>13</priority>
+                <IPsrc>10.2.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="19">
+                <priority>19</priority>
+                <IPsrc>10.2.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="28">
+            <rule ruleID="14">
+                <priority>14</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="18">
+                <priority>18</priority>
+                <IPsrc>10.2.1.5</IPsrc>
+                <Psrc>8080</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>80</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="29">
+            <rule ruleID="14">
+                <priority>14</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="20">
+                <priority>20</priority>
+                <IPsrc>10.2.1.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="30">
+            <rule ruleID="15">
+                <priority>15</priority>
+                <IPsrc>10.2.1.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="18">
+                <priority>18</priority>
+                <IPsrc>10.2.1.5</IPsrc>
+                <Psrc>8080</Psrc>
+                <IPdst>10.2.0.5</IPdst>
+                <Pdst>80</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="31">
+            <rule ruleID="15">
+                <priority>15</priority>
+                <IPsrc>10.2.1.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="20">
+                <priority>20</priority>
+                <IPsrc>10.2.1.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.0.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="32">
+            <rule ruleID="16">
+                <priority>16</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="17">
+                <priority>17</priority>
+                <IPsrc>10.2.0.5</IPsrc>
+                <Psrc>80</Psrc>
+                <IPdst>10.2.1.5</IPdst>
+                <Pdst>8080</Pdst>
+                <Protocol>TCP</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="ShadowingConflict" AnomalyID="33">
+            <rule ruleID="16">
+                <priority>16</priority>
+                <IPsrc>*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="19">
+                <priority>19</priority>
+                <IPsrc>10.2.0.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.2.1.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>ALLOW</Action>
+            </rule>
+        </Anomaly>
+        <Anomaly AnomalyName="Duplication" AnomalyID="34">
+            <rule ruleID="24">
+                <priority>24</priority>
+                <IPsrc>10.10.10.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.10.10.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+            <rule ruleID="25">
+                <priority>25</priority>
+                <IPsrc>10.10.10.*</IPsrc>
+                <Psrc>*</Psrc>
+                <IPdst>10.10.10.*</IPdst>
+                <Pdst>*</Pdst>
+                <Protocol>*</Protocol>
+                <Action>DENY</Action>
+            </rule>
+        </Anomaly>
+    </AnomaliesList>
+</ServiceInput>
