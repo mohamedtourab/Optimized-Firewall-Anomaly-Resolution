@@ -6,10 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68deff26-c911-40a5-90a8-b7c1c47634e1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/serializer/DataMarshaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/serializer/DataMarshaller.java" afterDir="false" />
-    </list>
+    <list default="true" id="68deff26-c911-40a5-90a8-b7c1c47634e1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +41,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="optimized-firewall-anomaly-resolution" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
@@ -54,8 +55,8 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Project/Optimized-Firewall-Anomaly-Resolution" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/optimized-firewall-anomaly-resolution.xml" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2772861" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.grazie" />
@@ -73,7 +74,7 @@
       <recent name="D:\MohamedMamdouh\Education\PoliTo\Projects\Optimized-Firewall-Anomaly-Resolution\web\WEB-INF\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DataMarshaller">
+  <component name="RunManager" selected="JUnit.All in Optimized-Firewall-Anomaly-Resolution">
     <configuration name="DataMarshaller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="data.serializer.DataMarshaller" />
       <module name="Optimized-Firewall-Anomaly-Resolution" />
@@ -214,9 +215,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in Optimized-Firewall-Anomaly-Resolution" />
         <item itemvalue="Application.DataMarshaller" />
         <item itemvalue="Application.DataUnmarshaller" />
-        <item itemvalue="JUnit.All in Optimized-Firewall-Anomaly-Resolution" />
         <item itemvalue="JUnit.ConflictResolverTest" />
         <item itemvalue="JUnit.ConflictResolverTest.testResolveAnomalies" />
       </list>
@@ -259,7 +260,7 @@
       <workItem from="1586349824952" duration="12424000" />
       <workItem from="1586376200518" duration="7641000" />
       <workItem from="1586426412653" duration="16000" />
-      <workItem from="1586429412357" duration="4684000" />
+      <workItem from="1586429412357" duration="5049000" />
     </task>
     <servers />
   </component>
@@ -275,10 +276,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="280" y="31" key="#ConflictResolverTest/0.0.1366.728@0.0.1366.728" timestamp="1586369538771" />
-    <state x="275" y="22" key="#Project_Structure" timestamp="1586429925079">
+    <state x="275" y="22" key="#Project_Structure" timestamp="1586435447062">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="22" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1586429925079" />
+    <state x="275" y="22" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1586435447062" />
     <state x="275" y="22" key="#Tomcat_Server" timestamp="1586299161453">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -327,26 +328,30 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="114" y="193" width="1063" height="342" key="#com.intellij.ws.xml.jaxb.GenerateJavaFromJAXBSchemasDialog/0.0.1366.728@0.0.1366.728" timestamp="1586301683958" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1586429673329">
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1586435675266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1586429673329" />
-    <state width="1323" height="570" key="GridCell.Tab.0.bottom" timestamp="1586435156095">
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1586435675266" />
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1586435819552">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="570" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586435156095" />
-    <state width="1323" height="570" key="GridCell.Tab.0.center" timestamp="1586435156094">
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1586435819552" />
+    <state width="1323" height="151" key="GridCell.Tab.0.bottom" timestamp="1586435330676">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="570" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586435156094" />
-    <state width="1323" height="570" key="GridCell.Tab.0.left" timestamp="1586435156094">
+    <state width="1323" height="151" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586435330676" />
+    <state width="1323" height="151" key="GridCell.Tab.0.center" timestamp="1586435330676">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="570" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586435156094" />
-    <state width="1323" height="570" key="GridCell.Tab.0.right" timestamp="1586435156095">
+    <state width="1323" height="151" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586435330676" />
+    <state width="1323" height="151" key="GridCell.Tab.0.left" timestamp="1586435330676">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="570" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586435156095" />
+    <state width="1323" height="151" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586435330676" />
+    <state width="1323" height="151" key="GridCell.Tab.0.right" timestamp="1586435330676">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="151" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586435330676" />
     <state width="1323" height="570" key="GridCell.Tab.1.bottom" timestamp="1586435156095">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
