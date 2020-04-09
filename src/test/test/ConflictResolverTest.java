@@ -1,15 +1,24 @@
 package test;
 
+import data.serializer.DataMarshaller;
+import data.serializer.DataUnmarshaller;
 import ofar.generated.classes.conflicts.Anomalies;
 import ofar.generated.classes.conflicts.AnomalyNames;
 import ofar.generated.classes.conflicts.AnomalyType;
+import ofar.generated.classes.conflicts.ObjectFactory;
+import ofar.generated.classes.contradiction.ContradictionSolutionType;
+import ofar.generated.classes.correlation.CorrelationSolutionType;
 import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
+import ofar.generated.classes.solveRequest.SolveRequest;
 import optimized.resolution.algorithm.classes.ConflictResolver;
 import optimized.resolution.algorithm.classes.DataCreator;
 import optimized.resolution.algorithm.classes.RemovedEntries;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 import java.math.BigInteger;
 
 import static org.junit.Assert.*;
@@ -140,15 +149,74 @@ public class ConflictResolverTest {
     public void testGetConflictAnomalies() {
         ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
         Anomalies unresolvedAnomalies = conflictResolver.getConflictAnomalies();
+        ObjectFactory objectFactory = new ObjectFactory();
+        JAXBElement<Anomalies> unresolved_anomalies = objectFactory.createAnomalies(unresolvedAnomalies);
+        DataMarshaller.marshalData(unresolved_anomalies,"ofar.generated.classes.conflicts","xsd/resulted_anomalies.xml","xsd/conflict_schema.xsd");
         //Test based on the initial created data
         assertEquals(22, unresolvedAnomalies.getAnomaly().size());
     }
 
     @Test
-    public void testExecuteSolveRequest() {
-        //TODO create data unmarshaller to create solveRequest Object
-        //TODO create validator to validate the data with respect to the schema
+    public void testExecuteSolveRequest() throws JAXBException, SAXException {
+        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
+        SolveRequest solveRequest = null;
+        RemovedEntries removedEntries = conflictResolver.executeSolveRequest(solveRequest);
+        try {
+            solveRequest = DataUnmarshaller.unmarshallData("xsd/solve_request.xml", "xsd/solve_request.xsd", "ofar.generated.classes.solveRequest");
+        } catch (SAXException | JAXBException e) {
+            e.printStackTrace();
+        }
+        ContradictionSolutionType contradictionSolutionType = new ContradictionSolutionType();
+        contradictionSolutionType.setAnomalyId(36);
+        contradictionSolutionType.setRuleId(200);
+        contradictionSolutionType.setToRemove(false);
+        ContradictionSolutionType contradictionSolutionType1 = new ContradictionSolutionType();
+        contradictionSolutionType1.setAnomalyId(37);
+        contradictionSolutionType1.setRuleId(200);
+        contradictionSolutionType1.setToRemove(true);
+        solveRequest.getContradictionSolutions().add(contradictionSolutionType);
+        solveRequest.getContradictionSolutions().add(contradictionSolutionType1);
+        CorrelationSolutionType correlationSolutionType = new CorrelationSolutionType();
+        RuleType ruleType = new RuleType();
+        ruleType.setRuleID(BigInteger.valueOf(25));
+        ruleType.setPriority(BigInteger.valueOf(25));
+        ruleType.setIPsrc("10.10.10.*");
+        ruleType.setPsrc("*");
+        ruleType.setIPdst("10.10.10.*");
+        ruleType.setPdst("*");
+        ruleType.setProtocol("*");
+        ruleType.setAction("DENY");
 
+        correlationSolutionType.setAnomalyId(20);
+        correlationSolutionType.setRuleId(23);
+        correlationSolutionType.setUpdatedRule(ruleType);
+        correlationSolutionType.setToChange(true);
+        solveRequest.getCorrelationSolutions().add(correlationSolutionType);
+        removedEntries = conflictResolver.executeSolveRequest(solveRequest);
+        assertEquals(13,removedEntries.getRemovedAnomalies().size());
+        SolveRequest newSolveRequest = new SolveRequest();
+        removedEntries = conflictResolver.executeSolveRequest(newSolveRequest);
+        assertNull(removedEntries);
     }
 
+    @Test
+    public void testAnomalyTypeToString(){
+        final AnomalyType anomalyType = new AnomalyType();
+        final RuleType ruleType = new RuleType();
+        ruleType.setRuleID(BigInteger.valueOf(25));
+        ruleType.setPriority(BigInteger.valueOf(25));
+        ruleType.setIPsrc("10.10.10.*");
+        ruleType.setPsrc("*");
+        ruleType.setIPdst("10.10.10.*");
+        ruleType.setPdst("*");
+        ruleType.setProtocol("*");
+        ruleType.setAction("DENY");
+        anomalyType.setAnomalyID(BigInteger.valueOf(4));
+        anomalyType.setAnomalyName(AnomalyNames.SHADOWING_REDUNDANCY);
+        anomalyType.getRule().add(ruleType);
+        anomalyType.getRule().add(ruleType);
+
+        final String expectedString = "Anomaly 4\nType SHADOWING_REDUNDANCY\nRules Included ["+ruleType+", "+ruleType+"]";
+        assertEquals(expectedString,anomalyType.toString());
+    }
 }

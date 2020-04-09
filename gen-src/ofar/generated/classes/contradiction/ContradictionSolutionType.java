@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="ruleId" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="anomalyId" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="toRemove" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -29,11 +30,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ContradictionSolutionType", propOrder = {
     "ruleId",
+    "anomalyId",
     "toRemove"
 })
 public class ContradictionSolutionType {
 
     protected int ruleId;
+    protected int anomalyId;
     protected boolean toRemove;
 
     /**
@@ -50,6 +53,22 @@ public class ContradictionSolutionType {
      */
     public void setRuleId(int value) {
         this.ruleId = value;
+    }
+
+    /**
+     * Gets the value of the anomalyId property.
+     * 
+     */
+    public int getAnomalyId() {
+        return anomalyId;
+    }
+
+    /**
+     * Sets the value of the anomalyId property.
+     * 
+     */
+    public void setAnomalyId(int value) {
+        this.anomalyId = value;
     }
 
     /**

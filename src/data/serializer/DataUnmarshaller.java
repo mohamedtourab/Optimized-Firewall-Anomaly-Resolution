@@ -29,9 +29,6 @@ public class DataUnmarshaller {
 
             // unmarshal file named fname
             solveRequest = (SolveRequest) u.unmarshal(new File(fileName));
-            System.out.println(solveRequest);
-
-
         } catch (SAXException se) {
             System.out.println("Unable to validate schema");
             throw se;
@@ -40,7 +37,7 @@ public class DataUnmarshaller {
     }
 
     public static void main(String[] args) throws JAXBException, SAXException {
-        DataUnmarshaller.unmarshallData("xsd/solve_request.xml","xsd/solve_request.xsd","ofar.generated.classes.solveRequest");
+        DataUnmarshaller.unmarshallData("xsd/solve_request.xml", "xsd/solve_request.xsd", "ofar.generated.classes.solveRequest");
     }
 
 }

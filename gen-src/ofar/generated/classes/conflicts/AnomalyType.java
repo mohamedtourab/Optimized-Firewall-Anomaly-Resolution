@@ -115,11 +115,12 @@ public class AnomalyType {
 
     @Override
     public String toString() {
-        return "AnomalyType{" +
-                "ruleID=" + rule +
-                ", anomalyName=" + anomalyName +
-                ", anomalyID=" + anomalyID +
-                '}';
+        return String.format("Anomaly %s\nType %s\nRules Included %s",anomalyID,anomalyName,rule);
+//        return "AnomalyType{" +
+//                "ruleID=" + rule +
+//                ", anomalyName=" + anomalyName +
+//                ", anomalyID=" + anomalyID +
+//                '}';
     }
 
     @Override
@@ -127,6 +128,7 @@ public class AnomalyType {
         if (obj == null) return false;
         if (!(obj instanceof AnomalyType)) return false;
         AnomalyType other = (AnomalyType) obj;
+        if (other.getAnomalyName() == null || other.getRule() == null || other.getAnomalyID() == null) return false;
         return other.anomalyName.equals(this.anomalyName) &&
                 other.rule.equals(this.rule);
     }
