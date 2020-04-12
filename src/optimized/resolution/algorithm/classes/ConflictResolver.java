@@ -12,6 +12,7 @@ import ofar.generated.classes.shadowingConflict.ShadowingConflictSolutionType;
 import ofar.generated.classes.solveRequest.SolveRequest;
 import optimized.resolution.algorithm.interfaces.Resolver;
 
+import javax.ws.rs.ForbiddenException;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,8 +20,8 @@ import java.util.stream.Stream;
 
 
 public class ConflictResolver implements Resolver {
-    private Rules rules;
-    private Anomalies anomalies;
+    private final Rules rules;
+    private final Anomalies anomalies;
 
     public Rules getRules() {
         return rules;
@@ -32,7 +33,7 @@ public class ConflictResolver implements Resolver {
 
     public ConflictResolver(Rules rules, Anomalies anomalies) {
         if (rules == null || anomalies == null || rules.getRule().size() == 0 || anomalies.getAnomaly().size() == 0) {
-            throw new IllegalArgumentException();
+            throw new ForbiddenException("Invalid Input");
         }
         this.anomalies = anomalies;
         this.rules = rules;
@@ -45,14 +46,13 @@ public class ConflictResolver implements Resolver {
         final RemovedEntries irrelevanceRemovedEntries = removeIrrelevanceAnomaly();
         final RemovedEntries duplicateRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
         final RemovedEntries shadowingRedundancyRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
-        final RemovedEntries unnecessaryRemovedEntries = removeUnnecessaryAnomaly();
 
         removedRules.getRule().addAll(Stream
-                .of(irrelevanceRemovedEntries.getRemovedRules(), duplicateRemovedEntries.getRemovedRules(), shadowingRedundancyRemovedEntries.getRemovedRules(), unnecessaryRemovedEntries.getRemovedRules())
+                .of(irrelevanceRemovedEntries.getRemovedRules(), duplicateRemovedEntries.getRemovedRules(), shadowingRedundancyRemovedEntries.getRemovedRules())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
         removedAnomalies.getAnomaly().addAll(Stream
-                .of(irrelevanceRemovedEntries.getRemovedAnomalies(), duplicateRemovedEntries.getRemovedAnomalies(), shadowingRedundancyRemovedEntries.getRemovedAnomalies(), unnecessaryRemovedEntries.getRemovedAnomalies())
+                .of(irrelevanceRemovedEntries.getRemovedAnomalies(), duplicateRemovedEntries.getRemovedAnomalies(), shadowingRedundancyRemovedEntries.getRemovedAnomalies())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
         return new RemovedEntries(new HashSet<RuleType>(removedRules.getRule()), new HashSet<AnomalyType>(removedAnomalies.getAnomaly()));

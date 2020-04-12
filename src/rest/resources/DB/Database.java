@@ -2,10 +2,11 @@ package rest.resources.DB;
 
 import ofar.generated.classes.input.ServiceInput;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Database {
-    public static HashMap<Integer, ServiceInput> dbHashMap = new HashMap<>();
+    public final static Map<Integer, ServiceInput> dbHashMap = new ConcurrentHashMap<>();
 
     public static ServiceInput insertEntry(ServiceInput serviceInput) {
         if (serviceInput == null) {

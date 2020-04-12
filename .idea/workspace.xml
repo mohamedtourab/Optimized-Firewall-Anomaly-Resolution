@@ -8,16 +8,15 @@
   <component name="ChangeListManager">
     <list default="true" id="68deff26-c911-40a5-90a8-b7c1c47634e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/serializer/DataMarshaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/serializer/DataMarshaller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/serializer/DataUnmarshaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/serializer/DataUnmarshaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/optimized/resolution/algorithm/classes/ConflictResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/optimized/resolution/algorithm/classes/ConflictResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rest/resources/DB/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rest/resources/DB/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rest/resources/OptimizerResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rest/resources/OptimizerResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/test/ConflictResolverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/test/ConflictResolverTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CoverageViewManager">
-    <option name="myElementSize" value="78" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -61,10 +60,11 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/optimized-firewall-anomaly-resolution.xml" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2772861" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.grazie" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -219,6 +219,14 @@
       <workItem from="1586429412357" duration="16996000" />
       <workItem from="1586451491944" duration="536000" />
       <workItem from="1586452135662" duration="608000" />
+      <workItem from="1586455544703" duration="304000" />
+      <workItem from="1586540530944" duration="2308000" />
+      <workItem from="1586551003992" duration="18000" />
+      <workItem from="1586635493937" duration="15000" />
+      <workItem from="1586641276714" duration="780000" />
+      <workItem from="1586642159985" duration="214000" />
+      <workItem from="1586642483273" duration="1525000" />
+      <workItem from="1586700713884" duration="1417000" />
     </task>
     <servers />
   </component>
@@ -234,6 +242,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="280" y="31" key="#ConflictResolverTest/0.0.1366.728@0.0.1366.728" timestamp="1586369538771" />
+    <state x="568" y="227" key="#Notifications" timestamp="1586635503830">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="568" y="227" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1586635503830" />
     <state x="275" y="22" key="#Project_Structure" timestamp="1586435447062">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -286,46 +298,46 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="114" y="193" width="1063" height="342" key="#com.intellij.ws.xml.jaxb.GenerateJavaFromJAXBSchemasDialog/0.0.1366.728@0.0.1366.728" timestamp="1586437611514" />
-    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1586435675266">
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1586702042069">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1586435675266" />
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1586702042069" />
     <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1586435819552">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1586435819552" />
-    <state width="1323" height="277" key="GridCell.Tab.0.bottom" timestamp="1586451342269">
+    <state width="1323" height="277" key="GridCell.Tab.0.bottom" timestamp="1586702045075">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="277" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586451342269" />
-    <state width="1323" height="277" key="GridCell.Tab.0.center" timestamp="1586451342269">
+    <state width="1323" height="277" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586702045075" />
+    <state width="1323" height="277" key="GridCell.Tab.0.center" timestamp="1586702045074">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="277" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586451342269" />
-    <state width="1323" height="277" key="GridCell.Tab.0.left" timestamp="1586451342268">
+    <state width="1323" height="277" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586702045074" />
+    <state width="1323" height="277" key="GridCell.Tab.0.left" timestamp="1586702045074">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="277" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586451342268" />
-    <state width="1323" height="277" key="GridCell.Tab.0.right" timestamp="1586451342269">
+    <state width="1323" height="277" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586702045074" />
+    <state width="1323" height="277" key="GridCell.Tab.0.right" timestamp="1586702045075">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="277" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586451342269" />
-    <state width="905" height="217" key="GridCell.Tab.1.bottom" timestamp="1586451342266">
+    <state width="1323" height="277" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586702045075" />
+    <state width="1323" height="243" key="GridCell.Tab.1.bottom" timestamp="1586701308674">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="905" height="217" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
-    <state width="905" height="217" key="GridCell.Tab.1.center" timestamp="1586451342266">
+    <state width="1323" height="243" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586701308674" />
+    <state width="1323" height="243" key="GridCell.Tab.1.center" timestamp="1586701308673">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="905" height="217" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
-    <state width="905" height="217" key="GridCell.Tab.1.left" timestamp="1586451342265">
+    <state width="1323" height="243" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1586701308673" />
+    <state width="1323" height="243" key="GridCell.Tab.1.left" timestamp="1586701308673">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="905" height="217" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1586451342265" />
-    <state width="905" height="217" key="GridCell.Tab.1.right" timestamp="1586451342266">
+    <state width="1323" height="243" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1586701308673" />
+    <state width="1323" height="243" key="GridCell.Tab.1.right" timestamp="1586701308673">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="905" height="217" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1586451342266" />
+    <state width="1323" height="243" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1586701308673" />
     <state width="905" height="217" key="GridCell.Tab.2.bottom" timestamp="1586451342266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -358,10 +370,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="905" height="217" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1586352775761" />
-    <state x="184" y="1" width="1040" height="727" key="SettingsEditor" timestamp="1586429964662">
+    <state x="184" y="1" width="1040" height="727" key="SettingsEditor" timestamp="1586551017640">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="1" width="1040" height="727" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1586429964662" />
+    <state x="184" y="1" width="1040" height="727" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1586551017640" />
     <state x="499" y="142" key="chooseDestDirectoryDialog" timestamp="1586363557771">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -382,25 +394,16 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="130" key="extract.method.dialog/0.0.1366.728@0.0.1366.728" timestamp="1586437830004" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1586382502909">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1586641480958">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1586382502909" />
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1586641480958" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1586450733631">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1586450733631" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/rest/resources/OptimizerResource.java</url>
-          <line>119</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="unnecessaryRemovedEntries" />
@@ -412,7 +415,7 @@
       <FILTER>optimized.resolution.algorithm.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$All_in_Optimized_Firewall_Anomaly_Resolution__2_.ic" NAME="All in Optimized-Firewall-Anomaly-Resolution (2) Coverage Results" MODIFIED="1586450465830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$All_in_Optimized_Firewall_Anomaly_Resolution.ic" NAME="All in Optimized-Firewall-Anomaly-Resolution Coverage Results" MODIFIED="1586455621638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$All_in_Optimized_Firewall_Anomaly_Resolution.ic" NAME="All in Optimized-Firewall-Anomaly-Resolution Coverage Results" MODIFIED="1586702045033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Optimized_Firewall_Anomaly_Resolution$ofar_generated_classes_in_Optimized_Firewall_Anomaly_Resolution.ic" NAME="ofar.generated.classes in Optimized-Firewall-Anomaly-Resolution Coverage Results" MODIFIED="1586369734679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ofar.generated.classes.*</FILTER>
     </SUITE>

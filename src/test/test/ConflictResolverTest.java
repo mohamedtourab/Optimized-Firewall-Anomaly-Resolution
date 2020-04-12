@@ -17,6 +17,7 @@ import optimized.resolution.algorithm.classes.RemovedEntries;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import javax.ws.rs.ForbiddenException;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import java.math.BigInteger;
@@ -43,8 +44,8 @@ public class ConflictResolverTest {
         ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
         RemovedEntries removedEntries = conflictResolver.resolveAnomalies();
         //Test based on the initial created data
-        assertEquals(10, removedEntries.getRemovedRules().size());
-        assertEquals(15, removedEntries.getRemovedAnomalies().size());
+        assertEquals(4, removedEntries.getRemovedRules().size());
+        assertEquals(9, removedEntries.getRemovedAnomalies().size());
 
         //Creating fake data
         Rules rules = new Rules();
@@ -74,9 +75,9 @@ public class ConflictResolverTest {
         assertEquals(1, removedEntries1.getRemovedRules().size());
         assertEquals(1, removedEntries1.getRemovedAnomalies().size());
 
-        assertThrows(IllegalArgumentException.class, () -> new ConflictResolver(null, null));
+        assertThrows(ForbiddenException.class, () -> new ConflictResolver(null, null));
         //The next test's used to test that an exception will be throw if we sent an empty rules or anomalies
-        assertThrows(IllegalArgumentException.class, () -> new ConflictResolver(rules, anomalies));
+        assertThrows(ForbiddenException.class, () -> new ConflictResolver(rules, anomalies));
 
 
     }
