@@ -158,7 +158,7 @@ public class ConflictResolverTest {
     }
 
     @Test
-    public void testExecuteSolveRequest() throws JAXBException, SAXException {
+    public void testExecuteSolveRequest() {
         ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
         SolveRequest solveRequest = null;
         RemovedEntries removedEntries = conflictResolver.executeSolveRequest(solveRequest);

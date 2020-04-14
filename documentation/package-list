@@ -10,4 +10,4 @@ optimized.resolution.algorithm.classes
 optimized.resolution.algorithm.interfaces
 rest.resources
 rest.resources.DB
-rest.resources.service
+test
