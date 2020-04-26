@@ -292,7 +292,7 @@ public class DataGenerator {
         ruleType23.setProtocol("*");
         ruleType23.setAction("DENY");
         rules.getRule().add(ruleType23);
-        //Rule 24
+        /*//Rule 24
         ruleType24 = objectFactory.createRuleType();
         ruleType24.setRuleID(BigInteger.valueOf(24));
         ruleType24.setPriority(BigInteger.valueOf(24));
@@ -314,7 +314,7 @@ public class DataGenerator {
         ruleType25.setProtocol("*");
         ruleType25.setAction("DENY");
         rules.getRule().add(ruleType25);
-
+*/
         return rules;
     }
 
@@ -550,13 +550,13 @@ public class DataGenerator {
         anomaly33.getRule().add(ruleType16);
         anomaly33.getRule().add(ruleType19);
         anomalies.getAnomaly().add(anomaly33);
-        //Anomaly 34
+        /*//Anomaly 34
         AnomalyType anomaly34 = objectFactory.createAnomalyType();
         anomaly34.setAnomalyID(BigInteger.valueOf(34));
         anomaly34.setAnomalyName(AnomalyNames.DUPLICATION);
         anomaly34.getRule().add(ruleType24);
         anomaly34.getRule().add(ruleType25);
-        anomalies.getAnomaly().add(anomaly34);
+        anomalies.getAnomaly().add(anomaly34);*/
 
         return anomalies;
     }
