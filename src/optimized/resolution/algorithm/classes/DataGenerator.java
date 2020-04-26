@@ -9,7 +9,7 @@ import ofar.generated.classes.rules.Rules;
 
 import java.math.BigInteger;
 
-public class DataCreator {
+public class DataGenerator {
     static RuleType ruleType1;
     static RuleType ruleType2;
     static RuleType ruleType3;
@@ -43,7 +43,7 @@ public class DataCreator {
         ruleType1 = objectFactory.createRuleType();
         ruleType1.setRuleID(BigInteger.valueOf(1));
         ruleType1.setPriority(BigInteger.valueOf(1));
-        ruleType1.setIPsrc("10.1.0.*");
+        ruleType1.setIPsrc("10.1.0.0/24");
         ruleType1.setPsrc("*");
         ruleType1.setIPdst("*");
         ruleType1.setPdst("*");
@@ -54,7 +54,7 @@ public class DataCreator {
         ruleType2 = objectFactory.createRuleType();
         ruleType2.setRuleID(BigInteger.valueOf(2));
         ruleType2.setPriority(BigInteger.valueOf(2));
-        ruleType2.setIPsrc("10.1.0.*");
+        ruleType2.setIPsrc("10.1.0.0/24");
         ruleType2.setPsrc("*");
         ruleType2.setIPdst("*");
         ruleType2.setPdst("*");
@@ -65,9 +65,9 @@ public class DataCreator {
         ruleType3 = objectFactory.createRuleType();
         ruleType3.setRuleID(BigInteger.valueOf(3));
         ruleType3.setPriority(BigInteger.valueOf(3));
-        ruleType3.setIPsrc("10.1.0.*");
+        ruleType3.setIPsrc("10.1.0.0/24");
         ruleType3.setPsrc("*");
-        ruleType3.setIPdst("10.3.0.*");
+        ruleType3.setIPdst("10.3.0.0/24");
         ruleType3.setPdst("*");
         ruleType3.setProtocol("TCP");
         ruleType3.setAction("DENY");
@@ -76,9 +76,9 @@ public class DataCreator {
         ruleType4 = objectFactory.createRuleType();
         ruleType4.setRuleID(BigInteger.valueOf(4));
         ruleType4.setPriority(BigInteger.valueOf(4));
-        ruleType4.setIPsrc("10.1.0.*");
+        ruleType4.setIPsrc("10.1.0.0/24");
         ruleType4.setPsrc("*");
-        ruleType4.setIPdst("10.3.1.*");
+        ruleType4.setIPdst("10.3.1.0/24");
         ruleType4.setPdst("*");
         ruleType4.setProtocol("TCP");
         ruleType4.setAction("DENY");
@@ -175,7 +175,7 @@ public class DataCreator {
         ruleType13 = objectFactory.createRuleType();
         ruleType13.setRuleID(BigInteger.valueOf(13));
         ruleType13.setPriority(BigInteger.valueOf(13));
-        ruleType13.setIPsrc("10.2.0.*");
+        ruleType13.setIPsrc("10.2.0.0/24");
         ruleType13.setPsrc("*");
         ruleType13.setIPdst("*");
         ruleType13.setPdst("*");
@@ -188,7 +188,7 @@ public class DataCreator {
         ruleType14.setPriority(BigInteger.valueOf(14));
         ruleType14.setIPsrc("*");
         ruleType14.setPsrc("*");
-        ruleType14.setIPdst("10.2.0.*");
+        ruleType14.setIPdst("10.2.0.0/24");
         ruleType14.setPdst("*");
         ruleType14.setProtocol("*");
         ruleType14.setAction("DENY");
@@ -197,7 +197,7 @@ public class DataCreator {
         ruleType15 = objectFactory.createRuleType();
         ruleType15.setRuleID(BigInteger.valueOf(15));
         ruleType15.setPriority(BigInteger.valueOf(15));
-        ruleType15.setIPsrc("10.2.1.*");
+        ruleType15.setIPsrc("10.2.1.0/24");
         ruleType15.setPsrc("*");
         ruleType15.setIPdst("*");
         ruleType15.setPdst("*");
@@ -210,7 +210,7 @@ public class DataCreator {
         ruleType16.setPriority(BigInteger.valueOf(16));
         ruleType16.setIPsrc("*");
         ruleType16.setPsrc("*");
-        ruleType16.setIPdst("10.2.1.*");
+        ruleType16.setIPdst("10.2.1.0/24");
         ruleType16.setPdst("*");
         ruleType16.setProtocol("*");
         ruleType16.setAction("DENY");
@@ -241,9 +241,9 @@ public class DataCreator {
         ruleType19 = objectFactory.createRuleType();
         ruleType19.setRuleID(BigInteger.valueOf(19));
         ruleType19.setPriority(BigInteger.valueOf(19));
-        ruleType19.setIPsrc("10.2.0.*");
+        ruleType19.setIPsrc("10.2.0.0/24");
         ruleType19.setPsrc("*");
-        ruleType19.setIPdst("10.2.1.*");
+        ruleType19.setIPdst("10.2.1.0/24");
         ruleType19.setPdst("*");
         ruleType19.setProtocol("*");
         ruleType19.setAction("ALLOW");
@@ -252,9 +252,9 @@ public class DataCreator {
         ruleType20 = objectFactory.createRuleType();
         ruleType20.setRuleID(BigInteger.valueOf(20));
         ruleType20.setPriority(BigInteger.valueOf(20));
-        ruleType20.setIPsrc("10.2.1.*");
+        ruleType20.setIPsrc("10.2.1.0/24");
         ruleType20.setPsrc("*");
-        ruleType20.setIPdst("10.2.0.*");
+        ruleType20.setIPdst("10.2.0.0/24");
         ruleType20.setPdst("*");
         ruleType20.setProtocol("*");
         ruleType20.setAction("ALLOW");
@@ -263,9 +263,9 @@ public class DataCreator {
         ruleType21 = objectFactory.createRuleType();
         ruleType21.setRuleID(BigInteger.valueOf(21));
         ruleType21.setPriority(BigInteger.valueOf(21));
-        ruleType21.setIPsrc("10.3.*.*");
+        ruleType21.setIPsrc("10.3.0.0/16");
         ruleType21.setPsrc("*");
-        ruleType21.setIPdst("10.2.*.*");
+        ruleType21.setIPdst("10.2.0.0/16");
         ruleType21.setPdst("*");
         ruleType21.setProtocol("*");
         ruleType21.setAction("DENY");
@@ -274,9 +274,9 @@ public class DataCreator {
         ruleType22 = objectFactory.createRuleType();
         ruleType22.setRuleID(BigInteger.valueOf(22));
         ruleType22.setPriority(BigInteger.valueOf(22));
-        ruleType22.setIPsrc("10.2.*.*");
+        ruleType22.setIPsrc("10.2.0.0/16");
         ruleType22.setPsrc("*");
-        ruleType22.setIPdst("10.3.*.*");
+        ruleType22.setIPdst("10.3.0.0/16");
         ruleType22.setPdst("*");
         ruleType22.setProtocol("*");
         ruleType22.setAction("DENY");
@@ -296,9 +296,9 @@ public class DataCreator {
         ruleType24 = objectFactory.createRuleType();
         ruleType24.setRuleID(BigInteger.valueOf(24));
         ruleType24.setPriority(BigInteger.valueOf(24));
-        ruleType24.setIPsrc("10.10.10.*");
+        ruleType24.setIPsrc("10.10.10.0/24");
         ruleType24.setPsrc("*");
-        ruleType24.setIPdst("10.10.10.*");
+        ruleType24.setIPdst("10.10.10.0/24");
         ruleType24.setPdst("*");
         ruleType24.setProtocol("*");
         ruleType24.setAction("DENY");
@@ -307,9 +307,9 @@ public class DataCreator {
         ruleType25 = objectFactory.createRuleType();
         ruleType25.setRuleID(BigInteger.valueOf(25));
         ruleType25.setPriority(BigInteger.valueOf(25));
-        ruleType25.setIPsrc("10.10.10.*");
+        ruleType25.setIPsrc("10.10.10.0/24");
         ruleType25.setPsrc("*");
-        ruleType25.setIPdst("10.10.10.*");
+        ruleType25.setIPdst("10.10.10.0/24");
         ruleType25.setPdst("*");
         ruleType25.setProtocol("*");
         ruleType25.setAction("DENY");

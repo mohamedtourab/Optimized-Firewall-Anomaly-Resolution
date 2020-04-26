@@ -8,6 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="68deff26-c911-40a5-90a8-b7c1c47634e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documentation/optimized/resolution/algorithm/classes/DataCreator.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/optimized/resolution/algorithm/classes/DataCreator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/serializer/DataMarshaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/serializer/DataMarshaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/optimized/resolution/algorithm/classes/DataCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/optimized/resolution/algorithm/classes/DataGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/test/ConflictResolverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/test/ConflictResolverTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +79,7 @@
       <recent name="D:\MohamedMamdouh\Education\PoliTo\Projects\Optimized-Firewall-Anomaly-Resolution\web\WEB-INF\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in Optimized-Firewall-Anomaly-Resolution">
+  <component name="RunManager" selected="Application.UnnecessaryAnomalyChecker">
     <configuration name="DataMarshaller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="data.serializer.DataMarshaller" />
       <module name="Optimized-Firewall-Anomaly-Resolution" />
@@ -96,6 +99,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="data.serializer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnnecessaryAnomalyChecker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="optimized.resolution.algorithm.classes.UnnecessaryAnomalyChecker" />
+      <module name="Optimized-Firewall-Anomaly-Resolution" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="optimized.resolution.algorithm.classes.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -187,11 +203,13 @@
     <list>
       <item itemvalue="Application.DataMarshaller" />
       <item itemvalue="Application.DataUnmarshaller" />
+      <item itemvalue="Application.UnnecessaryAnomalyChecker" />
       <item itemvalue="JUnit.All in Optimized-Firewall-Anomaly-Resolution" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.33" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.UnnecessaryAnomalyChecker" />
         <item itemvalue="JUnit.All in Optimized-Firewall-Anomaly-Resolution" />
         <item itemvalue="Application.DataMarshaller" />
         <item itemvalue="Application.DataUnmarshaller" />
@@ -226,6 +244,13 @@
       <workItem from="1586700713884" duration="1499000" />
       <workItem from="1586865163054" duration="94000" />
       <workItem from="1586865276928" duration="1403000" />
+      <workItem from="1586881115490" duration="4305000" />
+      <workItem from="1586969177281" duration="116000" />
+      <workItem from="1586969319037" duration="53000" />
+      <workItem from="1587822268355" duration="22000" />
+      <workItem from="1587824553858" duration="6683000" />
+      <workItem from="1587906878069" duration="14000" />
+      <workItem from="1587919946799" duration="16468000" />
     </task>
     <servers />
   </component>
@@ -285,10 +310,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="363" y="92" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.728@0.0.1366.728" timestamp="1586446943169" />
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586364818089">
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587920068494">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1586364818089" />
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1587920068494" />
     <state x="413" y="118" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1586379487555">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -297,46 +322,50 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="114" y="193" width="1063" height="342" key="#com.intellij.ws.xml.jaxb.GenerateJavaFromJAXBSchemasDialog/0.0.1366.728@0.0.1366.728" timestamp="1586437611514" />
+    <state x="430" y="73" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1586881169180">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="430" y="73" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1586881169180" />
     <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1586702042069">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1586702042069" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1586435819552">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1586881166933">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1586435819552" />
-    <state width="1323" height="200" key="GridCell.Tab.0.bottom" timestamp="1586874547112">
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1586881166933" />
+    <state width="1323" height="162" key="GridCell.Tab.0.bottom" timestamp="1587938949968">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="200" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586874547112" />
-    <state width="1323" height="200" key="GridCell.Tab.0.center" timestamp="1586874547111">
+    <state width="1323" height="162" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587938949968" />
+    <state width="1323" height="162" key="GridCell.Tab.0.center" timestamp="1587938949968">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="200" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586874547111" />
-    <state width="1323" height="200" key="GridCell.Tab.0.left" timestamp="1586874547111">
+    <state width="1323" height="162" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587938949968" />
+    <state width="1323" height="162" key="GridCell.Tab.0.left" timestamp="1587938949968">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="200" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586874547111" />
-    <state width="1323" height="200" key="GridCell.Tab.0.right" timestamp="1586874547111">
+    <state width="1323" height="162" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587938949968" />
+    <state width="1323" height="162" key="GridCell.Tab.0.right" timestamp="1587938949968">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="200" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586874547111" />
-    <state width="1323" height="243" key="GridCell.Tab.1.bottom" timestamp="1586702213708">
+    <state width="1323" height="162" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587938949968" />
+    <state width="1323" height="243" key="GridCell.Tab.1.bottom" timestamp="1587932916617">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="243" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586702213708" />
-    <state width="1323" height="243" key="GridCell.Tab.1.center" timestamp="1586702213708">
+    <state width="1323" height="243" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587932916617" />
+    <state width="1323" height="243" key="GridCell.Tab.1.center" timestamp="1587932916616">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="243" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1586702213708" />
-    <state width="1323" height="243" key="GridCell.Tab.1.left" timestamp="1586702213708">
+    <state width="1323" height="243" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587932916616" />
+    <state width="1323" height="243" key="GridCell.Tab.1.left" timestamp="1587932916616">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="243" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1586702213708" />
-    <state width="1323" height="243" key="GridCell.Tab.1.right" timestamp="1586702213708">
+    <state width="1323" height="243" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587932916616" />
+    <state width="1323" height="243" key="GridCell.Tab.1.right" timestamp="1587932916616">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="243" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1586702213708" />
+    <state width="1323" height="243" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587932916616" />
     <state width="905" height="217" key="GridCell.Tab.2.bottom" timestamp="1586451342266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -393,10 +422,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="130" key="extract.method.dialog/0.0.1366.728@0.0.1366.728" timestamp="1586437830004" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1586641480958">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1587920765860">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1586641480958" />
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1587920765860" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1586450733631">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

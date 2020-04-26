@@ -12,7 +12,7 @@ import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
 import ofar.generated.classes.solveRequest.SolveRequest;
 import optimized.resolution.algorithm.classes.ConflictResolver;
-import optimized.resolution.algorithm.classes.DataCreator;
+import optimized.resolution.algorithm.classes.DataGenerator;
 import optimized.resolution.algorithm.classes.RemovedEntries;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -28,20 +28,20 @@ public class ConflictResolverTest {
 
     @Test
     public void testGetRules() {
-        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
-        assertEquals(DataCreator.createRules().getRule(), conflictResolver.getRules().getRule());
+        ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
+        assertEquals(DataGenerator.createRules().getRule(), conflictResolver.getRules().getRule());
     }
 
     @Test
     public void testGetAnomalies() {
-        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
-        assertEquals(DataCreator.createAnomalies().getAnomaly(), conflictResolver.getAnomalies().getAnomaly());
+        ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
+        assertEquals(DataGenerator.createAnomalies().getAnomaly(), conflictResolver.getAnomalies().getAnomaly());
     }
 
 
     @Test
     public void testResolveAnomalies() {
-        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
+        ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         RemovedEntries removedEntries = conflictResolver.resolveAnomalies();
         //Test based on the initial created data
         assertEquals(4, removedEntries.getRemovedRules().size());
@@ -84,7 +84,7 @@ public class ConflictResolverTest {
 
     @Test
     public void testRemoveIrrelevanceAnomaly() {
-        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
+        ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         RemovedEntries removedEntries = conflictResolver.removeIrrelevanceAnomaly();
         //Test based on the initial created data
         assertEquals(2, removedEntries.getRemovedRules().size());
@@ -94,7 +94,7 @@ public class ConflictResolverTest {
 
     @Test
     public void testRemoveUnnecessaryAnomaly() {
-        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
+        ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         RemovedEntries removedEntries = conflictResolver.removeUnnecessaryAnomaly();
         //Test based on the initial created data
         assertEquals(6, removedEntries.getRemovedRules().size());
@@ -103,7 +103,7 @@ public class ConflictResolverTest {
 
     @Test
     public void testRemoveDuplicationOrShadowingRedundancyAnomaly() {
-        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
+        ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         RemovedEntries removedEntries = conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(null);
         assertNull(removedEntries);
 
@@ -148,7 +148,7 @@ public class ConflictResolverTest {
 
     @Test
     public void testGetConflictAnomalies() {
-        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
+        ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         Anomalies unresolvedAnomalies = conflictResolver.getConflictAnomalies();
         ObjectFactory objectFactory = new ObjectFactory();
         JAXBElement<Anomalies> unresolved_anomalies = objectFactory.createAnomalies(unresolvedAnomalies);
@@ -159,7 +159,7 @@ public class ConflictResolverTest {
 
     @Test
     public void testExecuteSolveRequest() {
-        ConflictResolver conflictResolver = new ConflictResolver(DataCreator.createRules(), DataCreator.createAnomalies());
+        ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         SolveRequest solveRequest = null;
         RemovedEntries removedEntries = conflictResolver.executeSolveRequest(solveRequest);
         try {

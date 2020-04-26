@@ -1,10 +1,6 @@
 package data.serializer;
 
 
-import ofar.generated.classes.conflicts.Anomalies;
-import ofar.generated.classes.input.ServiceInput;
-import ofar.generated.classes.rules.Rules;
-import optimized.resolution.algorithm.classes.DataCreator;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
