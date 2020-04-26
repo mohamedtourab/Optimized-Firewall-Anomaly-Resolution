@@ -91,6 +91,58 @@ public class UnnecessaryAnomalyChecker {
                 rxPortIncludedInRy(rx.getPdst(), ry.getPdst());
     }
 
+    private boolean isTotallyDisjoint(RuleType r1, RuleType r2) throws Exception {
+        //Check all rules between R1 and R2 if Rz between R1 and R2 is not disjoint from R1 and have opposite action return false
+
+        // check for src
+        final boolean first = prepareDisjointCheck(r1.getIPsrc(), r2.getIPsrc(), getIpType(r1.getIPsrc()), getIpType(r2.getIPsrc()));
+        if (!first) return false;
+        // check for dist
+        final boolean second = prepareDisjointCheck(r1.getIPdst(), r2.getIPdst(), getIpType(r1.getIPdst()), getIpType(r2.getIPdst()));
+        if (!second) return false;
+        // check for port
+        return isPortDisjoint(r1.getPsrc(), r2.getPsrc()) && isPortDisjoint(r1.getPdst(), r2.getPdst());
+    }
+
+
+    private boolean prepareDisjointCheck(String address1, String address2, IP_TYPE type1, IP_TYPE type2) {
+        if (type1 == IP_TYPE.IP_ADDRESS && type2 == IP_TYPE.SUBNET_MASK) {
+            return isDisjoint(address1, address2, IP_TYPES.ONE_SUBNET_AND_ONE_IP_ADDRESS);
+        } else if (type1 == IP_TYPE.SUBNET_MASK && type2 == IP_TYPE.IP_ADDRESS) {
+            return isDisjoint(address2, address1, IP_TYPES.ONE_SUBNET_AND_ONE_IP_ADDRESS);
+        } else if (type1 == IP_TYPE.SUBNET_MASK && type2 == IP_TYPE.SUBNET_MASK) {
+            return isDisjoint(address1, address2, IP_TYPES.BOTH_SUBNET);
+        } else {
+            return !address1.equals(address2);
+        }
+    }
+
+
+    private boolean isDisjoint(String address1, String address2, IP_TYPES ipMode) {
+        if (address1.equals("*") || address2.equals("*"))
+            return false;
+        if (ipMode == IP_TYPES.ONE_SUBNET_AND_ONE_IP_ADDRESS) {
+            final SubnetUtils utils = new SubnetUtils(address2);
+            List<String> allIpsInSubnet = Arrays.asList(utils.getInfo().getAllAddresses());
+            return !allIpsInSubnet.contains(address1);
+        } else {
+            final SubnetUtils utils1 = new SubnetUtils(address1);
+            final SubnetUtils utils2 = new SubnetUtils(address2);
+
+            final List<String> allIpsInSubnet1 = Arrays.asList(utils1.getInfo().getAllAddresses());
+            final String[] allIpsInSubnet2 = utils2.getInfo().getAllAddresses();
+            final Set<String> set = new HashSet<>(allIpsInSubnet1);
+
+            for (String s : allIpsInSubnet2) {
+                if (set.contains(s)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+
     /**
      * @param rx The IP of the first firewall rule
      * @param ry The IP of the second firewall rule
@@ -126,25 +178,6 @@ public class UnnecessaryAnomalyChecker {
 
     }
 
-    /**
-     * @param rx First IP address or Subnet Mask
-     * @param ry Second IP address or Subnet Mask
-     * @return The type of the received addresses ( BOTH_SUBNET,ONE_SUBNET_AND_ONE_IP_ADDRESS,BOTH_IP)
-     */
-    private IP_TYPES checkIPTypes(String rx, String ry) {
-        IP_TYPES type;
-
-        if (checkSingleIPType(rx) == IP_TYPE.SUBNET_MASK && checkSingleIPType(ry) == IP_TYPE.SUBNET_MASK) {
-            type = IP_TYPES.BOTH_SUBNET;
-            return type;
-        } else if (checkSingleIPType(rx) == IP_TYPE.SUBNET_MASK || checkSingleIPType(ry) == IP_TYPE.SUBNET_MASK) {
-            type = IP_TYPES.ONE_SUBNET_AND_ONE_IP_ADDRESS;
-            return type;
-        } else
-            type = IP_TYPES.BOTH_IP;
-
-        return type;
-    }
 
     /**
      * @param rx First Firewall Rule
@@ -198,54 +231,26 @@ public class UnnecessaryAnomalyChecker {
         }
     }
 
-    private boolean isDisjoint(String address1, String address2, IP_TYPES ipMode) {
-        if (address1.equals("*") || address2.equals("*"))
-            return false;
-        if (ipMode == IP_TYPES.ONE_SUBNET_AND_ONE_IP_ADDRESS) {
-            final SubnetUtils utils = new SubnetUtils(address2);
-            List<String> allIpsInSubnet = Arrays.asList(utils.getInfo().getAllAddresses());
-            return !allIpsInSubnet.contains(address1);
-        } else {
-            final SubnetUtils utils1 = new SubnetUtils(address1);
-            final SubnetUtils utils2 = new SubnetUtils(address2);
+    /**
+     * @param rx First IP address or Subnet Mask
+     * @param ry Second IP address or Subnet Mask
+     * @return The type of the received addresses ( BOTH_SUBNET,ONE_SUBNET_AND_ONE_IP_ADDRESS,BOTH_IP)
+     */
+    private IP_TYPES checkIPTypes(String rx, String ry) {
+        IP_TYPES type;
 
-            final List<String> allIpsInSubnet1 = Arrays.asList(utils1.getInfo().getAllAddresses());
-            final String[] allIpsInSubnet2 = utils2.getInfo().getAllAddresses();
-            final Set<String> set = new HashSet<>(allIpsInSubnet1);
+        if (checkSingleIPType(rx) == IP_TYPE.SUBNET_MASK && checkSingleIPType(ry) == IP_TYPE.SUBNET_MASK) {
+            type = IP_TYPES.BOTH_SUBNET;
+            return type;
+        } else if (checkSingleIPType(rx) == IP_TYPE.SUBNET_MASK || checkSingleIPType(ry) == IP_TYPE.SUBNET_MASK) {
+            type = IP_TYPES.ONE_SUBNET_AND_ONE_IP_ADDRESS;
+            return type;
+        } else
+            type = IP_TYPES.BOTH_IP;
 
-            for (String s : allIpsInSubnet2) {
-                if (set.contains(s)) {
-                    return false;
-                }
-            }
-            return true;
-        }
+        return type;
     }
 
-    private boolean prepareDisjointCheck(String address1, String address2, IP_TYPE type1, IP_TYPE type2) {
-        if (type1 == IP_TYPE.IP_ADDRESS && type2 == IP_TYPE.SUBNET_MASK) {
-            return isDisjoint(address1, address2, IP_TYPES.ONE_SUBNET_AND_ONE_IP_ADDRESS);
-        } else if (type1 == IP_TYPE.SUBNET_MASK && type2 == IP_TYPE.IP_ADDRESS) {
-            return isDisjoint(address2, address1, IP_TYPES.ONE_SUBNET_AND_ONE_IP_ADDRESS);
-        } else if (type1 == IP_TYPE.SUBNET_MASK && type2 == IP_TYPE.SUBNET_MASK) {
-            return isDisjoint(address1, address2, IP_TYPES.BOTH_SUBNET);
-        } else {
-            return !address1.equals(address2);
-        }
-    }
-
-    private boolean isTotallyDisjoint(RuleType r1, RuleType r2) throws Exception {
-        //Check all rules between R1 and R2 if Rz between R1 and R2 is not disjoint from R1 and have opposite action return false
-
-        // check for src
-        final boolean first = prepareDisjointCheck(r1.getIPsrc(), r2.getIPsrc(), getIpType(r1.getIPsrc()), getIpType(r2.getIPsrc()));
-        if (!first) return false;
-        // check for dist
-        final boolean second = prepareDisjointCheck(r1.getIPdst(), r2.getIPdst(), getIpType(r1.getIPdst()), getIpType(r2.getIPdst()));
-        if (!second) return false;
-        // check for port
-        return isPortDisjoint(r1.getPsrc(), r2.getPsrc()) && isPortDisjoint(r1.getPdst(), r2.getPdst());
-    }
 
     public static void main(String[] args) throws Exception {
         UnnecessaryAnomalyChecker unnecessaryAnomalyChecker = new UnnecessaryAnomalyChecker(DataGenerator.createRules());
