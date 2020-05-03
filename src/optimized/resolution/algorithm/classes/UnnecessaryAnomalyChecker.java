@@ -33,6 +33,11 @@ public class UnnecessaryAnomalyChecker {
         this.rules = rules;
     }
 
+    /**
+     * @return Return the list of unnecessary anomalies found in the list of rules created when an instance of the
+     * class is created
+     * @throws Exception
+     */
     public Anomalies checkForUnnecessaryAnomalies() throws Exception {
         Anomalies unnecessaryAnomalies = new Anomalies();
         for (int i = 0; i < rules.getRule().size(); i++) {
@@ -53,6 +58,12 @@ public class UnnecessaryAnomalyChecker {
         return unnecessaryAnomalies;
     }
 
+    /**
+     * @param rx First Firewall rule
+     * @param ry Second Firewall rul e
+     * @return true is there is unnecessary anomaly between these two rules else returns false.
+     * @throws Exception
+     */
     private boolean haveUnnecessaryAnomaly(RuleType rx, RuleType ry) throws Exception {
 
         if (specifySameAction(rx, ry)) {
@@ -68,6 +79,12 @@ public class UnnecessaryAnomalyChecker {
         return rx.getAction().equals(ry.getAction());
     }
 
+    /**
+     * @param rx First Firewall rule
+     * @param ry Second Firewall rule
+     * @return true the two rules are totally disjoint and specify the same action else returns false
+     * @throws Exception
+     */
     private boolean nonDisjointRuleExistBetweenRxAndRyWithOppositeActionToRx(RuleType rx, RuleType ry) throws Exception {
         int startIndex = rx.getRuleID().intValue() + 1;
         int endIndex = ry.getRuleID().intValue();
@@ -80,10 +97,20 @@ public class UnnecessaryAnomalyChecker {
         return true;
     }
 
+    /**
+     * @param rx First Firewall rule
+     * @param ry Second Firewall rule
+     * @return true if the first rule precedes the second rule in the order of the firewall table
+     */
     private boolean rxPrecedesRy(RuleType rx, RuleType ry) {
         return rx.getPriority().compareTo(ry.getPriority()) < 0;
     }
 
+    /**
+     * @param rx First Firewall rule
+     * @param ry Second Firewall rule
+     * @return true if all packet matched by the first rule are matched by the second rule too.
+     */
     private boolean allPacketsMatchedByRxAreMatchedByRy(RuleType rx, RuleType ry) {
         return compareIP(rx.getIPsrc(), ry.getIPsrc()) &&
                 compareIP(rx.getIPdst(), ry.getIPdst()) &&
@@ -91,6 +118,12 @@ public class UnnecessaryAnomalyChecker {
                 rxPortIncludedInRy(rx.getPdst(), ry.getPdst());
     }
 
+    /**
+     * @param r1 First Firewall rule
+     * @param r2 Second Firewall rule
+     * @return true if all the conditions for these two rule to be disjoint are met else returns false
+     * @throws Exception
+     */
     private boolean isTotallyDisjoint(RuleType r1, RuleType r2) throws Exception {
         //Check all rules between R1 and R2 if Rz between R1 and R2 is not disjoint from R1 and have opposite action return false
 
@@ -104,7 +137,16 @@ public class UnnecessaryAnomalyChecker {
         return isPortDisjoint(r1.getPsrc(), r2.getPsrc()) && isPortDisjoint(r1.getPdst(), r2.getPdst());
     }
 
-
+    /**
+     * This function is used to handle the calling of isDisjoint function as the Disjoint function can take as input (Subnet Mask,IP address)
+     * in case it took as an argument one subnet mask and IP address the IP address must be the first argument and the second argument should be the subenet mask
+     *
+     * @param address1 First IP address or Subnet Mask
+     * @param address2 Second IP address or Subtnet Mask
+     * @param type1    First IP address type i.e (IP_TYPE.IP_ADDRESS,IP_TYPE.SUBNET_MASK)
+     * @param type2    Second IP address type i.e (IP_TYPE.IP_ADDRESS,IP_TYPE.SUBNET_MASK)
+     * @return
+     */
     private boolean prepareDisjointCheck(String address1, String address2, IP_TYPE type1, IP_TYPE type2) {
         if (type1 == IP_TYPE.IP_ADDRESS && type2 == IP_TYPE.SUBNET_MASK) {
             return isDisjoint(address1, address2, IP_TYPES.ONE_SUBNET_AND_ONE_IP_ADDRESS);
@@ -117,7 +159,12 @@ public class UnnecessaryAnomalyChecker {
         }
     }
 
-
+    /**
+     * @param address1 The first IP address or subnet Mask.
+     * @param address2 The second IP address or subnet Mask.
+     * @param ipMode   This enum describes the values inside the address1 and address2 variables i.e (ONE_SUBNET_AND_ONE_IP_ADDRESS, BOTH_SUBNET)
+     * @return true if both addresses are completely disjoint, otherwise returns false
+     */
     private boolean isDisjoint(String address1, String address2, IP_TYPES ipMode) {
         if (address1.equals("*") || address2.equals("*"))
             return false;
@@ -200,6 +247,11 @@ public class UnnecessaryAnomalyChecker {
         return ipArr.length == 2 ? IP_TYPE.SUBNET_MASK : IP_TYPE.IP_ADDRESS;
     }
 
+    /**
+     * @param px First port number. it could be "*" to specify all ports
+     * @param pz Second port number. it could be "*" to specify all ports
+     * @return true if both port numbers are disjoint else returns false
+     */
     private boolean isPortDisjoint(String px, String pz) {
         if (px.equals("*") || pz.equals("*"))
             return false;
@@ -207,6 +259,11 @@ public class UnnecessaryAnomalyChecker {
             return !px.equals(pz);
     }
 
+    /**
+     * @param address The IP address that needed to be check if it's an IP address or a Subnet Mask
+     * @return the type of the address i.e (IP_TYPE.SUBNET_MASK,IP_TYPE.IP_ADDRESS)
+     * @throws Exception
+     */
     private IP_TYPE getIpType(String address) throws Exception {
         if (address == null || address.length() == 0) {
             throw new Exception("Empty IP Address");
