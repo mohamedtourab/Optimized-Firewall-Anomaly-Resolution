@@ -7,6 +7,7 @@ import ofar.generated.classes.rules.ObjectFactory;
 import ofar.generated.classes.rules.Rules;
 import ofar.generated.classes.solveRequest.SolveRequest;
 import optimized.resolution.algorithm.classes.ConflictResolver;
+import optimized.resolution.algorithm.classes.UnnecessaryAnomalyChecker;
 import rest.resources.DB.Database;
 
 import javax.ws.rs.*;
@@ -115,9 +116,10 @@ public class OptimizerResource {
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public JAXBElement<Rules> solveConflicts(SolveRequest solveRequest, @PathParam("id") int id) {
+    public JAXBElement<Rules> solveConflicts(SolveRequest solveRequest, @PathParam("id") int id) throws Exception {
         ObjectFactory objectFactory = new ObjectFactory();
-        ConflictResolver conflictResolver = null;
+        ConflictResolver conflictResolver;
+        UnnecessaryAnomalyChecker unnecessaryAnomalyChecker;
         synchronized (Database.dbHashMap) {
             ServiceInput serviceInput = Database.getEntry(id);
             if(serviceInput == null){
@@ -126,6 +128,8 @@ public class OptimizerResource {
             conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
             conflictResolver.resolveAnomalies();
             conflictResolver.executeSolveRequest(solveRequest);
+            unnecessaryAnomalyChecker = new UnnecessaryAnomalyChecker(conflictResolver.getRules());
+            unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies();
             conflictResolver.removeUnnecessaryAnomaly();
             serviceInput.setDefectedRules(conflictResolver.getRules());
             serviceInput.setAnomaliesList(conflictResolver.getAnomalies());

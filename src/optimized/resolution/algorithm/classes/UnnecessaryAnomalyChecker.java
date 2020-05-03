@@ -8,10 +8,7 @@ import ofar.generated.classes.rules.Rules;
 import org.apache.commons.net.util.SubnetUtils;
 
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -86,15 +83,28 @@ public class UnnecessaryAnomalyChecker {
      * @throws Exception
      */
     private boolean nonDisjointRuleExistBetweenRxAndRyWithOppositeActionToRx(RuleType rx, RuleType ry) throws Exception {
-        int startIndex = rx.getRuleID().intValue() + 1;
-        int endIndex = ry.getRuleID().intValue();
-        for (int i = startIndex; i < endIndex; i++) {
-            RuleType rz = rules.getRule().get(i);
-            if (!isTotallyDisjoint(rx, rz) && !specifySameAction(rx, rz))
+        List<RuleType> ruleToCheck = getAllElementsInBetween(rx, ry);
+        for (RuleType rz : ruleToCheck) {
+            if (!isTotallyDisjoint(rx, rz) && !specifySameAction(rx, rz)) {
                 //There is a correlated rule or there is a rule that specify the same action
                 return false;
+            }
         }
         return true;
+    }
+
+    private List<RuleType> getAllElementsInBetween(RuleType rx, RuleType ry) {
+        List<RuleType> rulesList = new ArrayList<>();
+        boolean startFilling = false;
+        for (RuleType rule : rules.getRule()) {
+            if (rule.equals(ry))
+                return rulesList;
+            if (startFilling)
+                rulesList.add(rule);
+            if (rule.equals(rx))
+                startFilling = true;
+        }
+        return rulesList;
     }
 
     /**
@@ -284,7 +294,7 @@ public class UnnecessaryAnomalyChecker {
         } else if (ip.find()) {
             return IP_TYPE.IP_ADDRESS;
         } else {
-            throw new Exception();
+            throw new Exception("Incorrect IP Address format");
         }
     }
 

@@ -3,7 +3,7 @@
     <DefectedRules>
         <rule ruleID="1">
             <priority>1</priority>
-            <IPsrc>10.1.0.*</IPsrc>
+            <IPsrc>10.1.0.0/24</IPsrc>
             <Psrc>*</Psrc>
             <IPdst>*</IPdst>
             <Pdst>*</Pdst>
@@ -12,7 +12,7 @@
         </rule>
         <rule ruleID="2">
             <priority>2</priority>
-            <IPsrc>10.1.0.*</IPsrc>
+            <IPsrc>10.1.0.0/24</IPsrc>
             <Psrc>*</Psrc>
             <IPdst>*</IPdst>
             <Pdst>*</Pdst>
@@ -21,18 +21,18 @@
         </rule>
         <rule ruleID="3">
             <priority>3</priority>
-            <IPsrc>10.1.0.*</IPsrc>
+            <IPsrc>10.1.0.0/24</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.3.0.*</IPdst>
+            <IPdst>10.3.0.0/24</IPdst>
             <Pdst>*</Pdst>
             <Protocol>TCP</Protocol>
             <Action>DENY</Action>
         </rule>
         <rule ruleID="4">
             <priority>4</priority>
-            <IPsrc>10.1.0.*</IPsrc>
+            <IPsrc>10.1.0.0/24</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.3.1.*</IPdst>
+            <IPdst>10.3.1.0/24</IPdst>
             <Pdst>*</Pdst>
             <Protocol>TCP</Protocol>
             <Action>DENY</Action>
@@ -111,7 +111,7 @@
         </rule>
         <rule ruleID="13">
             <priority>13</priority>
-            <IPsrc>10.2.0.*</IPsrc>
+            <IPsrc>10.2.0.0/24</IPsrc>
             <Psrc>*</Psrc>
             <IPdst>*</IPdst>
             <Pdst>*</Pdst>
@@ -122,14 +122,14 @@
             <priority>14</priority>
             <IPsrc>*</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.2.0.*</IPdst>
+            <IPdst>10.2.0.0/24</IPdst>
             <Pdst>*</Pdst>
             <Protocol>*</Protocol>
             <Action>DENY</Action>
         </rule>
         <rule ruleID="15">
             <priority>15</priority>
-            <IPsrc>10.2.1.*</IPsrc>
+            <IPsrc>10.2.1.0/24</IPsrc>
             <Psrc>*</Psrc>
             <IPdst>*</IPdst>
             <Pdst>*</Pdst>
@@ -140,7 +140,7 @@
             <priority>16</priority>
             <IPsrc>*</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.2.1.*</IPdst>
+            <IPdst>10.2.1.0/24</IPdst>
             <Pdst>*</Pdst>
             <Protocol>*</Protocol>
             <Action>DENY</Action>
@@ -165,36 +165,36 @@
         </rule>
         <rule ruleID="19">
             <priority>19</priority>
-            <IPsrc>10.2.0.*</IPsrc>
+            <IPsrc>10.2.0.0/24</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.2.1.*</IPdst>
+            <IPdst>10.2.1.0/24</IPdst>
             <Pdst>*</Pdst>
             <Protocol>*</Protocol>
             <Action>ALLOW</Action>
         </rule>
         <rule ruleID="20">
             <priority>20</priority>
-            <IPsrc>10.2.1.*</IPsrc>
+            <IPsrc>10.2.1.0/24</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.2.0.*</IPdst>
+            <IPdst>10.2.0.0/24</IPdst>
             <Pdst>*</Pdst>
             <Protocol>*</Protocol>
             <Action>ALLOW</Action>
         </rule>
         <rule ruleID="21">
             <priority>21</priority>
-            <IPsrc>10.3.*.*</IPsrc>
+            <IPsrc>10.3.0.0/16</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.2.*.*</IPdst>
+            <IPdst>10.2.0.0/16</IPdst>
             <Pdst>*</Pdst>
             <Protocol>*</Protocol>
             <Action>DENY</Action>
         </rule>
         <rule ruleID="22">
             <priority>22</priority>
-            <IPsrc>10.2.*.*</IPsrc>
+            <IPsrc>10.2.0.0/16</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.3.*.*</IPdst>
+            <IPdst>10.3.0.0/16</IPdst>
             <Pdst>*</Pdst>
             <Protocol>*</Protocol>
             <Action>DENY</Action>
@@ -210,18 +210,18 @@
         </rule>
         <rule ruleID="24">
             <priority>24</priority>
-            <IPsrc>10.10.10.*</IPsrc>
+            <IPsrc>10.10.10.0/16</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.10.10.*</IPdst>
+            <IPdst>10.10.10.0/16</IPdst>
             <Pdst>*</Pdst>
             <Protocol>*</Protocol>
             <Action>DENY</Action>
         </rule>
         <rule ruleID="25">
             <priority>25</priority>
-            <IPsrc>10.10.10.*</IPsrc>
+            <IPsrc>10.10.10.0/16</IPsrc>
             <Psrc>*</Psrc>
-            <IPdst>10.10.10.*</IPdst>
+            <IPdst>10.10.10.0/16</IPdst>
             <Pdst>*</Pdst>
             <Protocol>*</Protocol>
             <Action>DENY</Action>
@@ -231,9 +231,9 @@
         <Anomaly AnomalyName="Irrelevance" AnomalyID="1">
             <rule ruleID="3">
                 <priority>3</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.3.0.*</IPdst>
+                <IPdst>10.3.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>TCP</Protocol>
                 <Action>DENY</Action>
@@ -242,9 +242,9 @@
         <Anomaly AnomalyName="Irrelevance" AnomalyID="2">
             <rule ruleID="4">
                 <priority>4</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.3.1.*</IPdst>
+                <IPdst>10.3.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>TCP</Protocol>
                 <Action>DENY</Action>
@@ -253,7 +253,7 @@
         <Anomaly AnomalyName="ShadowingRedundancy" AnomalyID="3">
             <rule ruleID="1">
                 <priority>1</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -262,9 +262,9 @@
             </rule>
             <rule ruleID="3">
                 <priority>3</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.3.0.*</IPdst>
+                <IPdst>10.3.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>TCP</Protocol>
                 <Action>DENY</Action>
@@ -273,7 +273,7 @@
         <Anomaly AnomalyName="ShadowingRedundancy" AnomalyID="4">
             <rule ruleID="1">
                 <priority>1</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -282,9 +282,9 @@
             </rule>
             <rule ruleID="4">
                 <priority>4</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.3.1.*</IPdst>
+                <IPdst>10.3.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>TCP</Protocol>
                 <Action>DENY</Action>
@@ -293,7 +293,7 @@
         <Anomaly AnomalyName="ShadowingRedundancy" AnomalyID="5">
             <rule ruleID="2">
                 <priority>2</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -322,9 +322,9 @@
             </rule>
             <rule ruleID="19">
                 <priority>19</priority>
-                <IPsrc>10.2.0.*</IPsrc>
+                <IPsrc>10.2.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.1.*</IPdst>
+                <IPdst>10.2.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -342,9 +342,9 @@
             </rule>
             <rule ruleID="20">
                 <priority>20</priority>
-                <IPsrc>10.2.1.*</IPsrc>
+                <IPsrc>10.2.1.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.0.*</IPdst>
+                <IPdst>10.2.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -362,9 +362,9 @@
             </rule>
             <rule ruleID="20">
                 <priority>20</priority>
-                <IPsrc>10.2.1.*</IPsrc>
+                <IPsrc>10.2.1.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.0.*</IPdst>
+                <IPdst>10.2.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -382,9 +382,9 @@
             </rule>
             <rule ruleID="19">
                 <priority>19</priority>
-                <IPsrc>10.2.0.*</IPsrc>
+                <IPsrc>10.2.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.1.*</IPdst>
+                <IPdst>10.2.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -402,7 +402,7 @@
             </rule>
             <rule ruleID="13">
                 <priority>13</priority>
-                <IPsrc>10.2.0.*</IPsrc>
+                <IPsrc>10.2.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -424,7 +424,7 @@
                 <priority>14</priority>
                 <IPsrc>*</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.0.*</IPdst>
+                <IPdst>10.2.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
@@ -442,9 +442,9 @@
             </rule>
             <rule ruleID="19">
                 <priority>19</priority>
-                <IPsrc>10.2.0.*</IPsrc>
+                <IPsrc>10.2.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.1.*</IPdst>
+                <IPdst>10.2.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -462,9 +462,9 @@
             </rule>
             <rule ruleID="20">
                 <priority>20</priority>
-                <IPsrc>10.2.1.*</IPsrc>
+                <IPsrc>10.2.1.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.0.*</IPdst>
+                <IPdst>10.2.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -473,9 +473,9 @@
         <Anomaly AnomalyName="Unnecessary" AnomalyID="14">
             <rule ruleID="21">
                 <priority>21</priority>
-                <IPsrc>10.3.*.*</IPsrc>
+                <IPsrc>10.3.0.0/16</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.*.*</IPdst>
+                <IPdst>10.2.0.0/16</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
@@ -493,9 +493,9 @@
         <Anomaly AnomalyName="Unnecessary" AnomalyID="15">
             <rule ruleID="22">
                 <priority>22</priority>
-                <IPsrc>10.2.*.*</IPsrc>
+                <IPsrc>10.2.0.0/16</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.3.*.*</IPdst>
+                <IPdst>10.3.0.0/16</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
@@ -513,7 +513,7 @@
         <Anomaly AnomalyName="ShadowingConflict" AnomalyID="16">
             <rule ruleID="1">
                 <priority>1</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -522,7 +522,7 @@
             </rule>
             <rule ruleID="2">
                 <priority>2</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -533,7 +533,7 @@
         <Anomaly AnomalyName="ShadowingConflict" AnomalyID="17">
             <rule ruleID="1">
                 <priority>1</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -553,7 +553,7 @@
         <Anomaly AnomalyName="ShadowingConflict" AnomalyID="18">
             <rule ruleID="2">
                 <priority>2</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -562,9 +562,9 @@
             </rule>
             <rule ruleID="3">
                 <priority>3</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.3.0.*</IPdst>
+                <IPdst>10.3.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>TCP</Protocol>
                 <Action>DENY</Action>
@@ -573,7 +573,7 @@
         <Anomaly AnomalyName="ShadowingConflict" AnomalyID="19">
             <rule ruleID="2">
                 <priority>2</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -582,9 +582,9 @@
             </rule>
             <rule ruleID="4">
                 <priority>4</priority>
-                <IPsrc>10.1.0.*</IPsrc>
+                <IPsrc>10.1.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.3.1.*</IPdst>
+                <IPdst>10.3.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>TCP</Protocol>
                 <Action>DENY</Action>
@@ -713,7 +713,7 @@
         <Anomaly AnomalyName="ShadowingConflict" AnomalyID="26">
             <rule ruleID="13">
                 <priority>13</priority>
-                <IPsrc>10.2.0.*</IPsrc>
+                <IPsrc>10.2.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -733,7 +733,7 @@
         <Anomaly AnomalyName="ShadowingConflict" AnomalyID="27">
             <rule ruleID="13">
                 <priority>13</priority>
-                <IPsrc>10.2.0.*</IPsrc>
+                <IPsrc>10.2.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -742,9 +742,9 @@
             </rule>
             <rule ruleID="19">
                 <priority>19</priority>
-                <IPsrc>10.2.0.*</IPsrc>
+                <IPsrc>10.2.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.1.*</IPdst>
+                <IPdst>10.2.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -755,7 +755,7 @@
                 <priority>14</priority>
                 <IPsrc>*</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.0.*</IPdst>
+                <IPdst>10.2.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
@@ -775,16 +775,16 @@
                 <priority>14</priority>
                 <IPsrc>*</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.0.*</IPdst>
+                <IPdst>10.2.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
             </rule>
             <rule ruleID="20">
                 <priority>20</priority>
-                <IPsrc>10.2.1.*</IPsrc>
+                <IPsrc>10.2.1.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.0.*</IPdst>
+                <IPdst>10.2.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -793,7 +793,7 @@
         <Anomaly AnomalyName="ShadowingConflict" AnomalyID="30">
             <rule ruleID="15">
                 <priority>15</priority>
-                <IPsrc>10.2.1.*</IPsrc>
+                <IPsrc>10.2.1.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -813,7 +813,7 @@
         <Anomaly AnomalyName="ShadowingConflict" AnomalyID="31">
             <rule ruleID="15">
                 <priority>15</priority>
-                <IPsrc>10.2.1.*</IPsrc>
+                <IPsrc>10.2.1.0/24</IPsrc>
                 <Psrc>*</Psrc>
                 <IPdst>*</IPdst>
                 <Pdst>*</Pdst>
@@ -822,9 +822,9 @@
             </rule>
             <rule ruleID="20">
                 <priority>20</priority>
-                <IPsrc>10.2.1.*</IPsrc>
+                <IPsrc>10.2.1.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.0.*</IPdst>
+                <IPdst>10.2.0.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -835,7 +835,7 @@
                 <priority>16</priority>
                 <IPsrc>*</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.1.*</IPdst>
+                <IPdst>10.2.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
@@ -855,16 +855,16 @@
                 <priority>16</priority>
                 <IPsrc>*</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.1.*</IPdst>
+                <IPdst>10.2.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
             </rule>
             <rule ruleID="19">
                 <priority>19</priority>
-                <IPsrc>10.2.0.*</IPsrc>
+                <IPsrc>10.2.0.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.2.1.*</IPdst>
+                <IPdst>10.2.1.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>ALLOW</Action>
@@ -873,18 +873,18 @@
         <Anomaly AnomalyName="Duplication" AnomalyID="34">
             <rule ruleID="24">
                 <priority>24</priority>
-                <IPsrc>10.10.10.*</IPsrc>
+                <IPsrc>10.10.10.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.10.10.*</IPdst>
+                <IPdst>10.10.10.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
             </rule>
             <rule ruleID="25">
                 <priority>25</priority>
-                <IPsrc>10.10.10.*</IPsrc>
+                <IPsrc>10.10.10.0/24</IPsrc>
                 <Psrc>*</Psrc>
-                <IPdst>10.10.10.*</IPdst>
+                <IPdst>10.10.10.0/24</IPdst>
                 <Pdst>*</Pdst>
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
