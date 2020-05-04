@@ -1,4 +1,5 @@
 data.serializer
+generated.classes.wrappers
 ofar.generated.classes.conflicts
 ofar.generated.classes.contradiction
 ofar.generated.classes.correlation
