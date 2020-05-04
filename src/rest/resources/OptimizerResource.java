@@ -50,7 +50,7 @@ public class OptimizerResource {
     @DELETE
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ServiceInput deleteOptimizer(@PathParam("id") int id) {
+    public synchronized ServiceInput deleteOptimizer(@PathParam("id") int id) {
         return Database.dbHashMap.remove(id);
     }
 
