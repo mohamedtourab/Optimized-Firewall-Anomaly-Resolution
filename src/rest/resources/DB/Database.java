@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Database {
     public final static Map<Integer, ServiceInput> dbHashMap = new ConcurrentHashMap<>();
 
-    public static ServiceInput insertEntry(ServiceInput serviceInput) {
+    public static synchronized ServiceInput insertEntry(ServiceInput serviceInput) {
         if (serviceInput == null) {
             return null;
         }
