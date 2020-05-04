@@ -59,14 +59,17 @@ public class OptimizerResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public JAXBElement<Anomalies> getUnresolvedAnomalies(@PathParam("id") int id) {
         ofar.generated.classes.conflicts.ObjectFactory objectFactory = new ofar.generated.classes.conflicts.ObjectFactory();
-        ServiceInput serviceInput = Database.getEntry(id);
-        if(serviceInput == null){
-            throw new NotFoundException();
+        ConflictResolver conflictResolver;
+        synchronized (Database.dbHashMap) {
+            ServiceInput serviceInput = Database.getEntry(id);
+            if (serviceInput == null) {
+                throw new NotFoundException();
+            }
+            conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+            conflictResolver.removeIrrelevanceAnomaly();
+            conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
+            conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
         }
-        ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
-        conflictResolver.removeIrrelevanceAnomaly();
-        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
-        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
         return objectFactory.createAnomalies(conflictResolver.getConflictAnomalies());
     }
 
@@ -75,12 +78,15 @@ public class OptimizerResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public JAXBElement<Rules> solveIrrelevance(@PathParam("id") int id) {
         ObjectFactory objectFactory = new ObjectFactory();
-        ServiceInput serviceInput = Database.getEntry(id);
-        if(serviceInput == null){
-            throw new NotFoundException();
+        ConflictResolver conflictResolver;
+        synchronized (Database.dbHashMap) {
+            ServiceInput serviceInput = Database.getEntry(id);
+            if (serviceInput == null) {
+                throw new NotFoundException();
+            }
+            conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+            conflictResolver.removeIrrelevanceAnomaly();
         }
-        ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
-        conflictResolver.removeIrrelevanceAnomaly();
         return objectFactory.createRules(conflictResolver.getRules());
     }
 
@@ -89,12 +95,15 @@ public class OptimizerResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public JAXBElement<Rules> solveDuplication(@PathParam("id") int id) {
         ObjectFactory objectFactory = new ObjectFactory();
-        ServiceInput serviceInput = Database.getEntry(id);
-        if(serviceInput == null){
-            throw new NotFoundException();
+        ConflictResolver conflictResolver;
+        synchronized (Database.dbHashMap) {
+            ServiceInput serviceInput = Database.getEntry(id);
+            if (serviceInput == null) {
+                throw new NotFoundException();
+            }
+            conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+            conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
         }
-        ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
-        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
         return objectFactory.createRules(conflictResolver.getRules());
     }
 
@@ -103,12 +112,15 @@ public class OptimizerResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public JAXBElement<Rules> solveShadowingRedundancy(@PathParam("id") int id) {
         ObjectFactory objectFactory = new ObjectFactory();
-        ServiceInput serviceInput = Database.getEntry(id);
-        if(serviceInput == null){
-            throw new NotFoundException();
+        ConflictResolver conflictResolver;
+        synchronized (Database.dbHashMap) {
+            ServiceInput serviceInput = Database.getEntry(id);
+            if (serviceInput == null) {
+                throw new NotFoundException();
+            }
+            conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+            conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
         }
-        ConflictResolver conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
-        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
         return objectFactory.createRules(conflictResolver.getRules());
     }
 
@@ -122,7 +134,7 @@ public class OptimizerResource {
         UnnecessaryAnomalyChecker unnecessaryAnomalyChecker;
         synchronized (Database.dbHashMap) {
             ServiceInput serviceInput = Database.getEntry(id);
-            if(serviceInput == null){
+            if (serviceInput == null) {
                 throw new NotFoundException();
             }
             conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
