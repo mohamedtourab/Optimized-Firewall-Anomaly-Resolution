@@ -43,4 +43,9 @@ public class RuleTypeWrapper {
                 ", ruleID=" + getRuleType().getRuleID() +
                 '}';
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

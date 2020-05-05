@@ -36,7 +36,7 @@ public class UnnecessaryAnomalyChecker {
     /**
      * @return Return the list of unnecessary anomalies found in the list of rules created when an instance of the
      * class is created
-     * @throws Exception
+     * @throws Exception If the format of the IP address are incorrect or empty this exception is thrown
      */
     public Anomalies checkForUnnecessaryAnomalies(int anomalyListSize) throws Exception {
         Anomalies unnecessaryAnomalies = new Anomalies();
@@ -46,7 +46,6 @@ public class UnnecessaryAnomalyChecker {
                 RuleType ry = rules.getRule().get(j);
                 if (haveUnnecessaryAnomaly(rx, ry)) {
                     AnomalyType anomalyType = new AnomalyType();
-                    //TODO SET the anomalyID to the correct value in the anomaly list
                     anomalyType.setAnomalyID(BigInteger.valueOf(anomalyListSize++));
                     anomalyType.setAnomalyName(AnomalyNames.UNNECESSARY);
                     anomalyType.getRule().add(rx);
@@ -63,7 +62,7 @@ public class UnnecessaryAnomalyChecker {
      * @param rx First Firewall rule
      * @param ry Second Firewall rule
      * @return true is there is unnecessary anomaly between these two rules else returns false.
-     * @throws Exception
+     * @throws Exception If the format of the IP address are incorrect or empty this exception is thrown
      */
     private boolean haveUnnecessaryAnomaly(RuleType rx, RuleType ry) throws Exception {
 
@@ -84,7 +83,7 @@ public class UnnecessaryAnomalyChecker {
      * @param rx First Firewall rule
      * @param ry Second Firewall rule
      * @return true the two rules are totally disjoint and specify the same action else returns false
-     * @throws Exception
+     * @throws Exception If the format of the IP address are incorrect or empty this exception is thrown
      */
     private boolean nonDisjointRuleExistBetweenRxAndRyWithOppositeActionToRx(RuleType rx, RuleType ry) throws Exception {
 
@@ -148,7 +147,7 @@ public class UnnecessaryAnomalyChecker {
      * @param r1 First Firewall rule
      * @param r2 Second Firewall rule
      * @return true if all the conditions for these two rule to be disjoint are met else returns false
-     * @throws Exception
+     * @throws Exception If the format of the IP address are incorrect or empty this exception is thrown
      */
     private boolean isTotallyDisjoint(RuleType r1, RuleType r2) throws Exception {
         //Check all rules between R1 and R2 if Rz between R1 and R2 is not disjoint from R1 and have opposite action return false
@@ -292,7 +291,7 @@ public class UnnecessaryAnomalyChecker {
     /**
      * @param address The IP address that needed to be check if it's an IP address or a Subnet Mask
      * @return the type of the address i.e (IP_TYPE.SUBNET_MASK,IP_TYPE.IP_ADDRESS)
-     * @throws Exception
+     * @throws Exception If the format of the IP address are incorrect or empty this exception is thrown
      */
     private IP_TYPE getIpType(String address) throws Exception {
         if (address == null || address.length() == 0) {

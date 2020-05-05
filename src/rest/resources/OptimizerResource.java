@@ -137,8 +137,12 @@ public class OptimizerResource {
             unnecessaryAnomalyChecker = new UnnecessaryAnomalyChecker(conflictResolver.getRules());
             int anomalyListSize = conflictResolver.getAnomalies().getAnomaly().size();
             //conflictResolver.getAnomalies().getAnomaly().get(anomalyListSize - 1).getAnomalyID().intValue() -> here i get the anomaly ID of the last element in the anomalies list
-            unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(conflictResolver.getAnomalies().getAnomaly().get(anomalyListSize - 1).getAnomalyID().intValue());
+            Anomalies newlyCreatedAnomalies = unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(conflictResolver.getAnomalies().getAnomaly().get(anomalyListSize - 1).getAnomalyID().intValue());
+            //Add the newly created anomalies the list of the anomalies to be solved
+            conflictResolver.getAnomalies().getAnomaly().addAll(newlyCreatedAnomalies.getAnomaly());
+            //Resolve the unnecessary anomalies
             conflictResolver.removeUnnecessaryAnomaly();
+            //Update the database with the new list of rules and anomalies
             serviceInput.setDefectedRules(conflictResolver.getRules());
             serviceInput.setAnomaliesList(conflictResolver.getAnomalies());
 

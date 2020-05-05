@@ -27,6 +27,11 @@ public class AnomalyTypeWrapper {
     }
 
     @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
     public String toString() {
         return String.format("Anomaly %s\nType %s\nRules Included %s",
                 getAnomalyType().getAnomalyID(),
