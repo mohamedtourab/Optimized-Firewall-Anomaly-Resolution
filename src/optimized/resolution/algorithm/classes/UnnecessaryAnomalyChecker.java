@@ -337,10 +337,10 @@ public class UnnecessaryAnomalyChecker {
         return type;
     }
 
-
+/*
     public static void main(String[] args) throws Exception {
         UnnecessaryAnomalyChecker unnecessaryAnomalyChecker = new UnnecessaryAnomalyChecker(DataGenerator.createRules());
         unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(DataGenerator.createAnomalies().getAnomaly().size());
 
-    }
+    }*/
 }

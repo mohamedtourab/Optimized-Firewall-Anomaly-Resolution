@@ -14,6 +14,7 @@ import ofar.generated.classes.solveRequest.SolveRequest;
 import optimized.resolution.algorithm.classes.ConflictResolver;
 import optimized.resolution.algorithm.classes.DataGenerator;
 import optimized.resolution.algorithm.classes.RemovedEntries;
+import optimized.resolution.algorithm.classes.UnnecessaryAnomalyChecker;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -44,8 +45,8 @@ public class ConflictResolverTest {
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         RemovedEntries removedEntries = conflictResolver.resolveAnomalies();
         //Test based on the initial created data
-        assertEquals(4, removedEntries.getRemovedRules().size());
-        assertEquals(9, removedEntries.getRemovedAnomalies().size());
+        assertEquals(3, removedEntries.getRemovedRules().size());
+        assertEquals(8, removedEntries.getRemovedAnomalies().size());
 
         //Creating fake data
         Rules rules = new Rules();
@@ -102,6 +103,14 @@ public class ConflictResolverTest {
     }
 
     @Test
+    public void testUnnecessaryAnomalyChecker() throws Exception {
+        ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
+        UnnecessaryAnomalyChecker unnecessaryAnomalyChecker = new UnnecessaryAnomalyChecker(conflictResolver.getRules());
+        int anomaliesListSize = conflictResolver.getAnomalies().getAnomaly().size();
+        unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(conflictResolver.getAnomalies().getAnomaly().get(anomaliesListSize - 1).getAnomalyID().intValue());
+    }
+
+    @Test
     public void testRemoveDuplicationOrShadowingRedundancyAnomaly() {
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         RemovedEntries removedEntries = conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(null);
@@ -152,7 +161,7 @@ public class ConflictResolverTest {
         Anomalies unresolvedAnomalies = conflictResolver.getConflictAnomalies();
         ObjectFactory objectFactory = new ObjectFactory();
         JAXBElement<Anomalies> unresolved_anomalies = objectFactory.createAnomalies(unresolvedAnomalies);
-        DataMarshaller.marshalData(unresolved_anomalies,"ofar.generated.classes.conflicts","xsd/resulted_anomalies.xml","xsd/conflict_schema.xsd");
+        DataMarshaller.marshalData(unresolved_anomalies, "ofar.generated.classes.conflicts", "xsd/resulted_anomalies.xml", "xsd/conflict_schema.xsd");
         //Test based on the initial created data
         assertEquals(22, unresolvedAnomalies.getAnomaly().size());
     }
@@ -194,14 +203,14 @@ public class ConflictResolverTest {
         correlationSolutionType.setToChange(true);
         solveRequest.getCorrelationSolutions().add(correlationSolutionType);
         removedEntries = conflictResolver.executeSolveRequest(solveRequest);
-        assertEquals(13,removedEntries.getRemovedAnomalies().size());
+        assertEquals(13, removedEntries.getRemovedAnomalies().size());
         SolveRequest newSolveRequest = new SolveRequest();
         removedEntries = conflictResolver.executeSolveRequest(newSolveRequest);
         assertNull(removedEntries);
     }
 
     @Test
-    public void testAnomalyTypeToString(){
+    public void testAnomalyTypeToString() {
         final AnomalyType anomalyType = new AnomalyType();
         final RuleType ruleType = new RuleType();
         ruleType.setRuleID(BigInteger.valueOf(25));
@@ -217,7 +226,7 @@ public class ConflictResolverTest {
         anomalyType.getRule().add(ruleType);
         anomalyType.getRule().add(ruleType);
 
-        final String expectedString = "Anomaly 4\nType SHADOWING_REDUNDANCY\nRules Included ["+ruleType+", "+ruleType+"]";
-        assertEquals(expectedString,anomalyType.toString());
+        final String expectedString = "Anomaly 4\nType SHADOWING_REDUNDANCY\nRules Included [" + ruleType + ", " + ruleType + "]";
+        assertEquals(expectedString, anomalyType.toString());
     }
 }
