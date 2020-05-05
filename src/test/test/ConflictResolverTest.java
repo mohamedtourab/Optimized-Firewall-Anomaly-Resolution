@@ -108,7 +108,7 @@ public class ConflictResolverTest {
         UnnecessaryAnomalyChecker unnecessaryAnomalyChecker = new UnnecessaryAnomalyChecker(conflictResolver.getRules());
         int anomaliesListSize = conflictResolver.getAnomalies().getAnomaly().size();
         Anomalies newAnomalies = unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(conflictResolver.getAnomalies().getAnomaly().get(anomaliesListSize - 1).getAnomalyID().intValue());
-        assertEquals(8,newAnomalies.getAnomaly().size());
+        assertEquals(8, newAnomalies.getAnomaly().size());
     }
 
     @Test
