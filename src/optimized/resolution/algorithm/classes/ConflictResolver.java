@@ -15,6 +15,8 @@ import optimized.resolution.algorithm.interfaces.Resolver;
 import javax.ws.rs.ForbiddenException;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -69,7 +71,7 @@ public class ConflictResolver implements Resolver {
             }
         }
         //Remove rule and anomalies caused by the removed rules
-        return getRemovedEntries(removedRules, removedAnomalies);
+        return performRemoval(removedRules, removedAnomalies);
     }
 
     @Override
@@ -173,12 +175,38 @@ public class ConflictResolver implements Resolver {
             solveRequest.getShadowingConflictSolutions().stream().filter(ShadowingConflictSolutionType::isToChangeOrder).forEach(l -> {
                 AnomalyType anomaly = getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(l.getAnomalyId()));
                 if (anomaly.getRule().size() == 2) {
-                    int rule2Index = rules.getRule().indexOf(anomaly.getRule().get(0));
-                    int rule1Index = rules.getRule().indexOf(anomaly.getRule().get(1));
-                    BigInteger temp = anomaly.getRule().get(0).getPriority();
-                    anomaly.getRule().get(0).setPriority(anomaly.getRule().get(1).getPriority());
-                    anomaly.getRule().get(1).setPriority(temp);
-                    Collections.swap(rules.getRule(), rule1Index, rule2Index);
+                    /*Due to the change that happens in the rules list we cannot use the rule directly from the anomaly
+                    by using 'anomaly.getRule().get(0)' but we should get the updated rule from the rules list by using it ID*/
+                    RuleType rx = getRuleUsingRuleID(rules.getRule(), anomaly.getRule().get(0).getRuleID());
+                    RuleType ry = getRuleUsingRuleID(rules.getRule(), anomaly.getRule().get(1).getRuleID());
+                    int rxIndex = rules.getRule().indexOf(rx);
+                    Logger.getLogger(ConflictResolver.class.getName()).log(Level.WARNING, "The rule Rx " + anomaly.getRule().get(0));
+                    Logger.getLogger(ConflictResolver.class.getName()).log(Level.WARNING, "The rule Rx index " + rxIndex);
+
+
+                    //Copy Ry information because it should be deleted from the current position
+                    RuleType copyOfRy = new RuleType();
+                    copyOfRy.setPriority(ry.getPriority());
+                    copyOfRy.setRuleID(ry.getRuleID());
+                    copyOfRy.setAction(ry.getAction());
+                    copyOfRy.setIPdst(ry.getIPdst());
+                    copyOfRy.setIPsrc(ry.getIPsrc());
+                    copyOfRy.setPdst(ry.getPdst());
+                    copyOfRy.setPsrc(ry.getPsrc());
+                    copyOfRy.setProtocol(ry.getProtocol());
+
+                    BigInteger rxPriority = rx.getPriority();
+                    List<RuleType> rulesBelowNewPositionOfRy = getAllRulesBetweenTwoRules(rx, ry);
+                    //remove ry from the table
+                    rules.getRule().remove(ry);
+                    //Set copyOfRy priority equal to the current priority of Rx
+                    copyOfRy.setPriority(rxPriority);
+                    //Inset Ry just before Rx at the table
+                    rules.getRule().add(rxIndex, copyOfRy);
+                    //Increment Rx priority and all the rules below
+                    for (RuleType singleRule : rulesBelowNewPositionOfRy) {
+                        singleRule.setPriority(singleRule.getPriority().add(BigInteger.ONE));
+                    }
                 }
             });
             //Update Removed Anomalies Collection
@@ -209,10 +237,26 @@ public class ConflictResolver implements Resolver {
 
         }
 
-        return getRemovedEntries(removedRules, removedAnomalies);
+        return performRemoval(removedRules, removedAnomalies);
     }
 
-    private RemovedEntries getRemovedEntries(Set<RuleType> removedRules, Set<AnomalyType> removedAnomalies) {
+    private List<RuleType> getAllRulesBetweenTwoRules(RuleType rx, RuleType ry) {
+        List<RuleType> rulesList = new ArrayList<>();
+        boolean startFilling = false;
+        for (RuleType rule : rules.getRule()) {
+            if (rule.equals(ry))
+                return rulesList;
+            if (startFilling)
+                rulesList.add(rule);
+            if (rule.equals(rx)) {
+                startFilling = true;
+                rulesList.add(rule);
+            }
+        }
+        return rulesList;
+    }
+
+    private RemovedEntries performRemoval(Set<RuleType> removedRules, Set<AnomalyType> removedAnomalies) {
         removedRules.forEach(r -> rules.getRule().remove(r));
         removedRules.forEach(oneRule -> anomalies.getAnomaly().forEach(oneAnomaly -> {
             if (oneAnomaly.getRule().contains(oneRule)) {

@@ -135,7 +135,9 @@ public class OptimizerResource {
             conflictResolver.resolveAnomalies();
             conflictResolver.executeSolveRequest(solveRequest);
             unnecessaryAnomalyChecker = new UnnecessaryAnomalyChecker(conflictResolver.getRules());
-            unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies();
+            int anomalyListSize = conflictResolver.getAnomalies().getAnomaly().size();
+            //conflictResolver.getAnomalies().getAnomaly().get(anomalyListSize - 1).getAnomalyID().intValue() -> here i get the anomaly ID of the last element in the anomalies list
+            unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(conflictResolver.getAnomalies().getAnomaly().get(anomalyListSize - 1).getAnomalyID().intValue());
             conflictResolver.removeUnnecessaryAnomaly();
             serviceInput.setDefectedRules(conflictResolver.getRules());
             serviceInput.setAnomaliesList(conflictResolver.getAnomalies());

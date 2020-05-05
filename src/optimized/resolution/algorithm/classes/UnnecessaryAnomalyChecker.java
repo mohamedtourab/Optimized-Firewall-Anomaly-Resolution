@@ -9,11 +9,14 @@ import org.apache.commons.net.util.SubnetUtils;
 
 import java.math.BigInteger;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UnnecessaryAnomalyChecker {
     private final Rules rules;
+    private static final Logger LOGGER = Logger.getLogger(UnnecessaryAnomalyChecker.class.getName());
 
     enum IP_TYPES {
         BOTH_IP,
@@ -35,7 +38,7 @@ public class UnnecessaryAnomalyChecker {
      * class is created
      * @throws Exception
      */
-    public Anomalies checkForUnnecessaryAnomalies() throws Exception {
+    public Anomalies checkForUnnecessaryAnomalies(int anomalyListSize) throws Exception {
         Anomalies unnecessaryAnomalies = new Anomalies();
         for (int i = 0; i < rules.getRule().size(); i++) {
             RuleType rx = rules.getRule().get(i);
@@ -43,7 +46,8 @@ public class UnnecessaryAnomalyChecker {
                 RuleType ry = rules.getRule().get(j);
                 if (haveUnnecessaryAnomaly(rx, ry)) {
                     AnomalyType anomalyType = new AnomalyType();
-                    anomalyType.setAnomalyID(BigInteger.valueOf(1));
+                    //TODO SET the anomalyID to the correct value in the anomaly list
+                    anomalyType.setAnomalyID(BigInteger.valueOf(anomalyListSize++));
                     anomalyType.setAnomalyName(AnomalyNames.UNNECESSARY);
                     anomalyType.getRule().add(rx);
                     anomalyType.getRule().add(ry);
@@ -51,13 +55,13 @@ public class UnnecessaryAnomalyChecker {
                 }
             }
         }
-        unnecessaryAnomalies.getAnomaly().forEach(anomalyType -> System.out.println("Aunn(" + anomalyType.getRule().get(0).getRuleID() + ", " + anomalyType.getRule().get(1).getRuleID() + ")"));
+        unnecessaryAnomalies.getAnomaly().forEach(anomalyType -> LOGGER.log(Level.INFO, "Aunn(" + anomalyType.getRule().get(0).getRuleID() + ", " + anomalyType.getRule().get(1).getRuleID() + ")" + "ID->" + anomalyType.getAnomalyID()));
         return unnecessaryAnomalies;
     }
 
     /**
      * @param rx First Firewall rule
-     * @param ry Second Firewall rul e
+     * @param ry Second Firewall rule
      * @return true is there is unnecessary anomaly between these two rules else returns false.
      * @throws Exception
      */
@@ -66,7 +70,7 @@ public class UnnecessaryAnomalyChecker {
         if (specifySameAction(rx, ry)) {
             if (rxPrecedesRy(rx, ry)) {
                 if (allPacketsMatchedByRxAreMatchedByRy(rx, ry))
-                    return nonDisjointRuleExistBetweenRxAndRyWithOppositeActionToRx(rx, ry);
+                    return !nonDisjointRuleExistBetweenRxAndRyWithOppositeActionToRx(rx, ry);
             }
         }
         return false;
@@ -83,23 +87,35 @@ public class UnnecessaryAnomalyChecker {
      * @throws Exception
      */
     private boolean nonDisjointRuleExistBetweenRxAndRyWithOppositeActionToRx(RuleType rx, RuleType ry) throws Exception {
-        List<RuleType> ruleToCheck = getAllElementsInBetween(rx, ry);
+
+        List<RuleType> ruleToCheck = getAllElementsInBetweenWithOppositeAction(rx, ry);
         for (RuleType rz : ruleToCheck) {
-            if (!isTotallyDisjoint(rx, rz) && !specifySameAction(rx, rz)) {
-                //There is a correlated rule or there is a rule that specify the same action
-                return false;
+            if (!specifySameAction(rx, rz)) {
+                if (!isTotallyDisjoint(rx, rz)) {
+                    //There is a correlated rule that specify the different action
+                    LOGGER.log(Level.WARNING, "Rule " + rx.getRuleID() + " and Rule " + rz.getRuleID() + " are specifying different action and correlated and Ry is " + ry.getRuleID());
+                    return true;
+                }
             }
         }
-        return true;
+
+        return false;
     }
 
-    private List<RuleType> getAllElementsInBetween(RuleType rx, RuleType ry) {
+    /**
+     * This function can be used to retrieve all the rules that exists between two rules rx and ry in the firewall table
+     *
+     * @param rx First Firewall Rule
+     * @param ry Second Firewall Rule
+     * @return List of rules that are between the two input rules
+     */
+    private List<RuleType> getAllElementsInBetweenWithOppositeAction(RuleType rx, RuleType ry) {
         List<RuleType> rulesList = new ArrayList<>();
         boolean startFilling = false;
         for (RuleType rule : rules.getRule()) {
             if (rule.equals(ry))
                 return rulesList;
-            if (startFilling)
+            if (startFilling && !(rule.getAction().equals(rx.getAction())))
                 rulesList.add(rule);
             if (rule.equals(rx))
                 startFilling = true;
@@ -136,15 +152,19 @@ public class UnnecessaryAnomalyChecker {
      */
     private boolean isTotallyDisjoint(RuleType r1, RuleType r2) throws Exception {
         //Check all rules between R1 and R2 if Rz between R1 and R2 is not disjoint from R1 and have opposite action return false
-
         // check for src
-        final boolean first = prepareDisjointCheck(r1.getIPsrc(), r2.getIPsrc(), getIpType(r1.getIPsrc()), getIpType(r2.getIPsrc()));
-        if (!first) return false;
-        // check for dist
-        final boolean second = prepareDisjointCheck(r1.getIPdst(), r2.getIPdst(), getIpType(r1.getIPdst()), getIpType(r2.getIPdst()));
-        if (!second) return false;
-        // check for port
-        return isPortDisjoint(r1.getPsrc(), r2.getPsrc()) && isPortDisjoint(r1.getPdst(), r2.getPdst());
+        final boolean first = prepareDisjointCheck(
+                r1.getIPsrc(),
+                r2.getIPsrc(),
+                getIpType(r1.getIPsrc()),
+                getIpType(r2.getIPsrc()));
+        final boolean second = prepareDisjointCheck(
+                r1.getIPdst(),
+                r2.getIPdst(),
+                getIpType(r1.getIPdst()),
+                getIpType(r2.getIPdst()));
+
+        return (first || second) || (isPortDisjoint(r1.getPsrc(), r2.getPsrc()) || isPortDisjoint(r1.getPdst(), r2.getPdst()));
     }
 
     /**
@@ -155,7 +175,7 @@ public class UnnecessaryAnomalyChecker {
      * @param address2 Second IP address or Subtnet Mask
      * @param type1    First IP address type i.e (IP_TYPE.IP_ADDRESS,IP_TYPE.SUBNET_MASK)
      * @param type2    Second IP address type i.e (IP_TYPE.IP_ADDRESS,IP_TYPE.SUBNET_MASK)
-     * @return
+     * @return True if both addresses are completely disjoint, otherwise returns false
      */
     private boolean prepareDisjointCheck(String address1, String address2, IP_TYPE type1, IP_TYPE type2) {
         if (type1 == IP_TYPE.IP_ADDRESS && type2 == IP_TYPE.SUBNET_MASK) {
@@ -321,7 +341,7 @@ public class UnnecessaryAnomalyChecker {
 
     public static void main(String[] args) throws Exception {
         UnnecessaryAnomalyChecker unnecessaryAnomalyChecker = new UnnecessaryAnomalyChecker(DataGenerator.createRules());
-        unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies();
+        unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(DataGenerator.createAnomalies().getAnomaly().size());
 
     }
 }
