@@ -208,7 +208,7 @@
             <Protocol>*</Protocol>
             <Action>DENY</Action>
         </rule>
-        <rule ruleID="24">
+        <!--<rule ruleID="24">
             <priority>24</priority>
             <IPsrc>10.10.10.0/16</IPsrc>
             <Psrc>*</Psrc>
@@ -225,7 +225,7 @@
             <Pdst>*</Pdst>
             <Protocol>*</Protocol>
             <Action>DENY</Action>
-        </rule>
+        </rule>-->
     </DefectedRules>
     <AnomaliesList>
         <Anomaly AnomalyName="Irrelevance" AnomalyID="1">
@@ -870,7 +870,7 @@
                 <Action>ALLOW</Action>
             </rule>
         </Anomaly>
-        <Anomaly AnomalyName="Duplication" AnomalyID="34">
+        <!--<Anomaly AnomalyName="Duplication" AnomalyID="34">
             <rule ruleID="24">
                 <priority>24</priority>
                 <IPsrc>10.10.10.0/24</IPsrc>
@@ -889,6 +889,6 @@
                 <Protocol>*</Protocol>
                 <Action>DENY</Action>
             </rule>
-        </Anomaly>
+        </Anomaly>-->
     </AnomaliesList>
 </ServiceInput>
