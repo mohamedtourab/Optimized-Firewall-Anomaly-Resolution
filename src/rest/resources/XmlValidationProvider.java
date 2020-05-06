@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,21 +45,16 @@ public class XmlValidationProvider<T> implements MessageBodyReader<T> {
         logger.log(Level.SEVERE, "--- XML validator ---");
 
         try {
-            InputStream schemaStream = XmlValidationProvider.class.getResourceAsStream("/xsd/webservice_input_schema.xsd");
-            InputStream schemaStream2 = XmlValidationProvider.class.getResourceAsStream("/xsd/firewall_rules.xsd");
-            InputStream schemaStream3 = XmlValidationProvider.class.getResourceAsStream("/xsd/conflict_schema.xsd");
+            URL schemaStream = getClass().getClassLoader().getResource("/xsd/webservice_input_schema.xsd");
+            /*InputStream schemaStream2 = XmlValidationProvider.class.getResourceAsStream("/xsd/firewall_rules.xsd");
+            InputStream schemaStream3 = XmlValidationProvider.class.getResourceAsStream("/xsd/conflict_schema.xsd");*/
 
             if (schemaStream == null) {
                 logger.log(Level.SEVERE, "xml schema file Not found.");
                 throw new IOException();
             }
             SchemaFactory sf = SchemaFactory.newInstance(W3C_XML_SCHEMA_NS_URI);
-            schema = sf.newSchema(
-                    new StreamSource[]{
-                            new StreamSource(schemaStream2),
-                            new StreamSource(schemaStream3),
-                            new StreamSource(schemaStream)
-                    });
+            schema = sf.newSchema(schemaStream);
 
             jc = JAXBContext.newInstance(jaxbPackage);
 
