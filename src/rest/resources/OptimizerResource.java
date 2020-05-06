@@ -2,8 +2,10 @@ package rest.resources;
 
 import ofar.generated.classes.conflicts.Anomalies;
 import ofar.generated.classes.conflicts.AnomalyNames;
+import ofar.generated.classes.conflicts.AnomalyType;
 import ofar.generated.classes.input.ServiceInput;
 import ofar.generated.classes.rules.ObjectFactory;
+import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
 import ofar.generated.classes.solveRequest.SolveRequest;
 import optimized.resolution.algorithm.classes.ConflictResolver;
@@ -15,10 +17,13 @@ import javax.ws.rs.core.*;
 import javax.xml.bind.JAXBElement;
 import java.net.URI;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 @Path("/optimizer")
 public class OptimizerResource {
+    Logger logger = Logger.getLogger(OptimizerResource.class.getName());
 
     @POST
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -66,75 +71,119 @@ public class OptimizerResource {
                 return solveSubOptimizationAnomalies(id);
             }
             default: {
+                logger.log(Level.INFO, "Get request received");
+                logger.log(Level.INFO, "Getting Requested item");
                 return Database.getEntry(id);
             }
         }
     }
 
     private ServiceInput solveSubOptimizationAnomalies(int id) {
+        ofar.generated.classes.input.ObjectFactory serviceInputObjectFactory = new ofar.generated.classes.input.ObjectFactory();
         ConflictResolver conflictResolver;
-        ServiceInput serviceInput = Database.getEntry(id);
-        if (serviceInput == null) {
+        if (Database.getEntry(id) == null) {
             throw new NotFoundException();
+        } else {
+            logger.log(Level.INFO, "Get request received");
+            logger.log(Level.INFO, "Performing Sub-Optimization resolution");
+            ServiceInput serviceInput = createServiceInput(id);
+            conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+            conflictResolver.removeIrrelevanceAnomaly();
+            conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
+            conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
+            ServiceInput returnedServiceInput = serviceInputObjectFactory.createServiceInput();
+            returnedServiceInput.setId(id);
+            returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
+            returnedServiceInput.setDefectedRules(conflictResolver.getRules());
+            return returnedServiceInput;
         }
-        conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
-        conflictResolver.removeIrrelevanceAnomaly();
-        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
-        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
 
-        ServiceInput returnedServiceInput = new ServiceInput();
-        returnedServiceInput.setId(id);
-        returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
-        returnedServiceInput.setDefectedRules(conflictResolver.getRules());
-        return returnedServiceInput;
     }
 
     private ServiceInput solveIrrelevance(int id) {
         ConflictResolver conflictResolver;
-        ServiceInput serviceInput = Database.getEntry(id);
-        if (serviceInput == null) {
+        if (Database.getEntry(id) == null) {
             throw new NotFoundException();
+        } else {
+            logger.log(Level.INFO, "Get request received");
+            logger.log(Level.INFO, "Performing irrelevance resolution");
+            ServiceInput serviceInput = createServiceInput(id);
+            conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+            conflictResolver.removeIrrelevanceAnomaly();
+            ServiceInput returnedServiceInput = new ServiceInput();
+            returnedServiceInput.setId(id);
+            returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
+            returnedServiceInput.setDefectedRules(conflictResolver.getRules());
+            return returnedServiceInput;
         }
-        conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
-        conflictResolver.removeIrrelevanceAnomaly();
-        ServiceInput returnedServiceInput = new ServiceInput();
-        returnedServiceInput.setId(id);
-        returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
-        returnedServiceInput.setDefectedRules(conflictResolver.getRules());
-        return returnedServiceInput;
+
     }
 
 
     private ServiceInput solveDuplication(int id) {
-        ConflictResolver conflictResolver;
-        ServiceInput serviceInput = Database.getEntry(id);
-        if (serviceInput == null) {
-            throw new NotFoundException();
-        }
-        conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
-        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
 
-        ServiceInput returnedServiceInput = new ServiceInput();
-        returnedServiceInput.setId(id);
-        returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
-        returnedServiceInput.setDefectedRules(conflictResolver.getRules());
-        return returnedServiceInput;
+        ConflictResolver conflictResolver;
+        if (Database.getEntry(id) == null) {
+            throw new NotFoundException();
+        } else {
+            logger.log(Level.INFO, "Get request received");
+            logger.log(Level.INFO, "Performing duplication resolution");
+            ServiceInput serviceInput = createServiceInput(id);
+            conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+            conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
+            ServiceInput returnedServiceInput = new ServiceInput();
+            returnedServiceInput.setId(id);
+            returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
+            returnedServiceInput.setDefectedRules(conflictResolver.getRules());
+            return returnedServiceInput;
+        }
     }
 
 
     private ServiceInput solveShadowingRedundancy(int id) {
         ConflictResolver conflictResolver;
-        ServiceInput serviceInput = Database.getEntry(id);
-        if (serviceInput == null) {
+        if (Database.getEntry(id) == null) {
             throw new NotFoundException();
+        } else {
+            logger.log(Level.INFO, "Get request received");
+            logger.log(Level.INFO, "Performing shadowing redundancy resolution");
+            ServiceInput serviceInput = createServiceInput(id);
+            conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+            conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
+            ServiceInput returnedServiceInput = new ServiceInput();
+            returnedServiceInput.setId(id);
+            returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
+            returnedServiceInput.setDefectedRules(conflictResolver.getRules());
+            return returnedServiceInput;
         }
-        conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
-        conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
-        ServiceInput returnedServiceInput = new ServiceInput();
-        returnedServiceInput.setId(id);
-        returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
-        returnedServiceInput.setDefectedRules(conflictResolver.getRules());
-        return returnedServiceInput;
+    }
+
+    private ServiceInput createServiceInput(int id) {
+        ofar.generated.classes.input.ObjectFactory serviceInputObjectFactory = new ofar.generated.classes.input.ObjectFactory();
+        ServiceInput serviceInput = serviceInputObjectFactory.createServiceInput();
+        serviceInput.setId(id);
+        serviceInput.setAnomaliesList(cloneAnomalies(Database.getEntry(id).getAnomaliesList()));
+        serviceInput.setDefectedRules(cloneRules(Database.getEntry(id).getDefectedRules()));
+        return serviceInput;
+    }
+
+    private Anomalies cloneAnomalies(Anomalies anomalies) {
+        ofar.generated.classes.conflicts.ObjectFactory conflictsObjectFactory = new ofar.generated.classes.conflicts.ObjectFactory();
+
+        Anomalies clonedAnomalies = conflictsObjectFactory.createAnomalies();
+        for (AnomalyType anomalyType : anomalies.getAnomaly()) {
+            clonedAnomalies.getAnomaly().add(anomalyType);
+        }
+        return clonedAnomalies;
+    }
+
+    private Rules cloneRules(Rules rules) {
+        ObjectFactory rulesObjectFactory = new ObjectFactory();
+        Rules clonedRules = rulesObjectFactory.createRules();
+        for (RuleType ruleType : rules.getRule()) {
+            clonedRules.getRule().add(ruleType);
+        }
+        return clonedRules;
     }
 
     @PUT
@@ -150,6 +199,8 @@ public class OptimizerResource {
             if (serviceInput == null) {
                 throw new NotFoundException();
             }
+            logger.log(Level.INFO, "Put request received");
+            logger.log(Level.INFO, "Applying solve request");
             conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
             conflictResolver.resolveAnomalies();
             conflictResolver.executeSolveRequest(solveRequest);

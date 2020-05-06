@@ -6,6 +6,7 @@ import ofar.generated.classes.conflicts.AnomalyNames;
 import ofar.generated.classes.conflicts.AnomalyType;
 import ofar.generated.classes.contradiction.ContradictionSolutionType;
 import ofar.generated.classes.correlation.CorrelationSolutionType;
+import ofar.generated.classes.rules.ObjectFactory;
 import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
 import ofar.generated.classes.shadowingConflict.ShadowingConflictSolutionType;
@@ -15,8 +16,6 @@ import optimized.resolution.algorithm.interfaces.Resolver;
 import javax.ws.rs.ForbiddenException;
 import java.math.BigInteger;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,8 +42,10 @@ public class ConflictResolver implements Resolver {
 
     @Override
     public RemovedEntries resolveAnomalies() {
-        final Rules removedRules = new Rules();
-        final Anomalies removedAnomalies = new Anomalies();
+        ObjectFactory rulesObjectFactory = new ObjectFactory();
+        ofar.generated.classes.conflicts.ObjectFactory conflictsObjectFactory = new ofar.generated.classes.conflicts.ObjectFactory();
+        final Rules removedRules = rulesObjectFactory.createRules();
+        final Anomalies removedAnomalies = conflictsObjectFactory.createAnomalies();
         final RemovedEntries irrelevanceRemovedEntries = removeIrrelevanceAnomaly();
         final RemovedEntries duplicateRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
         final RemovedEntries shadowingRedundancyRemovedEntries = removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
@@ -57,7 +58,7 @@ public class ConflictResolver implements Resolver {
                 .of(irrelevanceRemovedEntries.getRemovedAnomalies(), duplicateRemovedEntries.getRemovedAnomalies(), shadowingRedundancyRemovedEntries.getRemovedAnomalies())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList()));
-        return new RemovedEntries(new HashSet<RuleType>(removedRules.getRule()), new HashSet<AnomalyType>(removedAnomalies.getAnomaly()));
+        return new RemovedEntries(new HashSet<>(removedRules.getRule()), new HashSet<>(removedAnomalies.getAnomaly()));
     }
 
     @Override
@@ -135,7 +136,8 @@ public class ConflictResolver implements Resolver {
 
     @Override
     public Anomalies getConflictAnomalies() {
-        Anomalies returnData = new Anomalies();
+        ofar.generated.classes.conflicts.ObjectFactory conflictsObjectFactory = new ofar.generated.classes.conflicts.ObjectFactory();
+        Anomalies returnData = conflictsObjectFactory.createAnomalies();
         returnData.getAnomaly().addAll(anomalies.getAnomaly().stream().filter(a -> {
             AnomalyNames anomalyName = a.getAnomalyName();
             return anomalyName.equals(AnomalyNames.CONTRADICTION) || anomalyName.equals(AnomalyNames.SHADOWING_CONFLICT) || anomalyName.equals(AnomalyNames.CORRELATION);
@@ -145,6 +147,7 @@ public class ConflictResolver implements Resolver {
 
     @Override
     public RemovedEntries executeSolveRequest(SolveRequest solveRequest) {
+        ObjectFactory rulesObjectFactory = new ObjectFactory();
         if (solveRequest == null || isEmpty(solveRequest)) {
             return null;
         }
@@ -180,12 +183,9 @@ public class ConflictResolver implements Resolver {
                     RuleType rx = getRuleUsingRuleID(rules.getRule(), anomaly.getRule().get(0).getRuleID());
                     RuleType ry = getRuleUsingRuleID(rules.getRule(), anomaly.getRule().get(1).getRuleID());
                     int rxIndex = rules.getRule().indexOf(rx);
-                    Logger.getLogger(ConflictResolver.class.getName()).log(Level.WARNING, "The rule Rx " + anomaly.getRule().get(0));
-                    Logger.getLogger(ConflictResolver.class.getName()).log(Level.WARNING, "The rule Rx index " + rxIndex);
-
 
                     //Copy Ry information because it should be deleted from the current position
-                    RuleType copyOfRy = new RuleType();
+                    RuleType copyOfRy = rulesObjectFactory.createRuleType();
                     copyOfRy.setPriority(ry.getPriority());
                     copyOfRy.setRuleID(ry.getRuleID());
                     copyOfRy.setAction(ry.getAction());
@@ -274,7 +274,8 @@ public class ConflictResolver implements Resolver {
     }
 
     private RuleType getRuleUsingRuleID(List<RuleType> listOfRules, BigInteger ruleID) {
-        RuleType r = new RuleType();
+        ObjectFactory rulesObjectFactory = new ObjectFactory();
+        RuleType r = rulesObjectFactory.createRuleType();
         for (RuleType rule : listOfRules) {
             if (rule.getRuleID().equals(ruleID))
                 r = rule;
@@ -283,7 +284,8 @@ public class ConflictResolver implements Resolver {
     }
 
     private AnomalyType getAnomalyUsingAnomalyID(List<AnomalyType> listOfAnomalies, BigInteger anomalyId) {
-        AnomalyType a = new AnomalyType();
+        ofar.generated.classes.conflicts.ObjectFactory conflictsObjectFactory = new ofar.generated.classes.conflicts.ObjectFactory();
+        AnomalyType a = conflictsObjectFactory.createAnomalyType();
         for (AnomalyType anomaly : listOfAnomalies) {
             if (anomaly.getAnomalyID().equals(anomalyId))
                 a = anomaly;
