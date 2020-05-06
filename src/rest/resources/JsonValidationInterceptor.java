@@ -32,8 +32,11 @@ import org.xml.sax.SAXParseException;
 @Consumes({"application/json", "text/json"})
 public class JsonValidationInterceptor implements ReaderInterceptor {
     private final String jaxbPackage = "ofar.generated.classes.input";
+    private final String jaxbPackage2 = "ofar.generated.classes.solveRequest";
     private Schema schema;
+    private Schema schemaSolveRequest;
     private JAXBContext jc;
+    private JAXBContext jc2;
     private Logger logger;
     private String responseBodyTemplate;
 
@@ -42,6 +45,7 @@ public class JsonValidationInterceptor implements ReaderInterceptor {
 
         try {
             URL schemaStream = getClass().getClassLoader().getResource("/xsd/webservice_input_schema.xsd");
+            URL schemaStream2 = getClass().getClassLoader().getResource("/xsd/solve_request.xsd");
 /*			InputStream schemaStream2 = XmlValidationProvider.class.getResourceAsStream("/xsd/firewall_rules.xsd");
 			InputStream schemaStream3 = XmlValidationProvider.class.getResourceAsStream("/xsd/conflict_schema.xsd");*/
             if (schemaStream == null) {
@@ -50,8 +54,10 @@ public class JsonValidationInterceptor implements ReaderInterceptor {
             }
             SchemaFactory sf = SchemaFactory.newInstance(W3C_XML_SCHEMA_NS_URI);
             schema = sf.newSchema(schemaStream);
+            schemaSolveRequest = sf.newSchema(schemaStream2);
 
             jc = JAXBContext.newInstance(jaxbPackage);
+            jc2 = JAXBContext.newInstance(jaxbPackage2);
 
             InputStream templateStream = XmlValidationProvider.class.getResourceAsStream("/html/BadRequestBodyTemplate.html");
             if (templateStream == null) {
@@ -80,11 +86,21 @@ public class JsonValidationInterceptor implements ReaderInterceptor {
     }
 
     public void validate(Object item) {
+        String postRequestClass = "ofar.generated.classes.input.ServiceInput";
+        String putRequestClass = "ofar.generated.classes.solveRequest.SolveRequest";
         try {
-            JAXBSource source = new JAXBSource(jc, item);
-            Validator v = schema.newValidator();
+            JAXBSource source;
+            Validator v;
+            if (item.getClass().getName().equals(postRequestClass)) {
+                source = new JAXBSource(jc, item);
+                v = schema.newValidator();
+            } else {
+                source = new JAXBSource(jc2, item);
+                v = schemaSolveRequest.newValidator();
+            }
             v.setErrorHandler(new MyErrorHandler());
             v.validate(source);
+
         } catch (SAXException e) {
             logger.log(Level.WARNING, "Request body validation error.", e);
             String validationErrorMessage = "Request body validation error";

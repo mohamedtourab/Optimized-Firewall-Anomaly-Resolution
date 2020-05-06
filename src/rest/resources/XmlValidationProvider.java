@@ -24,7 +24,6 @@ import javax.ws.rs.ext.Provider;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
@@ -34,9 +33,12 @@ import org.xml.sax.SAXParseException;
 @Consumes({"application/xml", "text/xml"})
 public class XmlValidationProvider<T> implements MessageBodyReader<T> {
     private final String jaxbPackage = "ofar.generated.classes.input";
-    private Schema schema;
+    private final String jaxbPackage2 = "ofar.generated.classes.solveRequest";
+    private Schema schemaServiceInput;
+    private Schema schemaSolveRequest;
     private JAXBContext jc;
-    private Logger logger;
+    private JAXBContext jc2;
+    private final Logger logger;
     private String responseBodyTemplate;
 
 
@@ -46,6 +48,8 @@ public class XmlValidationProvider<T> implements MessageBodyReader<T> {
 
         try {
             URL schemaStream = getClass().getClassLoader().getResource("/xsd/webservice_input_schema.xsd");
+            URL schemaStream2 = getClass().getClassLoader().getResource("/xsd/solve_request.xsd");
+
             /*InputStream schemaStream2 = XmlValidationProvider.class.getResourceAsStream("/xsd/firewall_rules.xsd");
             InputStream schemaStream3 = XmlValidationProvider.class.getResourceAsStream("/xsd/conflict_schema.xsd");*/
 
@@ -54,9 +58,10 @@ public class XmlValidationProvider<T> implements MessageBodyReader<T> {
                 throw new IOException();
             }
             SchemaFactory sf = SchemaFactory.newInstance(W3C_XML_SCHEMA_NS_URI);
-            schema = sf.newSchema(schemaStream);
-
+            schemaServiceInput = sf.newSchema(schemaStream);
+            schemaSolveRequest = sf.newSchema(schemaStream2);
             jc = JAXBContext.newInstance(jaxbPackage);
+            jc2 = JAXBContext.newInstance(jaxbPackage2);
 
             InputStream templateStream = XmlValidationProvider.class.getResourceAsStream("/html/BadRequestBodyTemplate.html");
             if (templateStream == null) {
@@ -79,18 +84,27 @@ public class XmlValidationProvider<T> implements MessageBodyReader<T> {
 
     @Override
     public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-        return jaxbPackage.equals(type.getPackage().getName());
+        return jaxbPackage.equals(type.getPackage().getName()) || jaxbPackage2.equals(type.getPackage().getName());
     }
 
     @Override
     public T readFrom(Class<T> type, Type genericType, Annotation[] annotations, MediaType mediaType,
                       MultivaluedMap<String, String> httpHeaders, InputStream entityStream)
-            throws IOException, WebApplicationException {
+            throws WebApplicationException {
         Unmarshaller unmarshaller;
+        String postRequestClass = "ofar.generated.classes.input.ServiceInput";
+        String putRequestClass = "ofar.generated.classes.solveRequest.SolveRequest";
+
         try {
             jc = JAXBContext.newInstance(jaxbPackage);
-            unmarshaller = jc.createUnmarshaller();
-            unmarshaller.setSchema(schema);
+            jc2 = JAXBContext.newInstance(jaxbPackage2);
+            if (type.getName().equals(postRequestClass)) {
+                unmarshaller = jc.createUnmarshaller();
+                unmarshaller.setSchema(schemaServiceInput);
+            } else {
+                unmarshaller = jc2.createUnmarshaller();
+                unmarshaller.setSchema(schemaSolveRequest);
+            }
             try {
                 Object obj = unmarshaller.unmarshal(entityStream);
                 if (obj.getClass().equals(type))
@@ -106,7 +120,7 @@ public class XmlValidationProvider<T> implements MessageBodyReader<T> {
                 logger.log(Level.WARNING, "Request body validation error.", ex);
                 Throwable linked = ex.getLinkedException();
                 String validationErrorMessage = "Request body validation error";
-                if (linked != null && linked instanceof SAXParseException)
+                if (linked instanceof SAXParseException)
                     validationErrorMessage += ": " + linked.getMessage();
                 BadRequestException bre = new BadRequestException("Request body validation error");
                 String responseBody = responseBodyTemplate.replaceFirst("___TO_BE_REPLACED___", validationErrorMessage);
