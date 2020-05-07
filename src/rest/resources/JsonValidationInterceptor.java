@@ -86,6 +86,13 @@ public class JsonValidationInterceptor implements ReaderInterceptor {
     }
 
     public void validate(Object item) {
+        if (item == null) {
+            BadRequestException bre = new BadRequestException("Request body body is empty");
+            String validationErrorMessage = "Request body is empty";
+            String responseBody = responseBodyTemplate.replaceFirst("___TO_BE_REPLACED___", validationErrorMessage);
+            Response response = Response.fromResponse(bre.getResponse()).entity(responseBody).type("text/html").build();
+            throw new BadRequestException("Request body is empty", response);
+        }
         String postRequestClass = "ofar.generated.classes.input.ServiceInput";
         String putRequestClass = "ofar.generated.classes.solveRequest.SolveRequest";
         try {

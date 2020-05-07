@@ -91,6 +91,13 @@ public class XmlValidationProvider<T> implements MessageBodyReader<T> {
     public T readFrom(Class<T> type, Type genericType, Annotation[] annotations, MediaType mediaType,
                       MultivaluedMap<String, String> httpHeaders, InputStream entityStream)
             throws WebApplicationException {
+        if (entityStream == null) {
+            String validationErrorMessage = "Request body is empty";
+            BadRequestException bre = new BadRequestException("Request body is empty");
+            String responseBody = responseBodyTemplate.replaceFirst("___TO_BE_REPLACED___", validationErrorMessage);
+            Response response = Response.fromResponse(bre.getResponse()).entity(responseBody).type("text/html").build();
+            throw new BadRequestException("Request body is empty", response);
+        }
         Unmarshaller unmarshaller;
         String postRequestClass = "ofar.generated.classes.input.ServiceInput";
         String putRequestClass = "ofar.generated.classes.solveRequest.SolveRequest";
