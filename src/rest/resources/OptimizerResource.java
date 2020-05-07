@@ -1,5 +1,9 @@
 package rest.resources;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import ofar.generated.classes.conflicts.Anomalies;
 import ofar.generated.classes.conflicts.AnomalyNames;
 import ofar.generated.classes.conflicts.AnomalyType;
@@ -22,6 +26,7 @@ import java.util.logging.Logger;
 
 
 @Path("/optimizer")
+@Api(value = "/biblio")
 public class OptimizerResource {
     Logger logger = Logger.getLogger(OptimizerResource.class.getName());
 
@@ -39,6 +44,11 @@ public class OptimizerResource {
     }
 
     @GET
+    @ApiOperation(value = "getBiblio", notes = "read main resource"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = ServiceInput.class),
+    })
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Collection<ServiceInput> getAllServiceInput() {
         return Database.dbHashMap.values();
