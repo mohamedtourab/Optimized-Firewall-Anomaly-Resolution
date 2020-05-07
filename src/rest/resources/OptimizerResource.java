@@ -253,7 +253,7 @@ public class OptimizerResource {
             conflictResolver.removeUnnecessaryAnomaly();
             //Update the database with the new list of rules and anomalies
             serviceInput.setDefectedRules(conflictResolver.getRules());
-            serviceInput.setAnomaliesList(conflictResolver.getAnomalies());
+            serviceInput.setAnomaliesList(new Anomalies());
 
         }
         return objectFactory.createRules(conflictResolver.getRules());
