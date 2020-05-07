@@ -1,9 +1,6 @@
 package rest.resources;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import ofar.generated.classes.conflicts.Anomalies;
 import ofar.generated.classes.conflicts.AnomalyNames;
 import ofar.generated.classes.conflicts.AnomalyType;
@@ -26,11 +23,17 @@ import java.util.logging.Logger;
 
 
 @Path("/optimizer")
-@Api(value = "/biblio")
+@Api(value = "/optimizer")
 public class OptimizerResource {
     Logger logger = Logger.getLogger(OptimizerResource.class.getName());
 
     @POST
+    @ApiOperation(value = "createoptimizer", notes = "create a new optimizer that takes ServiceInput", response = ServiceInput.class
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "OK", response = ServiceInput.class),
+            @ApiResponse(code = 400, message = "Bad Request"),
+    })
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response createOptimizer(ServiceInput serviceInput, @Context UriInfo uriInfo) {
@@ -44,7 +47,7 @@ public class OptimizerResource {
     }
 
     @GET
-    @ApiOperation(value = "getBiblio", notes = "read main resource"
+    @ApiOperation(value = "getAllServiceInput", notes = "read all service input resources"
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK", response = ServiceInput.class),
@@ -56,17 +59,36 @@ public class OptimizerResource {
 
     @DELETE
     @Path("{id}")
+    @ApiOperation(value = "deleteOptimizer", notes = "delete a single optimizer"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "No content"),
+            @ApiResponse(code = 404, message = "Not Found"),
+    })
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public synchronized ServiceInput deleteOptimizer(@PathParam("id") int id) {
+    public synchronized ServiceInput deleteOptimizer(@ApiParam("The id of the optimizer") @PathParam("id") int id) {
         return Database.dbHashMap.remove(id);
     }
 
     @GET
+    @ApiOperation(value = "getSingleServiceInput", notes = "Get a single ServiceInput resource after doing some actions " +
+            "based on the QueryParam resolutionType.\nPossible values are:\n1-\"solveIrrelevance\"\n " +
+            "2-\"solveDuplication\"\n 3-\"solveShadowingRedundancy\"\n 3-\"solveSub-optimization\"\n" +
+            "4-\"\" which is the default value if you didn't send a QueryParam. if you used this case " +
+            "you will get the original ServiceInput resource without any edits "
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = ServiceInput.class),
+            @ApiResponse(code = 404, message = "Not Found"),
+
+    })
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public ServiceInput getUnresolvedAnomalies(
-            @PathParam("id") int id,
-            @QueryParam("resolutionType") @DefaultValue("") String requestedTypeOfResolution) {
+    public ServiceInput getSingleServiceInput(
+            @ApiParam("The id of the optimizer") @PathParam("id") int id,
+            @ApiParam("The keyword to be used for selecting an action to be performed on the ServiceInput resource by default no action is done")
+            @QueryParam("resolutionType")
+            @DefaultValue("") String requestedTypeOfResolution) {
         switch (requestedTypeOfResolution) {
             case "solveIrrelevance": {
                 return solveIrrelevance(id);
@@ -198,9 +220,16 @@ public class OptimizerResource {
 
     @PUT
     @Path("{id}")
+    @ApiOperation(value = "solveConflicts", notes = "update a single item by applying a solution written by network administrator"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = Rules.class),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "Not Found"),
+    })
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public JAXBElement<Rules> solveConflicts(SolveRequest solveRequest, @PathParam("id") int id) throws Exception {
+    public JAXBElement<Rules> solveConflicts(SolveRequest solveRequest, @ApiParam("The id of the optimizer") @PathParam("id") int id) throws Exception {
         ObjectFactory objectFactory = new ObjectFactory();
         ConflictResolver conflictResolver;
         UnnecessaryAnomalyChecker unnecessaryAnomalyChecker;
