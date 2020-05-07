@@ -15,7 +15,7 @@
 </p>
 <p>
   The main resource of the service is the collection resource
-  named <a href="rest/optimizer">Optimizer</a>
+  named <a href="rest/optimizer">ServiceInputs</a>
   which represents the (initially empty) collection of optimizer object which contains
   items of class ServiceInput. By POST-ing to this resource it is possible to create
   new ServiceInput objects as sub-resources. The ids of these resources
