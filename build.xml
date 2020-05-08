@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<project name="Rest-OFAR" default="compile" basedir=".">
+
+	<!-- set global properties for this build -->
+	<property name="src.dir" location="src" />
+	<property name="gen-src.dir" location="gen-src" />
+	<property name="build.dir" location="build" />
+	<property name="resources.dir" location="${src.dir}/rest/resources" />
+	<property name="schema.dir" location="xsd" />
+	<property name="gen_lib.dir" location="lib" />
+	<property name="lib.dir" location="WebContent/WEB-INF/lib" />
+	<property name="target.dir" location="target" />
+	<property name="PORT" value="8080" />
+	<property name="URL" value="http://localhost:${PORT}/ofar" />
+
+	<path id="class.path">
+		<fileset dir="${gen_lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Target: Clean directory -->
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directories -->
+		<delete>
+			<fileset dir="${build.dir}">
+				<include name="**/*.class" />
+			</fileset>
+		</delete>
+		<delete>
+			<fileset dir="${target.dir}"/>
+		</delete>
+		<!--
+		<delete dir="${gen-src.dir}" />
+		-->
+	</target>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used
+         by compile -->
+		<mkdir dir="${build.dir}" />
+		<!--
+		<mkdir dir="${gen-src.dir}" />
+		-->
+	</target>
+	<!-- Target: chk-bindings -->
+	<!--
+	<target name="-chk-bindings">
+		<uptodate property="generate-bindings.notRequired" targetfile="${src.dir}/.flagfile">
+			<srcfiles dir="${schema.dir}" includes="**/*.xsd" />
+		</uptodate>
+	</target>
+	-->
+	<!-- Target: generate-bindings 
+	insert: unless="generate-bindings.notRequired" to generate if required only
+	-->
+	<!--
+	<target name="generate-bindings" depends="init,-chk-bindings" description="Generate bindings from schema">
+		<exec executable="xjc" failonerror="true">
+			<arg value="-d" />
+			<arg value="${gen-src.dir}" />
+			<arg value="-p" />
+			<arg value="ofar.generated.classes.conflicts" />
+			<arg value="${schema.dir}/conflict_schema.xsd" />
+		</exec>
+		<exec executable="xjc" failonerror="true">
+			<arg value="-d" />
+			<arg value="${gen-src.dir}" />
+			<arg value="-p" />
+			<arg value="ofar.generated.classes.contradiction" />
+			<arg value="${schema.dir}/contradict_solution.xsd" />
+		</exec>
+		<exec executable="xjc" failonerror="true">
+			<arg value="-d" />
+			<arg value="${gen-src.dir}" />
+			<arg value="-p" />
+			<arg value="ofar.generated.classes.correlation" />
+			<arg value="${schema.dir}/correlation_solution.xsd" />
+		</exec>
+		<exec executable="xjc" failonerror="true">
+			<arg value="-d" />
+			<arg value="${gen-src.dir}" />
+			<arg value="-p" />
+			<arg value="ofar.generated.classes.input" />
+			<arg value="${schema.dir}/webservice_input_schema.xsd" />
+		</exec>
+		<exec executable="xjc" failonerror="true">
+			<arg value="-d" />
+			<arg value="${gen-src.dir}" />
+			<arg value="-p" />
+			<arg value="ofar.generated.classes.solveRequest" />
+			<arg value="${schema.dir}/solve_request.xsd" />
+		</exec>
+		<exec executable="xjc" failonerror="true">
+			<arg value="-d" />
+			<arg value="${gen-src.dir}" />
+			<arg value="-p" />
+			<arg value="ofar.generated.classes.rules" />
+			<arg value="${schema.dir}/firewall_rules.xsd" />
+		</exec>
+		<exec executable="xjc" failonerror="true">
+			<arg value="-d" />
+			<arg value="${gen-src.dir}" />
+			<arg value="-p" />
+			<arg value="ofar.generated.classes.shadowingConflict" />
+			<arg value="${schema.dir}/shadowing_conflict_solution.xsd" />
+		</exec>
+		<touch file="${gen-src.dir}/.flagfile" />
+	</target>
+	-->
+
+	<!-- Target: Compile -->
+	<target name="compile" depends="init" description="compile the source ">
+		<property name="debug" value="off" />
+		<property name="debuglevel" value="lines,vars,source" />
+		<!-- Compile the code from ${src} into ${build} -->
+		<javac encoding="ISO-8859-1" includeantruntime="false" srcdir="${src.dir}:${gen-src.dir}" destdir="${build.dir}" debug="on" debuglevel="${debuglevel}">
+			<classpath refid="class.path" />
+		</javac>
+	</target>
+
+
+	<!--
+	<target name="test">
+		<junit printsummary="yes" haltonfailure="no" showoutput="true">
+		-->
+	<!-- test class declaration -->
+	<!--
+			<classpath location="${build.dir}" />
+			<test name="it.polito.dp2.rest.nfv.test.TestFromObj" haltonfailure="no" todir="${report.dir}">
+				<formatter type="plain" />
+				<formatter type="xml" />
+			</test>
+			<test name="it.polito.dp2.rest.nfv.test.TestFromXml" haltonfailure="no" todir="${report.dir}">
+				<formatter type="plain" />
+				<formatter type="xml" />
+			</test>
+		</junit>
+		<fail if="test_failed" message="*** Some Tests FAILED ***" />
+	</target>
+	-->
+
+	<!-- Target: generate war file -->
+	<target name="war" depends="compile">
+		<war destfile="${target.dir}/ofar.war" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="WebContent">
+				<include name="**/*.*" />
+			</fileset>
+			<classes dir="${build.dir}" />
+			<zipfileset dir="."  includes="xsd/**" prefix="WEB-INF/classes" />
+		</war>
+	</target>
+
+
+	<!-- Target: deploy war -->
+	<target name="deploy" depends="war">
+		<sequential>
+			<antcall target="deployWS" />
+		</sequential>
+	</target>
+
+	<!-- Target: deploy war -->
+	<target name="redeploy" depends="war">
+		<sequential>
+			<antcall target="undeployWS" />
+			<antcall target="deployWS" />
+		</sequential>
+	</target>
+
+	<!-- Tomcat Properties -->
+	<property name="service.name" value="ofar" />
+	<property name="root.location" value="${basedir}" />
+	<import file="tomcat-build.xml" />
+	<!-- Ant Script for controlling Tomcat-->
+
+</project>
