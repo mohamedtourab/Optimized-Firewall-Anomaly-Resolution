@@ -7,6 +7,7 @@ import ofar.generated.classes.solveRequest.SolveRequest;
 import org.xml.sax.SAXException;
 import rest.resources.OptimizerResource;
 
+import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -48,13 +49,15 @@ public class ServiceClient {
 
     private void runClient() throws JAXBException, SAXException {
         ServiceInput serviceInput = createType("src/data/serializer/serviceInput.xml", "xsd/webservice_input_schema.xsd", "ofar.generated.classes.input");
-        performPost(serviceInput);
-        performPost(serviceInput);
+        URI uri1 = performPost(serviceInput);
+        URI uri2 = performPost(serviceInput);
         performGetAllResources();
-        performGetSingleResource(0, "");
-        perfomPutOnSingleResource(0);
-        performGetSingleResource(0, "");
-        performGetSingleResource(1, "solveIrrelevance");
+        performGetSingleResource(uri1, "");
+        performPutOnSingleResource(uri1);
+        performGetSingleResource(uri1, "");
+        performGetSingleResource(uri1, "solveIrrelevance");
+        performDelete(uri2);
+        performGetSingleResource(uri2,"");
 
     }
 
@@ -73,16 +76,32 @@ public class ServiceClient {
             return uri;
         } else {
             logger.log(Level.INFO, "Post failed with status " + response.getStatus());
-            return null;
+            client.close();
+            throw new ForbiddenException("POST request cannot be performed");
         }
     }
 
-    public void performGetSingleResource(Integer id, String action) {
+    public void performDelete(URI uri) {
+        logger.log(Level.INFO, "--- Performing a DELETE Request --- \n");
+        WebTarget itemTarget = client.target(uri);
+        ServiceInput response = itemTarget.request(MediaType.APPLICATION_XML)
+                .delete(ServiceInput.class);
+        logger.log(Level.INFO, "---DELETE Request Executed Successfully--- \n");
+
+        logger.log(Level.INFO, "--- Performing a DELETE Request --- \n");
+        logger.log(Level.INFO, "--- ServiceInput resource deleted ID --- \n" + response.getId());
+        logger.log(Level.INFO, "--- ServiceInput resource deleted rules --- \n" + response.getDefectedRules().getRule());
+        logger.log(Level.INFO, "--- ServiceInput resource deleted anomalies --- \n" + response.getAnomaliesList().getAnomaly());
+
+
+    }
+
+    public void performGetSingleResource(URI uri, String action) {
         WebTarget itemTarget = null;
         ServiceInput serviceInput = null;
         logger.log(Level.INFO, " --- Performing GET operations on the single resource --- ");
         if (action.equals("")) {
-            itemTarget = target.path(id.toString());
+            itemTarget = client.target(uri);
             serviceInput = itemTarget.request().accept(MediaType.APPLICATION_XML)
                     .get(ServiceInput.class);
         } else {
@@ -90,7 +109,7 @@ public class ServiceClient {
                     action.equals("solveDuplication") ||
                     action.equals("solveShadowingRedundancy") ||
                     action.equals("solveSub-optimization")) {
-                itemTarget = target.queryParam(action).path(id.toString());
+                itemTarget = client.target(uri).queryParam(action);
                 serviceInput = itemTarget.request().accept(MediaType.APPLICATION_XML)
                         .get(ServiceInput.class);
             } else {
@@ -106,9 +125,14 @@ public class ServiceClient {
 
     }
 
-    public void perfomPutOnSingleResource(Integer id) throws JAXBException, SAXException {
+    public void performPutOnSingleResource(URI uri) throws JAXBException, SAXException {
+        ServiceInput serviceInput = map.get(uri);
+        if (serviceInput == null) {
+            logger.log(Level.INFO, " --- Cannot Perform PUT operations ServiceInput resouce not found --- ");
+            return;
+        }
         logger.log(Level.INFO, " --- Performing PUT operations on the single resource --- ");
-        WebTarget itemTarget = target.path(id.toString());
+        WebTarget itemTarget = client.target(uri);
         SolveRequest solveRequest = createType("xsd/solve_request.xml", "xsd/solve_request.xsd", "ofar.generated.classes.solveRequest");
         Rules rules = itemTarget.request().accept(MediaType.APPLICATION_XML).put(Entity.entity(solveRequest, MediaType.APPLICATION_XML), Rules.class);
         logger.log(Level.INFO, rules.getRule().toString());
