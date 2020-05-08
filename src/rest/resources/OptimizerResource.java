@@ -40,9 +40,12 @@ public class OptimizerResource {
         if (serviceInput == null) {
             throw new ForbiddenException("Empty Input");
         }
+        logger.log(Level.INFO, "Creating a new ServiceInput");
+        logger.log(Level.INFO, "Saving the new resource into the Database");
         ServiceInput savedInput = Database.insertEntry(serviceInput);
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
         URI u = builder.path(Long.toString(savedInput.getId())).build();
+        logger.log(Level.INFO, "Returning the response object   ");
         return Response.created(u).entity(savedInput).build();
     }
 
@@ -119,6 +122,11 @@ public class OptimizerResource {
             logger.log(Level.INFO, "Get request received");
             logger.log(Level.INFO, "Performing Sub-Optimization resolution");
             ServiceInput serviceInput = createServiceInput(id);
+            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+                logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
+                logger.log(Level.INFO, "Returning Rules");
+                return serviceInput;
+            }
             conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
             conflictResolver.removeIrrelevanceAnomaly();
             conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
@@ -127,6 +135,7 @@ public class OptimizerResource {
             returnedServiceInput.setId(id);
             returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
             returnedServiceInput.setDefectedRules(conflictResolver.getRules());
+            logger.log(Level.INFO, "Returning the list new list of rules and the remaining anomalies");
             return returnedServiceInput;
         }
 
@@ -140,12 +149,19 @@ public class OptimizerResource {
             logger.log(Level.INFO, "Get request received");
             logger.log(Level.INFO, "Performing irrelevance resolution");
             ServiceInput serviceInput = createServiceInput(id);
+            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+                logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
+                logger.log(Level.INFO, "Returning Rules");
+                return serviceInput;
+            }
             conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
             conflictResolver.removeIrrelevanceAnomaly();
+            logger.log(Level.INFO, "Irrelevance anomalies removed successfully");
             ServiceInput returnedServiceInput = new ServiceInput();
             returnedServiceInput.setId(id);
             returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
             returnedServiceInput.setDefectedRules(conflictResolver.getRules());
+            logger.log(Level.INFO, "Returning the list new list of rules and the remaining anomalies");
             return returnedServiceInput;
         }
 
@@ -161,12 +177,19 @@ public class OptimizerResource {
             logger.log(Level.INFO, "Get request received");
             logger.log(Level.INFO, "Performing duplication resolution");
             ServiceInput serviceInput = createServiceInput(id);
+            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+                logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
+                logger.log(Level.INFO, "Returning Rules");
+                return serviceInput;
+            }
             conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
             conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
+            logger.log(Level.INFO, "Duplication anomalies removed successfully");
             ServiceInput returnedServiceInput = new ServiceInput();
             returnedServiceInput.setId(id);
             returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
             returnedServiceInput.setDefectedRules(conflictResolver.getRules());
+            logger.log(Level.INFO, "Returning the list new list of rules and the remaining anomalies");
             return returnedServiceInput;
         }
     }
@@ -180,12 +203,19 @@ public class OptimizerResource {
             logger.log(Level.INFO, "Get request received");
             logger.log(Level.INFO, "Performing shadowing redundancy resolution");
             ServiceInput serviceInput = createServiceInput(id);
+            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+                logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
+                logger.log(Level.INFO, "Returning Rules");
+                return serviceInput;
+            }
             conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
             conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
+            logger.log(Level.INFO, "Shadowing Redundancy anomalies removed successfully");
             ServiceInput returnedServiceInput = new ServiceInput();
             returnedServiceInput.setId(id);
             returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
             returnedServiceInput.setDefectedRules(conflictResolver.getRules());
+            logger.log(Level.INFO, "Returning the list new list of rules and the remaining anomalies");
             return returnedServiceInput;
         }
     }
@@ -238,24 +268,48 @@ public class OptimizerResource {
             if (serviceInput == null) {
                 throw new NotFoundException();
             }
+            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+                logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
+                logger.log(Level.INFO, "Returning Rules");
+                return objectFactory.createRules(serviceInput.getDefectedRules());
+            }
             logger.log(Level.INFO, "Put request received");
-            logger.log(Level.INFO, "Applying solve request");
+            logger.log(Level.INFO, "Getting Data from Database");
             conflictResolver = new ConflictResolver(serviceInput.getDefectedRules(), serviceInput.getAnomaliesList());
+            logger.log(Level.INFO, "Resolving all sub-optimization anomalies");
             conflictResolver.resolveAnomalies();
+            logger.log(Level.INFO, "Sub-optimization anomalies resolved");
+
+            logger.log(Level.INFO, "Applying solve request");
             conflictResolver.executeSolveRequest(solveRequest);
+            logger.log(Level.INFO, "Solve request applied");
+
             unnecessaryAnomalyChecker = new UnnecessaryAnomalyChecker(conflictResolver.getRules());
             int anomalyListSize = conflictResolver.getAnomalies().getAnomaly().size();
+            logger.log(Level.INFO, "Checking Unnecessary Anomalies");
             //conflictResolver.getAnomalies().getAnomaly().get(anomalyListSize - 1).getAnomalyID().intValue() -> here i get the anomaly ID of the last element in the anomalies list
             Anomalies newlyCreatedAnomalies = unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(conflictResolver.getAnomalies().getAnomaly().get(anomalyListSize - 1).getAnomalyID().intValue());
+            if(newlyCreatedAnomalies.getAnomaly().size() == 0){
+                logger.log(Level.INFO, "Unnecessary Anomalies Detected");
+
+            }else{
+                logger.log(Level.INFO, "No unnecessary anomalies found");
+
+            }
+
             //Add the newly created anomalies the list of the anomalies to be solved
             conflictResolver.getAnomalies().getAnomaly().addAll(newlyCreatedAnomalies.getAnomaly());
+            logger.log(Level.INFO, "Resolving unnecessary anomalies");
             //Resolve the unnecessary anomalies
             conflictResolver.removeUnnecessaryAnomaly();
+            logger.log(Level.INFO, "Updating Database...");
+
             //Update the database with the new list of rules and anomalies
             serviceInput.setDefectedRules(conflictResolver.getRules());
             serviceInput.setAnomaliesList(new Anomalies());
 
         }
+        logger.log(Level.INFO, "Returning the updated list of rules");
         return objectFactory.createRules(conflictResolver.getRules());
     }
 }

@@ -1,5 +1,6 @@
 package data.serializer;
 
+import ofar.generated.classes.input.ServiceInput;
 import ofar.generated.classes.solveRequest.SolveRequest;
 import org.xml.sax.SAXException;
 
@@ -14,8 +15,8 @@ import static javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI;
 
 public class DataUnmarshaller {
 
-    public static SolveRequest unmarshallData(String fileName, String schemaPath, String contextPath) throws SAXException, JAXBException {
-        SolveRequest solveRequest;
+    public static <T> T unmarshallSolveRequest(String fileName, String schemaPath, String contextPath) throws SAXException, JAXBException {
+        T solveRequest;
         try {
             // initialize JAXBContext and create unmarshaller
             //contextPath = "ofar.generated.classes.solveRequest"
@@ -28,7 +29,7 @@ public class DataUnmarshaller {
             u.setSchema(schema);
 
             // unmarshal file named fname
-            solveRequest = (SolveRequest) u.unmarshal(new File(fileName));
+            solveRequest = (T) u.unmarshal(new File(fileName));
         } catch (SAXException se) {
             System.out.println("Unable to validate schema");
             throw se;
@@ -37,7 +38,7 @@ public class DataUnmarshaller {
     }
 
 /*    public static void main(String[] args) throws JAXBException, SAXException {
-        DataUnmarshaller.unmarshallData("xsd/solve_request.xml", "xsd/solve_request.xsd", "ofar.generated.classes.solveRequest");
+        DataUnmarshaller.unmarshallSolveRequest("xsd/solve_request.xml", "xsd/solve_request.xsd", "ofar.generated.classes.solveRequest");
     }*/
 
 }

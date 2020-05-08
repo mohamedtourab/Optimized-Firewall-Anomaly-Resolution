@@ -37,6 +37,50 @@
 			"response": []
 		},
 		{
+			"name": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/0?resolutionType=solveIrrelevance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Optimized_Firewall_Anomaly_Resolution_war_exploded",
+						"rest",
+						"optimizer",
+						"0"
+					],
+					"query": [
+						{
+							"key": "resolutionType",
+							"value": "solveIrrelevance",
+							"disabled": true
+						},
+						{
+							"key": "resolutionType",
+							"value": "solveDuplication",
+							"disabled": true
+						},
+						{
+							"key": "resolutionType",
+							"value": "solveShadowingRedundancy",
+							"disabled": true
+						},
+						{
+							"key": "resolutionType",
+							"value": "solveSub-optimization",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/",
 			"request": {
 				"method": "PUT",
@@ -62,34 +106,6 @@
 						"rest",
 						"optimizer",
 						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/0?resolutionType=solveIrrelevance",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/0?resolutionType=solveIrrelevance",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"Optimized_Firewall_Anomaly_Resolution_war_exploded",
-						"rest",
-						"optimizer",
-						"0"
-					],
-					"query": [
-						{
-							"key": "resolutionType",
-							"value": "solveIrrelevance"
-						}
 					]
 				}
 			},

@@ -173,7 +173,7 @@ public class ConflictResolverTest {
         SolveRequest solveRequest = null;
         RemovedEntries removedEntries = conflictResolver.executeSolveRequest(solveRequest);
         try {
-            solveRequest = DataUnmarshaller.unmarshallData("xsd/solve_request.xml", "xsd/solve_request.xsd", "ofar.generated.classes.solveRequest");
+            solveRequest = DataUnmarshaller.unmarshallSolveRequest("xsd/solve_request.xml", "xsd/solve_request.xsd", "ofar.generated.classes.solveRequest");
         } catch (SAXException | JAXBException e) {
             e.printStackTrace();
         }

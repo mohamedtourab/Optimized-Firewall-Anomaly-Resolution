@@ -9,14 +9,12 @@ import org.apache.commons.net.util.SubnetUtils;
 
 import java.math.BigInteger;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UnnecessaryAnomalyChecker {
     private final Rules rules;
-    private static final Logger LOGGER = Logger.getLogger(UnnecessaryAnomalyChecker.class.getName());
+//    private static final Logger LOGGER = Logger.getLogger(UnnecessaryAnomalyChecker.class.getName());
 
     enum IP_TYPES {
         BOTH_IP,
@@ -54,7 +52,6 @@ public class UnnecessaryAnomalyChecker {
                 }
             }
         }
-        unnecessaryAnomalies.getAnomaly().forEach(anomalyType -> LOGGER.log(Level.INFO, "Aunn(" + anomalyType.getRule().get(0).getRuleID() + ", " + anomalyType.getRule().get(1).getRuleID() + ")" + "ID->" + anomalyType.getAnomalyID()));
         return unnecessaryAnomalies;
     }
 
@@ -92,7 +89,6 @@ public class UnnecessaryAnomalyChecker {
             if (!specifySameAction(rx, rz)) {
                 if (!isTotallyDisjoint(rx, rz)) {
                     //There is a correlated rule that specify the different action
-                    LOGGER.log(Level.WARNING, "Rule " + rx.getRuleID() + " and Rule " + rz.getRuleID() + " are specifying different action and correlated and Ry is " + ry.getRuleID());
                     return true;
                 }
             }
