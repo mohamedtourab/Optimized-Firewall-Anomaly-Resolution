@@ -1,7 +1,7 @@
 # Optimized-Firewall-Anomaly-Resolutions
 [![CodeFactor](https://www.codefactor.io/repository/github/mohamedmamdouh95/optimized-firewall-anomaly-resolution/badge/master)](https://www.codefactor.io/repository/github/mohamedmamdouh95/optimized-firewall-anomaly-resolution/overview/master)
 
-Firewalls have been widely used to protect not only small and local networks, but also large enterprise networks. The configuration of firewalls is mainly done manually by network administrators. Thus, it suffers from human errors. A typical example of error in firewall configurations is conflict among two firewall rules, which arises when the effect of one rule is influenced or altered by another one, e.g. the actions of two rules (that are both satisfied simultaneously) contradict each other. In literature, several solutions have been proposed for firewall conflict detection. However, a detected conflict has to be solved manually by administrators, and none of the proposed approaches even tries to minimize such necessary administration operations. In order to overcome this limitation, the Netgroup (Computer Networks research group at Politecnico di Torino) recently defined a new approach, which also minimizes the number of resolutions that have to be performed by administrators to fix the detected conflicts. The aim of this project is to design and implement a RESTful web service based on this new approach.
+Firewalls have been widely used to protect not only small and local networks, but also large enterprise networks. The configuration of firewalls is mainly done manually by network administrators. Thus, it suffers from human errors. A typical example of error in firewall configurations is conflict among two firewalls rules, which arises when the effect of one rule is influenced or altered by another one, e.g. the actions of the two rules (that are both satisfied simultaneously) contradict each other. In literature, several solutions have been proposed for firewall conflict detection. However, a detected conflict has to be solved manually by administrators, and none of the proposed approaches even tries to minimize such necessary administration operations. In order to overcome this limitation, the Netgroup (Computer Networks research group at Politecnico di Torino) recently defined a new approach, which also minimizes the number of resolutions that have to be performed by administrators to fix the detected conflicts. The aim of this project is to design and implement a RESTful web service based on this new approach.
 
 
 # RESTful web service
@@ -108,18 +108,19 @@ The used software has been [Eclipse IDE for Enterprise Java Developers.](https:/
 1. Clone the project
 
         git clone https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution
-2. After clonining the project, before you copy the content of the cloned folder change the name of the *Web* folder to *WebContent*
+2. After cloning the project, before you copy the content of the cloned folder change the name of the *Web* folder to *WebContent*
 
 3. Overwrite all the file folder of your project with the new one downloaded.
 4. Right click on **gen-src** folder and select **use as source folder** from *Build Path*
 5. Add the ant builders by clicking on *Window->Show View->Other->Ant* then add the two ant builders (builder.xml & tomcat-build.xml)
-6. Open the build.xml and change the following things:
+6. Open the build.xml file and change the following things:
     - project name to your project name
     - change the property *name* value to your project name
-    - open web.xml and change the following line from `<param-value>http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest</param-value>` to `<param-value>http://localhost:8080/PUT YOUR PROJECT NAME HERE/rest</param-value>`
-    - open index.jsp and change the following line from `<p><a href="_swagger-ui/index.html?url=http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/swagger.json">Swagger documentation</a>` to `<p><a href="_swagger-ui/index.html?url=http://localhost:8080/PUT YOUR PROJET NAME HERE/rest/swagger.json">Swagger documentation</a>`
+7. Open tomcat-build.xml, change the property *tomcatLocation* value to the directory of your tomcat server.
+8. open web.xml and change the following line from `<param-value>http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest</param-value>` to `<param-value>http://localhost:8080/PUT YOUR PROJECT NAME HERE/rest</param-value>`
+9. open index.jsp and change the following line from `<p><a href="_swagger-ui/index.html?url=http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/swagger.json">Swagger documentation</a>` to `<p><a href="_swagger-ui/index.html?url=http://localhost:8080/PUT YOUR PROJET NAME HERE/rest/swagger.json">Swagger documentation</a>`
 
-7. At this point you can:
+10. At this point you can:
 	- Use the **build.xml**
 		- Target: start-tomcat
 		- Target: deploy
