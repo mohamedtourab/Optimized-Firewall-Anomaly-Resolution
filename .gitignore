@@ -6,3 +6,6 @@ OFAR.iml
 bin/
 out/
 .DS_Store
+Optimized-Firewall-Anomaly-Resolution.iml
+optimized-firewall-anomaly-resolution.properties
+optimized-firewall-anomaly-resolution.xml
