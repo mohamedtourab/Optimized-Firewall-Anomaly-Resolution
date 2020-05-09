@@ -1,7 +1,5 @@
 package data.serializer;
 
-import ofar.generated.classes.input.ServiceInput;
-import ofar.generated.classes.solveRequest.SolveRequest;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;

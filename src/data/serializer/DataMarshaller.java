@@ -1,6 +1,5 @@
 package data.serializer;
 
-
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;

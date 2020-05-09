@@ -75,7 +75,7 @@ public class XmlValidationProvider<T> implements MessageBodyReader<T> {
                 out.append(line);
             }
             responseBodyTemplate = out.toString();
-
+            reader.close();
             logger.log(Level.INFO, "XmlProvider initialized successfully");
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error initializing XmlProvider. Service will not work properly.", e);
@@ -100,7 +100,6 @@ public class XmlValidationProvider<T> implements MessageBodyReader<T> {
         }
         Unmarshaller unmarshaller;
         String postRequestClass = "ofar.generated.classes.input.ServiceInput";
-        String putRequestClass = "ofar.generated.classes.solveRequest.SolveRequest";
 
         try {
             jc = JAXBContext.newInstance(jaxbPackage);

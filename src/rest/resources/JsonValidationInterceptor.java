@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.InternalServerErrorException;
@@ -20,7 +19,6 @@ import javax.ws.rs.ext.ReaderInterceptor;
 import javax.ws.rs.ext.ReaderInterceptorContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.util.JAXBSource;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
@@ -71,7 +69,7 @@ public class JsonValidationInterceptor implements ReaderInterceptor {
                 out.append(line);
             }
             responseBodyTemplate = out.toString();
-
+            reader.close();
             logger.log(Level.INFO, "JsonValidationInterceptor initialized successfully");
         } catch (Exception se) {
             logger.log(Level.SEVERE, "Error initializing JsonValidationInterceptor. Service will not work properly.", se);
@@ -94,7 +92,6 @@ public class JsonValidationInterceptor implements ReaderInterceptor {
             throw new BadRequestException("Request body is empty", response);
         }
         String postRequestClass = "ofar.generated.classes.input.ServiceInput";
-        String putRequestClass = "ofar.generated.classes.solveRequest.SolveRequest";
         try {
             JAXBSource source;
             Validator v;
