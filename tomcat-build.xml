@@ -75,9 +75,9 @@
                     <include name="**/*.*"/>
                 </fileset>
             </copy>
-            <copy todir="${server.location}/${server.name}/${service.name}/WEB-INF/lib">
+            <!--<copy todir="${server.location}/${server.name}/${service.name}/WEB-INF/lib">
                 <fileset dir="${gen_lib.dir}"/>
-            </copy>
+            </copy>-->
             <copy todir="${server.location}/${server.name}/${service.name}/WEB-INF/classes">
                 <fileset dir="${schema.dir}"/>
             </copy>

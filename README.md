@@ -119,8 +119,8 @@ The used software has been [Eclipse IDE for Enterprise Java Developers.](https:/
 7. Open tomcat-build.xml, change the property *tomcatLocation* value to the directory of your tomcat server.
 8. open web.xml and change the following line from `<param-value>http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest</param-value>` to `<param-value>http://localhost:8080/PUT YOUR PROJECT NAME HERE/rest</param-value>`
 9. open index.jsp and change the following line from `<p><a href="_swagger-ui/index.html?url=http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/swagger.json">Swagger documentation</a>` to `<p><a href="_swagger-ui/index.html?url=http://localhost:8080/PUT YOUR PROJET NAME HERE/rest/swagger.json">Swagger documentation</a>`
-
-10. At this point you can:
+10. Open Tomcat installation folder, open *Conf->tomcat-users.xml* and add `<user username="root" password="root" roles="admin-gui,admin-script,manager-gui,manager-script"/>` then save the file. 
+11. At this point you can:
 	- Use the **build.xml**
 		- Target: start-tomcat
 		- Target: deploy

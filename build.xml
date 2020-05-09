@@ -16,9 +16,9 @@
 
 
     <path id="class.path">
-        <fileset dir="${gen_lib.dir}">
+        <!--<fileset dir="${gen_lib.dir}">
             <include name="**/*.jar"/>
-        </fileset>
+        </fileset>-->
         <fileset dir="${lib.dir}">
             <include name="**/*.jar"/>
         </fileset>
