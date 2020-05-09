@@ -74,8 +74,8 @@ Click Finish and wait while IntelliJ IDEA is creating the project.
 
 3. Click on **File** select **Project Structure** then select **Project** and make sure that you chose a directory for the Compiler output. From the Project Setting menu, select **Module**, select **gen-src** mark it as Sources, select **test** inside src and mark it as **Tests**. You should have the same result as this
 ![modules](images/selectModules.png)
-4. From the same Project Setting menu select **Libraries**, click on **+** sign and select java. Add both libraries folder you have in this project i.e (lib,web/WEB-INF/lib).
-5. Without closing the project structure window. select **Artifacts**. you should find a warning at the bottom of the window, click on **FIX** and select **Add 'lib1' to the artifact** and the same for **lib**. Under the WEB-INF/classes directory create new Directory named *xsd*, After creating this directory select it and click on **+** and choose **Directory Content**. Select the *xsd* you copied into your projet. Before clicking ok make sure that you checked **Include in project build** option. The artifacts should look as the following picture. ![artifacts](images/artifacts.PNG)
+4. From the same Project Setting menu select **Libraries**, click on **+** sign and select java. Add both libraries folder you have in this project i.e (web/WEB-INF/lib) then click Apply.
+5. Without closing the project structure window. select **Artifacts**. you should find a warning at the bottom of the window, click on **FIX** and select **Add 'lib' to the artifact** . Under the WEB-INF/classes directory create new Directory named *xsd*, After creating this directory select it and click on **+** and choose **Directory Content**. Select the *xsd* you copied into your projet. Before clicking ok make sure that you checked **Include in project build** option. The artifacts should look as the following picture. ![artifacts](images/artifacts.PNG)
 
 6. Open *web.xml* file, in the second servlet change the following line from
  `<param-value>http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest</param-value>`
