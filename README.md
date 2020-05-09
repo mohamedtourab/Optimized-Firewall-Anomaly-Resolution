@@ -8,7 +8,7 @@ Firewalls have been widely used to protect not only small and local networks, bu
 
 Implementation of a RESTful web service that permits to create an optimizer which contains set of firewall rules and anomalies . 
 
-Different methods allow you to get the list of updated set of rules after performing the desired optimization on the list of rules and anomalies.
+Different methods allow you to get the list of updated set of rules after performing the desired optimization on the list of rules and anomalies. Check [Documentation](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/documentation) for more information.
 
 # Overview
 
