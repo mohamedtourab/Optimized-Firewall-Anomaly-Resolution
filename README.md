@@ -13,10 +13,10 @@ Different methods allow you to get the list of updated set of rules after perfor
 # Overview
 
 - [Configuration](#configuration)
-	- [IntelliJ IDEA](#intellij\ IDEA)
+	- [IntelliJ IDEA](#intellij-IDEA)
 	- [Eclipse](#Eclipse)
 - [Postman Collection](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/postman_collection)
-- [Possible Issues](#Possible\ Issues)
+- [Possible Issues](#Possible-Issues)
 
 # Configuration
 
@@ -33,7 +33,7 @@ The used software has been [IntelliJ IDEA ULTIMATE EDITION](https://www.jetbrain
 ### Configure the Tomcat server in IntelliJ IDEA
 
 1. Open the *Settings / Preferences Dialog* choosing **File | Settings** for Windows and Linux or **IntelliJ IDEA | Preferences** for macOS, and click Application Servers under Build, Execution, Deployment.
-2. On the **Application Servers** page that opens, click **+** icons general add svg above the central pane and choose **Tomcat Server** from the list.
+2. On the **Application Servers** page that opens, click **+** icon choose **Tomcat Server** from the list.
 ![](images/chooseServer.png)
 
 3. Specify the **Tomcat Server** installation folder in the Tomcat Home field. Type its path manually or click browseButton and choose the installation folder in the dialog box that opens.
@@ -43,8 +43,7 @@ The used software has been [IntelliJ IDEA ULTIMATE EDITION](https://www.jetbrain
 1. Choose *File | Project Structure* on the main menu.
 2. In the Project Structure Dialog that opens, choose **SDKs** under the **Platform Settings**.
 3. On the **SDKs** page that opens, click **+** icons general add svg above the central pane and choose **JDK**.
-
-    ![jdk](images/chooseJDK.png)
+![](images/chooseJDK.PNG)
 
 4. Specify the installation folder of the **Java SE Development Kit (JDK)** to use. Type the path manually or click browseButton and choose the installation folder in the dialog that opens.
 
@@ -76,7 +75,7 @@ Click Finish and wait while IntelliJ IDEA is creating the project.
 3. Click on **File** select **Project Structure** then select **Project** and make sure that you chose a directory for the Compiler output. From the Project Setting menu, select **Module**, select **gen-src** mark it as Sources, select **test** inside src and mark it as **Tests**. You should have the same result as this
 ![modules](images/selectModules.png)
 4. From the same Project Setting menu select **Libraries**, click on **+** sign and select java. Add both libraries folder you have in this project i.e (lib,web/WEB-INF/lib).
-5. Without closing the project structure window. select **Artifacts**. you should find a warning at the bottom of the window, click on **FIX** and select **Add 'lib1' to the artifact** and the same for **lib**. Under the WEB-INF/classes directory create new Directory named *xsd*, After creating this directory select it and click on **+** and choose **Directory Content**. Select the *xsd* you copied into your projet. Before clicking ok make sure that you checked **Include in project build** option. The artifacts should look as the following picture. ![artifacts](images/artifacts.png)
+5. Without closing the project structure window. select **Artifacts**. you should find a warning at the bottom of the window, click on **FIX** and select **Add 'lib1' to the artifact** and the same for **lib**. Under the WEB-INF/classes directory create new Directory named *xsd*, After creating this directory select it and click on **+** and choose **Directory Content**. Select the *xsd* you copied into your projet. Before clicking ok make sure that you checked **Include in project build** option. The artifacts should look as the following picture. ![artifacts](images/artifacts.PNG)
 
 6. Open *web.xml* file, in the second servlet change the following line from
  `<param-value>http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest</param-value>`
