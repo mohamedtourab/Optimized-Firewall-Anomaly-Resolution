@@ -21,7 +21,7 @@
 
     <xsd:complexType name="AnomalyType">
         <xsd:sequence>
-            <xsd:element name="rule" type="ruleType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="rule" type="ruleType" minOccurs="1" maxOccurs="2"/>
         </xsd:sequence>
         <xsd:attribute name="AnomalyName" type="AnomalyNames" use="required"/>
         <xsd:attribute name="AnomalyID" type="xsd:positiveInteger" use="required"/>

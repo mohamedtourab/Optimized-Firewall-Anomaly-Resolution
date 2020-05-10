@@ -108,7 +108,10 @@ public class OptimizerResource {
             default: {
                 logger.log(Level.INFO, "Get request received");
                 logger.log(Level.INFO, "Getting Requested item");
-                return Database.getEntry(id);
+                if (Database.getEntry(id) == null)
+                    throw new NotFoundException();
+                else
+                    return Database.getEntry(id);
             }
         }
     }
@@ -122,7 +125,7 @@ public class OptimizerResource {
             logger.log(Level.INFO, "Get request received");
             logger.log(Level.INFO, "Performing Sub-Optimization resolution");
             ServiceInput serviceInput = createServiceInput(id);
-            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+            if (serviceInput.getAnomaliesList().getAnomaly().size() == 0) {
                 logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
                 logger.log(Level.INFO, "Returning Rules");
                 return serviceInput;
@@ -149,7 +152,7 @@ public class OptimizerResource {
             logger.log(Level.INFO, "Get request received");
             logger.log(Level.INFO, "Performing irrelevance resolution");
             ServiceInput serviceInput = createServiceInput(id);
-            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+            if (serviceInput.getAnomaliesList().getAnomaly().size() == 0) {
                 logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
                 logger.log(Level.INFO, "Returning Rules");
                 return serviceInput;
@@ -177,7 +180,7 @@ public class OptimizerResource {
             logger.log(Level.INFO, "Get request received");
             logger.log(Level.INFO, "Performing duplication resolution");
             ServiceInput serviceInput = createServiceInput(id);
-            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+            if (serviceInput.getAnomaliesList().getAnomaly().size() == 0) {
                 logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
                 logger.log(Level.INFO, "Returning Rules");
                 return serviceInput;
@@ -203,7 +206,7 @@ public class OptimizerResource {
             logger.log(Level.INFO, "Get request received");
             logger.log(Level.INFO, "Performing shadowing redundancy resolution");
             ServiceInput serviceInput = createServiceInput(id);
-            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+            if (serviceInput.getAnomaliesList().getAnomaly().size() == 0) {
                 logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
                 logger.log(Level.INFO, "Returning Rules");
                 return serviceInput;
@@ -268,7 +271,7 @@ public class OptimizerResource {
             if (serviceInput == null) {
                 throw new NotFoundException();
             }
-            if(serviceInput.getAnomaliesList().getAnomaly().size()==0){
+            if (serviceInput.getAnomaliesList().getAnomaly().size() == 0) {
                 logger.log(Level.WARNING, "No Anomalies Found. These rules are already optimized");
                 logger.log(Level.INFO, "Returning Rules");
                 return objectFactory.createRules(serviceInput.getDefectedRules());
@@ -289,10 +292,10 @@ public class OptimizerResource {
             logger.log(Level.INFO, "Checking Unnecessary Anomalies");
             //conflictResolver.getAnomalies().getAnomaly().get(anomalyListSize - 1).getAnomalyID().intValue() -> here i get the anomaly ID of the last element in the anomalies list
             Anomalies newlyCreatedAnomalies = unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(conflictResolver.getAnomalies().getAnomaly().get(anomalyListSize - 1).getAnomalyID().intValue());
-            if(newlyCreatedAnomalies.getAnomaly().size() == 0){
+            if (newlyCreatedAnomalies.getAnomaly().size() == 0) {
                 logger.log(Level.INFO, "Unnecessary Anomalies Detected");
 
-            }else{
+            } else {
                 logger.log(Level.INFO, "No unnecessary anomalies found");
 
             }
