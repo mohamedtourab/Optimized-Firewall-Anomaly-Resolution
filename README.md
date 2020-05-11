@@ -137,3 +137,4 @@ The postman folder contains a .json file (that can be imported in Postman) wich 
 - Tomcat might refuse your connection. If so open Tomcat setup folder then open *conf->tomcat-user.xml* add the following line
 `  <user username="root" password="root" roles="admin-gui,admin-script,manager-gui,manager-script"/>
 `
+- Due to the usage of different IDEs you might get an error when you open the project using Eclipse IDE in the package definition inside test class *ConflictResolverTest.java* to fix this problem just change the package from test to test.test
