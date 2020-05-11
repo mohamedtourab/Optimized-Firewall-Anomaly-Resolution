@@ -159,7 +159,7 @@ Two ways to perform test:
 
 	It is a resource that can be called by performing a GET to path `http://localhost:8080/project_name/rest/test`. 
 	
-	The resource will call a test client that will perform different combination of operations to be sure each operation is correct the Client class will check each operation result if the result's as expected or not: if yes it will log the insertion, otherwise it will throw an exception.
+	The resource will call a test client that will perform a combination of operations, to be sure each operation is correct the Client class will check whether the response of each operation is as expected or not: if yes it will log the result, otherwise it will throw an exception.
 
 # Postman Collection
 
