@@ -1,0 +1,14 @@
+data.serializer
+ofar.generated.classes.conflicts
+ofar.generated.classes.contradiction
+ofar.generated.classes.correlation
+ofar.generated.classes.input
+ofar.generated.classes.rules
+ofar.generated.classes.shadowingConflict
+ofar.generated.classes.solveRequest
+optimized.resolution.algorithm.classes
+optimized.resolution.algorithm.interfaces
+rest.resources
+rest.resources.DB
+rest.resources.client
+test
