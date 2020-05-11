@@ -125,16 +125,48 @@ The used software has been [Eclipse IDE for Enterprise Java Developers.](https:/
 		- Target: start-tomcat
 		- Target: deploy
 		- Now the services has been deployed and ready to use
-        - open google chrome and enter the following link `http://localhost:8080/PUT YPUR PROJECT NAME/` you should get the index screen.
+        - open google chrome and enter the following link `http://localhost:8080/PUT YOUR PROJECT NAME/` you should get the index page.
 
+# Test
+### Test Classes Configuration
+##### ServiceClient.java and TestService.java Classes
+You need to specify the name of your project in the projectName variable inside *ServiceClient.java* and *TestService.java*  based on the IDE used.
+##### Example
+##### If Eclipse IDE is used
+- if the project name is : helloWorld. The **projectName=helloWorld**
+##### If Intellij IDE is used
+- if the project name is : helloWorld. The **projectName=helloWorld_war_exploded**
+
+
+
+Two ways to perform test:
+- [JUnit test](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/src/test/test/TestService.java)
+
+	It will perform some different kind of tests:
+
+	- *wrong_post_request()* will add a wrong **ServiceInput** resource, the expected status code will be *400 Bad Request*
+
+	- *correct_post_request()* will add a correct **ServiceInput** resource, the expected status code will be *201 Created*
+
+	- *correct_put_request()* will edit a ServiceInput resource with a correct  **SolveRequest**, the expected status code will be *200 OK*
+
+	- *wrong_put_request()* will edit a ServiceInput resource with a wrong  **SolveRequest**, the expected status code will be *400 Bad request*
+
+	- *wrong_delete_request()* will perform delete on a wrong resource, the expected status code will be a *204 No Content*
+
+- [Client test](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/src/rest/resources/client/ClientResource.java)
+
+	It is a resource that can be called by performing a GET to path `http://localhost:8080/project_name/rest/test`. 
+	
+	The resource will call a test client that will perform different combination of operations to be sure each operation is correct the Client class will check each operation result if the result's as expected or not: if yes it will log the insertion, otherwise it will throw an exception.
 
 # Postman Collection
 
-The postman folder contains a .json file (that can be imported in Postman) wich inside are defined some GET, POST, DELETE and PUT examples for some elements.
+The postman folder contains a .json file (that can be imported in Postman) which contains predefined request to test the web service.
 
 # Possible Issues
 
-- Tomcat might refuse your connection. If so open Tomcat setup folder then open *conf->tomcat-user.xml* add the following line
+- Tomcat might refuse your connection. If so open Tomcat setup folder then open *conf->tomcat-user.xml* add the following line.
 `  <user username="root" password="root" roles="admin-gui,admin-script,manager-gui,manager-script"/>
 `
-- Due to the usage of different IDEs you might get an error when you open the project using Eclipse IDE in the package definition inside test class *ConflictResolverTest.java* to fix this problem just change the package from test to test.test
+- Due to the usage of different IDEs you might get an error when you open the project using Eclipse IDE in the package definition inside each test class inside the test directory *ConflictResolverTest.java*,*TestService.java* to fix this problem just change the package from test to test.test

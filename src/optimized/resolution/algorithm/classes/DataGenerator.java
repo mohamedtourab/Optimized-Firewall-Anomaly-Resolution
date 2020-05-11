@@ -3,9 +3,13 @@ package optimized.resolution.algorithm.classes;
 import ofar.generated.classes.conflicts.Anomalies;
 import ofar.generated.classes.conflicts.AnomalyNames;
 import ofar.generated.classes.conflicts.AnomalyType;
+import ofar.generated.classes.correlation.CorrelationSolutionType;
+import ofar.generated.classes.input.ServiceInput;
 import ofar.generated.classes.rules.ObjectFactory;
 import ofar.generated.classes.rules.RuleType;
 import ofar.generated.classes.rules.Rules;
+import ofar.generated.classes.shadowingConflict.ShadowingConflictSolutionType;
+import ofar.generated.classes.solveRequest.SolveRequest;
 
 import java.math.BigInteger;
 
@@ -33,8 +37,6 @@ public class DataGenerator {
     static RuleType ruleType21;
     static RuleType ruleType22;
     static RuleType ruleType23;
-    static RuleType ruleType24;
-    static RuleType ruleType25;
 
     public static Rules createRules() {
         ObjectFactory objectFactory = new ObjectFactory();
@@ -292,29 +294,6 @@ public class DataGenerator {
         ruleType23.setProtocol("*");
         ruleType23.setAction("DENY");
         rules.getRule().add(ruleType23);
-        /*//Rule 24
-        ruleType24 = objectFactory.createRuleType();
-        ruleType24.setRuleID(BigInteger.valueOf(24));
-        ruleType24.setPriority(BigInteger.valueOf(24));
-        ruleType24.setIPsrc("10.10.10.0/24");
-        ruleType24.setPsrc("*");
-        ruleType24.setIPdst("10.10.10.0/24");
-        ruleType24.setPdst("*");
-        ruleType24.setProtocol("*");
-        ruleType24.setAction("DENY");
-        rules.getRule().add(ruleType24);
-        //Rule 25
-        ruleType25 = objectFactory.createRuleType();
-        ruleType25.setRuleID(BigInteger.valueOf(25));
-        ruleType25.setPriority(BigInteger.valueOf(25));
-        ruleType25.setIPsrc("10.10.10.0/24");
-        ruleType25.setPsrc("*");
-        ruleType25.setIPdst("10.10.10.0/24");
-        ruleType25.setPdst("*");
-        ruleType25.setProtocol("*");
-        ruleType25.setAction("DENY");
-        rules.getRule().add(ruleType25);
-*/
         return rules;
     }
 
@@ -550,15 +529,70 @@ public class DataGenerator {
         anomaly33.getRule().add(ruleType16);
         anomaly33.getRule().add(ruleType19);
         anomalies.getAnomaly().add(anomaly33);
-        /*//Anomaly 34
-        AnomalyType anomaly34 = objectFactory.createAnomalyType();
-        anomaly34.setAnomalyID(BigInteger.valueOf(34));
-        anomaly34.setAnomalyName(AnomalyNames.DUPLICATION);
-        anomaly34.getRule().add(ruleType24);
-        anomaly34.getRule().add(ruleType25);
-        anomalies.getAnomaly().add(anomaly34);*/
-
         return anomalies;
+    }
+
+    public static SolveRequest createSolveRequest() {
+        SolveRequest solveRequest = new SolveRequest();
+        ShadowingConflictSolutionType shadowingConflictSolutionType = new ShadowingConflictSolutionType();
+        shadowingConflictSolutionType.setAnomalyId(16);
+        shadowingConflictSolutionType.setToRemove(false);
+        shadowingConflictSolutionType.setToChangeOrder(true);
+        solveRequest.getShadowingConflictSolutions().add(shadowingConflictSolutionType);
+        shadowingConflictSolutionType = new ShadowingConflictSolutionType();
+        shadowingConflictSolutionType.setAnomalyId(20);
+        shadowingConflictSolutionType.setToRemove(false);
+        shadowingConflictSolutionType.setToChangeOrder(true);
+        solveRequest.getShadowingConflictSolutions().add(shadowingConflictSolutionType);
+        shadowingConflictSolutionType = new ShadowingConflictSolutionType();
+        shadowingConflictSolutionType.setAnomalyId(21);
+        shadowingConflictSolutionType.setToRemove(false);
+        shadowingConflictSolutionType.setToChangeOrder(true);
+        solveRequest.getShadowingConflictSolutions().add(shadowingConflictSolutionType);
+        shadowingConflictSolutionType = new ShadowingConflictSolutionType();
+        shadowingConflictSolutionType.setAnomalyId(22);
+        shadowingConflictSolutionType.setToRemove(false);
+        shadowingConflictSolutionType.setToChangeOrder(true);
+        solveRequest.getShadowingConflictSolutions().add(shadowingConflictSolutionType);
+        shadowingConflictSolutionType = new ShadowingConflictSolutionType();
+        shadowingConflictSolutionType.setAnomalyId(24);
+        shadowingConflictSolutionType.setToRemove(false);
+        shadowingConflictSolutionType.setToChangeOrder(true);
+        solveRequest.getShadowingConflictSolutions().add(shadowingConflictSolutionType);
+        shadowingConflictSolutionType = new ShadowingConflictSolutionType();
+        shadowingConflictSolutionType.setAnomalyId(27);
+        shadowingConflictSolutionType.setToRemove(false);
+        shadowingConflictSolutionType.setToChangeOrder(true);
+        solveRequest.getShadowingConflictSolutions().add(shadowingConflictSolutionType);
+        shadowingConflictSolutionType = new ShadowingConflictSolutionType();
+        shadowingConflictSolutionType.setAnomalyId(29);
+        shadowingConflictSolutionType.setToRemove(false);
+        shadowingConflictSolutionType.setToChangeOrder(true);
+        solveRequest.getShadowingConflictSolutions().add(shadowingConflictSolutionType);
+        CorrelationSolutionType correlationSolutionType = new CorrelationSolutionType();
+        correlationSolutionType.setAnomalyId(6);
+        correlationSolutionType.setToChange(false);
+        solveRequest.getCorrelationSolutions().add(correlationSolutionType);
+        correlationSolutionType = new CorrelationSolutionType();
+        correlationSolutionType.setAnomalyId(7);
+        correlationSolutionType.setToChange(false);
+        solveRequest.getCorrelationSolutions().add(correlationSolutionType);
+        correlationSolutionType = new CorrelationSolutionType();
+        correlationSolutionType.setAnomalyId(8);
+        correlationSolutionType.setToChange(false);
+        solveRequest.getCorrelationSolutions().add(correlationSolutionType);
+        correlationSolutionType = new CorrelationSolutionType();
+        correlationSolutionType.setAnomalyId(9);
+        correlationSolutionType.setToChange(false);
+        solveRequest.getCorrelationSolutions().add(correlationSolutionType);
+        return solveRequest;
+    }
+
+    public static ServiceInput createServiceInput() {
+        ServiceInput serviceInput = new ServiceInput();
+        serviceInput.setDefectedRules(DataGenerator.createRules());
+        serviceInput.setAnomaliesList(DataGenerator.createAnomalies());
+        return serviceInput;
     }
 
 

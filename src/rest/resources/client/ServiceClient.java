@@ -1,10 +1,10 @@
 package rest.resources.client;
 
-import data.serializer.DataUnmarshaller;
 import ofar.generated.classes.input.ServiceInput;
 import ofar.generated.classes.rules.Rules;
 import ofar.generated.classes.solveRequest.SolveRequest;
-import org.xml.sax.SAXException;
+import optimized.resolution.algorithm.classes.DataGenerator;
+
 import rest.resources.OptimizerResource;
 
 import javax.ws.rs.ForbiddenException;
@@ -16,7 +16,6 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-import javax.xml.bind.JAXBException;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -25,17 +24,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServiceClient {
+    //CHANGE THE VALUE TO YOUR PROJECT NAME HERE
+    private static final String projectName = "Optimized_Firewall_Anomaly_Resolution_war_exploded";
+
     Logger logger = Logger.getLogger(OptimizerResource.class.getName());
     private static Client client;
-
-    private WebTarget target;        // the WebTarget of the main resource
-    private Map<URI, ServiceInput> map;    // a local map to access created resources
+    private final WebTarget target;        // the WebTarget of the main resource
+    private final Map<URI, ServiceInput> map;    // a local map to access created resources
 
     public ServiceClient() {
-
         // create the Client object
         client = ClientBuilder.newClient();
-
         // create a web target for the main URI
         target = client.target(getBaseURI());
         // create the map
@@ -44,11 +43,11 @@ public class ServiceClient {
     }
 
     private static URI getBaseURI() {
-        return UriBuilder.fromUri("http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/").build();
+        return UriBuilder.fromUri("http://localhost:8080/" + projectName + "/rest/optimizer/").build();
     }
 
-    private void runClient() throws JAXBException, SAXException {
-        ServiceInput serviceInput = createType("src/data/serializer/serviceInput.xml", "xsd/webservice_input_schema.xsd", "ofar.generated.classes.input");
+    public void runClient() {
+        ServiceInput serviceInput = DataGenerator.createServiceInput();
         URI uri1 = performPost(serviceInput);
         URI uri2 = performPost(serviceInput);
         performGetAllResources();
@@ -57,7 +56,8 @@ public class ServiceClient {
         performGetSingleResource(uri1, "");
         performGetSingleResource(uri1, "solveIrrelevance");
         performDelete(uri2);
-        performGetSingleResource(uri2,"");
+        performGetAllResources();
+        logger.log(Level.INFO, "Successful: Test Ended Successfully");
 
     }
 
@@ -97,7 +97,7 @@ public class ServiceClient {
     }
 
     public void performGetSingleResource(URI uri, String action) {
-        WebTarget itemTarget = null;
+        WebTarget itemTarget;
         ServiceInput serviceInput = null;
         logger.log(Level.INFO, " --- Performing GET operations on the single resource --- ");
         if (action.equals("")) {
@@ -125,7 +125,7 @@ public class ServiceClient {
 
     }
 
-    public void performPutOnSingleResource(URI uri) throws JAXBException, SAXException {
+    public void performPutOnSingleResource(URI uri) {
         ServiceInput serviceInput = map.get(uri);
         if (serviceInput == null) {
             logger.log(Level.INFO, " --- Cannot Perform PUT operations ServiceInput resouce not found --- ");
@@ -133,7 +133,7 @@ public class ServiceClient {
         }
         logger.log(Level.INFO, " --- Performing PUT operations on the single resource --- ");
         WebTarget itemTarget = client.target(uri);
-        SolveRequest solveRequest = createType("xsd/solve_request.xml", "xsd/solve_request.xsd", "ofar.generated.classes.solveRequest");
+        SolveRequest solveRequest = DataGenerator.createSolveRequest();
         Rules rules = itemTarget.request().accept(MediaType.APPLICATION_XML).put(Entity.entity(solveRequest, MediaType.APPLICATION_XML), Rules.class);
         logger.log(Level.INFO, rules.getRule().toString());
 
@@ -162,12 +162,7 @@ public class ServiceClient {
 
     }
 
-
-    private <T> T createType(String fileName, String schemaPath, String contextPath) throws JAXBException, SAXException {
-        return DataUnmarshaller.unmarshallSolveRequest(fileName, schemaPath, contextPath);
-    }
-
-    public static void main(String[] args) throws JAXBException, SAXException {
+    public static void main(String[] args) {
         ServiceClient serviceClient = new ServiceClient();
         serviceClient.runClient();
     }
