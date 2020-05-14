@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -31,14 +31,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "contradictionSolutions",
-    "shadowingConflictSolutions",
-    "correlationSolutions"
+        "contradictionSolutions",
+        "shadowingConflictSolutions",
+        "correlationSolutions"
 })
 @XmlRootElement(name = "SolveRequest")
 public class SolveRequest {
@@ -49,25 +47,23 @@ public class SolveRequest {
 
     /**
      * Gets the value of the contradictionSolutions property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the contradictionSolutions property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContradictionSolutions().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ContradictionSolutionType }
-     * 
-     * 
      */
     public List<ContradictionSolutionType> getContradictionSolutions() {
         if (contradictionSolutions == null) {
@@ -78,25 +74,23 @@ public class SolveRequest {
 
     /**
      * Gets the value of the shadowingConflictSolutions property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the shadowingConflictSolutions property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getShadowingConflictSolutions().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ShadowingConflictSolutionType }
-     * 
-     * 
      */
     public List<ShadowingConflictSolutionType> getShadowingConflictSolutions() {
         if (shadowingConflictSolutions == null) {
@@ -107,25 +101,23 @@ public class SolveRequest {
 
     /**
      * Gets the value of the correlationSolutions property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the correlationSolutions property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getCorrelationSolutions().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link CorrelationSolutionType }
-     * 
-     * 
      */
     public List<CorrelationSolutionType> getCorrelationSolutions() {
         if (correlationSolutions == null) {

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 public class TestService {
     //CHANGE THE VALUE TO YOUR PROJECT NAME HERE
-    private final String projectName = "Optimized_Firewall_Anomaly_Resolution_war_exploded";
+    private final String projectName = "testProject";
 
     private final String baseUrl = "http://localhost:8080/" + projectName + "/rest/optimizer";
     private static final Logger logger = Logger.getLogger(TestService.class.getName());
@@ -60,7 +60,7 @@ public class TestService {
         target.request(MediaType.APPLICATION_XML)
                 .post(Entity.entity(serviceInput, MediaType.APPLICATION_XML));
         logger.log(Level.INFO, "OFAR PUT (correct_put_request) test [:Started]");
-        WebTarget itemTarget = target.path("1");
+        WebTarget itemTarget = target.path("0");
         SolveRequest solveRequest = DataGenerator.createSolveRequest();
         Response response = itemTarget.request().accept(MediaType.APPLICATION_XML).put(Entity.entity(solveRequest, MediaType.APPLICATION_XML), Response.class);
         // Assert that correct status code is returned.
@@ -82,7 +82,7 @@ public class TestService {
     @Test
     public void wrong_delete_request() {
         logger.log(Level.INFO, "OFAR DELETE (wrong_delete_request) test [:Started]");
-        WebTarget itemTarget = target.path("1000");
+        WebTarget itemTarget = target.path("10000");
         Response response = itemTarget.request(MediaType.APPLICATION_XML)
                 .delete();
         Assert.assertEquals(204, response.getStatus());

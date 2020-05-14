@@ -10,7 +10,7 @@
                 <xsd:element name="DefectedRules" type="Rules"/>
                 <xsd:element name="AnomaliesList" type="Anomalies"/>
             </xsd:sequence>
-            <xsd:attribute name = "id" type="xsd:int"/>
+            <xsd:attribute name = "id" type="xsd:positiveInteger"/>
         </xsd:complexType>
     </xsd:element>
 

@@ -198,8 +198,8 @@ public class ConflictResolverTest {
         ruleType.setProtocol("*");
         ruleType.setAction("DENY");
 
-        correlationSolutionType.setAnomalyId(20);
-        correlationSolutionType.setRuleId(23);
+        correlationSolutionType.setAnomalyId(BigInteger.valueOf(20));
+        correlationSolutionType.setRuleId(BigInteger.valueOf(23));
         correlationSolutionType.setUpdatedRule(ruleType);
         correlationSolutionType.setToChange(true);
         solveRequest.getCorrelationSolutions().add(correlationSolutionType);

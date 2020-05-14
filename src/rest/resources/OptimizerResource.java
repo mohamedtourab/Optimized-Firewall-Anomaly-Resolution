@@ -16,6 +16,7 @@ import rest.resources.DB.Database;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import javax.xml.bind.JAXBElement;
+import java.math.BigInteger;
 import java.net.URI;
 import java.util.Collection;
 import java.util.logging.Level;
@@ -44,7 +45,7 @@ public class OptimizerResource {
         logger.log(Level.INFO, "Saving the new resource into the Database");
         ServiceInput savedInput = Database.insertEntry(serviceInput);
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-        URI u = builder.path(Long.toString(savedInput.getId())).build();
+        URI u = builder.path(Long.toString(savedInput.getId().intValue())).build();
         logger.log(Level.INFO, "Returning the response object   ");
         return Response.created(u).entity(savedInput).build();
     }
@@ -135,7 +136,7 @@ public class OptimizerResource {
             conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
             conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
             ServiceInput returnedServiceInput = serviceInputObjectFactory.createServiceInput();
-            returnedServiceInput.setId(id);
+            returnedServiceInput.setId(BigInteger.valueOf(id));
             returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
             returnedServiceInput.setDefectedRules(conflictResolver.getRules());
             logger.log(Level.INFO, "Returning the list new list of rules and the remaining anomalies");
@@ -161,7 +162,7 @@ public class OptimizerResource {
             conflictResolver.removeIrrelevanceAnomaly();
             logger.log(Level.INFO, "Irrelevance anomalies removed successfully");
             ServiceInput returnedServiceInput = new ServiceInput();
-            returnedServiceInput.setId(id);
+            returnedServiceInput.setId(BigInteger.valueOf(id));
             returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
             returnedServiceInput.setDefectedRules(conflictResolver.getRules());
             logger.log(Level.INFO, "Returning the list new list of rules and the remaining anomalies");
@@ -189,7 +190,7 @@ public class OptimizerResource {
             conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.DUPLICATION);
             logger.log(Level.INFO, "Duplication anomalies removed successfully");
             ServiceInput returnedServiceInput = new ServiceInput();
-            returnedServiceInput.setId(id);
+            returnedServiceInput.setId(BigInteger.valueOf(id));
             returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
             returnedServiceInput.setDefectedRules(conflictResolver.getRules());
             logger.log(Level.INFO, "Returning the list new list of rules and the remaining anomalies");
@@ -215,7 +216,7 @@ public class OptimizerResource {
             conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
             logger.log(Level.INFO, "Shadowing Redundancy anomalies removed successfully");
             ServiceInput returnedServiceInput = new ServiceInput();
-            returnedServiceInput.setId(id);
+            returnedServiceInput.setId(BigInteger.valueOf(id));
             returnedServiceInput.setAnomaliesList(conflictResolver.getAnomalies());
             returnedServiceInput.setDefectedRules(conflictResolver.getRules());
             logger.log(Level.INFO, "Returning the list new list of rules and the remaining anomalies");
@@ -226,7 +227,7 @@ public class OptimizerResource {
     private ServiceInput createServiceInput(int id) {
         ofar.generated.classes.input.ObjectFactory serviceInputObjectFactory = new ofar.generated.classes.input.ObjectFactory();
         ServiceInput serviceInput = serviceInputObjectFactory.createServiceInput();
-        serviceInput.setId(id);
+        serviceInput.setId(BigInteger.valueOf(id));
         serviceInput.setAnomaliesList(cloneAnomalies(Database.getEntry(id).getAnomaliesList()));
         serviceInput.setDefectedRules(cloneRules(Database.getEntry(id).getDefectedRules()));
         return serviceInput;

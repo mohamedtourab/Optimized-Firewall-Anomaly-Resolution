@@ -1,9 +1,11 @@
 
 package ofar.generated.classes.shadowingConflict;
 
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -17,8 +19,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="ruleId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="anomalyId" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="ruleId" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" minOccurs="0"/>
+ *         &lt;element name="anomalyId" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
  *         &lt;element name="toRemove" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="toChangeOrder" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
@@ -38,9 +40,11 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ShadowingConflictSolutionType {
 
-    @XmlElement(defaultValue = "-1")
-    protected Integer ruleId;
-    protected int anomalyId;
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger ruleId;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger anomalyId;
     @XmlElement(defaultValue = "false")
     protected boolean toRemove;
     @XmlElement(defaultValue = "false")
@@ -51,10 +55,10 @@ public class ShadowingConflictSolutionType {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getRuleId() {
+    public BigInteger getRuleId() {
         return ruleId;
     }
 
@@ -63,26 +67,34 @@ public class ShadowingConflictSolutionType {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public void setRuleId(Integer value) {
+    public void setRuleId(BigInteger value) {
         this.ruleId = value;
     }
 
     /**
      * Gets the value of the anomalyId property.
      * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
      */
-    public int getAnomalyId() {
+    public BigInteger getAnomalyId() {
         return anomalyId;
     }
 
     /**
      * Sets the value of the anomalyId property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
      */
-    public void setAnomalyId(int value) {
+    public void setAnomalyId(BigInteger value) {
         this.anomalyId = value;
     }
 

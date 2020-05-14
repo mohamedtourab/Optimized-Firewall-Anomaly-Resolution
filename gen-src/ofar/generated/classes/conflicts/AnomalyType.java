@@ -10,6 +10,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="rule" type="{}ruleType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="rule" type="{}ruleType" maxOccurs="2"/>
  *       &lt;/sequence>
  *       &lt;attribute name="AnomalyName" use="required" type="{}AnomalyNames" />
  *       &lt;attribute name="AnomalyID" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
@@ -39,6 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class AnomalyType {
 
+    @XmlElement(required = true)
     protected List<RuleType> rule;
     @XmlAttribute(name = "AnomalyName", required = true)
     protected AnomalyNames anomalyName;
@@ -115,7 +117,7 @@ public class AnomalyType {
 
     @Override
     public String toString() {
-        return String.format("Anomaly %s\nType %s\nRules Included %s",anomalyID,anomalyName,rule);
+        return String.format("Anomaly %s\nType %s\nRules Included %s", anomalyID, anomalyName, rule);
 //        return "AnomalyType{" +
 //                "ruleID=" + rule +
 //                ", anomalyName=" + anomalyName +

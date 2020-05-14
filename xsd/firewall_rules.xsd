@@ -14,14 +14,14 @@
     </xsd:complexType>
     <xsd:complexType name="ruleType">
         <xsd:sequence>
-            <xsd:element name="priority" type="xsd:positiveInteger"/>
-            <xsd:element name="IPsrc" type="xsd:string"/>
+            <xsd:element name="priority" type="xsd:positiveInteger" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="IPsrc" type="xsd:string" minOccurs="1" maxOccurs="1"/>
             <!--Psrc cannot integers because we usually use "*" to represent all ports and this cannot be used in integers-->
-            <xsd:element name="Psrc" type="xsd:string"/>
-            <xsd:element name="IPdst" type="xsd:string"/>
-            <xsd:element name="Pdst" type="xsd:string"/>
-            <xsd:element name="Protocol" type="xsd:string"/>
-            <xsd:element name="Action">
+            <xsd:element name="Psrc" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="IPdst" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Pdst" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Protocol" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Action" minOccurs="1" maxOccurs="1">
                 <xsd:simpleType>
                     <xsd:restriction base="xsd:string">
                         <xsd:enumeration value="ALLOW"/>

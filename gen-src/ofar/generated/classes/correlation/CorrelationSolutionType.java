@@ -3,9 +3,11 @@ package ofar.generated.classes.correlation;
 
 import ofar.generated.classes.rules.RuleType;
 
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -20,8 +22,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="toChange" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="ruleId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="anomalyId" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="ruleId" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" minOccurs="0"/>
+ *         &lt;element name="anomalyId" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
  *         &lt;element name="updatedRule" type="{}ruleType" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -42,9 +44,11 @@ public class CorrelationSolutionType {
 
     @XmlElement(defaultValue = "false")
     protected boolean toChange;
-    @XmlElement(defaultValue = "-1")
-    protected Integer ruleId;
-    protected int anomalyId;
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger ruleId;
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger anomalyId;
     protected RuleType updatedRule;
 
     /**
@@ -68,10 +72,10 @@ public class CorrelationSolutionType {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getRuleId() {
+    public BigInteger getRuleId() {
         return ruleId;
     }
 
@@ -80,26 +84,34 @@ public class CorrelationSolutionType {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public void setRuleId(Integer value) {
+    public void setRuleId(BigInteger value) {
         this.ruleId = value;
     }
 
     /**
      * Gets the value of the anomalyId property.
      * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
      */
-    public int getAnomalyId() {
+    public BigInteger getAnomalyId() {
         return anomalyId;
     }
 
     /**
      * Sets the value of the anomalyId property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
      */
-    public void setAnomalyId(int value) {
+    public void setAnomalyId(BigInteger value) {
         this.anomalyId = value;
     }
 

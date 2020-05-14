@@ -171,12 +171,12 @@ public class ConflictResolver implements Resolver {
             //Perform the first solution to get the rules to be deleted
             removedRules.addAll(solveRequest.getShadowingConflictSolutions().stream()
                     .filter(ShadowingConflictSolutionType::isToRemove)
-                    .map(a -> getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId())))
+                    .map(a -> getRuleUsingRuleID(rules.getRule(), a.getRuleId()))
                     .collect(Collectors.toSet()));
 
             //Perform the second solution to flip the order
             solveRequest.getShadowingConflictSolutions().stream().filter(ShadowingConflictSolutionType::isToChangeOrder).forEach(l -> {
-                AnomalyType anomaly = getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(l.getAnomalyId()));
+                AnomalyType anomaly = getAnomalyUsingAnomalyID(anomalies.getAnomaly(), l.getAnomalyId());
                 if (anomaly.getRule().size() == 2) {
                     /*Due to the change that happens in the rules list we cannot use the rule directly from the anomaly
                     by using 'anomaly.getRule().get(0)' but we should get the updated rule from the rules list by using it ID*/
@@ -211,14 +211,14 @@ public class ConflictResolver implements Resolver {
             });
             //Update Removed Anomalies Collection
             removedAnomalies.addAll(solveRequest.getShadowingConflictSolutions().stream()
-                    .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(a.getAnomalyId())))
+                    .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), a.getAnomalyId()))
                     .collect(Collectors.toSet()));
 
         }
         if (solveRequest.getCorrelationSolutions().size() > 0) {
             //Solve Correlation
             solveRequest.getCorrelationSolutions().stream().filter(CorrelationSolutionType::isToChange).forEach(a -> {
-                RuleType rule = getRuleUsingRuleID(rules.getRule(), BigInteger.valueOf(a.getRuleId()));
+                RuleType rule = getRuleUsingRuleID(rules.getRule(), a.getRuleId());
                 rule.setPriority(a.getUpdatedRule().getPriority());
                 rule.setAction(a.getUpdatedRule().getAction());
                 rule.setIPdst(a.getUpdatedRule().getIPdst());
@@ -231,7 +231,7 @@ public class ConflictResolver implements Resolver {
 
             //Update Removed Anomalies Collection
             removedAnomalies.addAll(solveRequest.getCorrelationSolutions().stream()
-                    .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), BigInteger.valueOf(a.getAnomalyId())))
+                    .map(a -> getAnomalyUsingAnomalyID(anomalies.getAnomaly(), a.getAnomalyId()))
                     .collect(Collectors.toSet()));
 
 

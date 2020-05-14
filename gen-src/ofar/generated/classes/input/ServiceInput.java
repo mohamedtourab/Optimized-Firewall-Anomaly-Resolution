@@ -4,11 +4,13 @@ package ofar.generated.classes.input;
 import ofar.generated.classes.conflicts.Anomalies;
 import ofar.generated.classes.rules.Rules;
 
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="DefectedRules" type="{}Rules"/>
  *         &lt;element name="AnomaliesList" type="{}Anomalies"/>
  *       &lt;/sequence>
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -46,7 +48,8 @@ public class ServiceInput {
     @XmlElement(name = "AnomaliesList", required = true)
     protected Anomalies anomaliesList;
     @XmlAttribute(name = "id")
-    protected Integer id;
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger id;
 
     /**
      * Gets the value of the defectedRules property.
@@ -101,10 +104,10 @@ public class ServiceInput {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public Integer getId() {
+    public BigInteger getId() {
         return id;
     }
 
@@ -113,10 +116,10 @@ public class ServiceInput {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link BigInteger }
      *     
      */
-    public void setId(Integer value) {
+    public void setId(BigInteger value) {
         this.id = value;
     }
 
