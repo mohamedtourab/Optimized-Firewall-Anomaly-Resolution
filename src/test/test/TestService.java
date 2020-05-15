@@ -57,10 +57,10 @@ public class TestService {
     public void correct_put_request() {
         ServiceInput serviceInput = DataGenerator.createServiceInput();
         // Perform a POST
-        target.request(MediaType.APPLICATION_XML)
-                .post(Entity.entity(serviceInput, MediaType.APPLICATION_XML));
+        ServiceInput postResult = target.request(MediaType.APPLICATION_XML)
+                .post(Entity.entity(serviceInput, MediaType.APPLICATION_XML), ServiceInput.class);
         logger.log(Level.INFO, "OFAR PUT (correct_put_request) test [:Started]");
-        WebTarget itemTarget = target.path("0");
+        WebTarget itemTarget = target.path(postResult.getId().toString());
         SolveRequest solveRequest = DataGenerator.createSolveRequest();
         Response response = itemTarget.request().accept(MediaType.APPLICATION_XML).put(Entity.entity(solveRequest, MediaType.APPLICATION_XML), Response.class);
         // Assert that correct status code is returned.
@@ -86,6 +86,21 @@ public class TestService {
         Response response = itemTarget.request(MediaType.APPLICATION_XML)
                 .delete();
         Assert.assertEquals(204, response.getStatus());
+        logger.log(Level.INFO, "OFAR DELETE test [:Ended]");
+
+    }
+
+    @Test
+    public void correct_delete_request() {
+        ServiceInput serviceInput = DataGenerator.createServiceInput();
+        logger.log(Level.INFO, "OFAR DELETE (correct_delete_request) test [:Started]");
+        // Perform a POST
+        ServiceInput postResult = target.request(MediaType.APPLICATION_XML)
+                .post(Entity.entity(serviceInput, MediaType.APPLICATION_XML), ServiceInput.class);
+        WebTarget itemTarget = target.path(postResult.getId().toString());
+        Response response = itemTarget.request(MediaType.APPLICATION_XML)
+                .delete();
+        Assert.assertEquals(200, response.getStatus());
         logger.log(Level.INFO, "OFAR DELETE test [:Ended]");
 
     }
