@@ -154,6 +154,9 @@ Two ways to perform test:
 	- *wrong_put_request()* will edit a ServiceInput resource with a wrong  **SolveRequest**, the expected status code will be *400 Bad request*
 
 	- *wrong_delete_request()* will perform delete on a wrong resource, the expected status code will be a *204 No Content*
+	
+	- *correct_delete_request()* will perform delete on an existing resource, the expected status code will be a *200 OK*
+
 
 - [Client test](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/src/rest/resources/client/ClientResource.java)
 
