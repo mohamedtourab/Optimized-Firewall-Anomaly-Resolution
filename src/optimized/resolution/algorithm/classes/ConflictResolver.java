@@ -244,7 +244,7 @@ public class ConflictResolver implements Resolver {
      * This functions returns a list of rules that falls between rx and ry. Notice that Rx should lies before Ry in the table.
      * @param rx First rule in the table
      * @param ry Second rule in the table
-     * @return
+     * @return List of rules that lies between Rx and Ry
      */
     private List<RuleType> getAllRulesBetweenTwoRules(RuleType rx, RuleType ry) {
         List<RuleType> rulesList = new ArrayList<>();
