@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 
 public class ServiceClient {
     //CHANGE THE VALUE TO YOUR PROJECT NAME HERE
-    private static final String projectName = "Optimized_Firewall_Anomaly_Resolution_war_exploded";
+    private static final String projectName = "testProject";
 
     Logger logger = Logger.getLogger(OptimizerResource.class.getName());
     private static Client client;

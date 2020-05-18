@@ -240,6 +240,12 @@ public class ConflictResolver implements Resolver {
         return performRemoval(removedRules, removedAnomalies);
     }
 
+    /**
+     * This functions returns a list of rules that falls between rx and ry. Notice that Rx should lies before Ry in the table.
+     * @param rx First rule in the table
+     * @param ry Second rule in the table
+     * @return
+     */
     private List<RuleType> getAllRulesBetweenTwoRules(RuleType rx, RuleType ry) {
         List<RuleType> rulesList = new ArrayList<>();
         boolean startFilling = false;
@@ -256,6 +262,13 @@ public class ConflictResolver implements Resolver {
         return rulesList;
     }
 
+    /**
+     * This function is used to update the main list of rules and anomalies by removing all the rules and anomalies
+     * that needs to be removed. These rules and anomalies that should be removed are sent as arguments to the functon
+     * @param removedRules List of rules the needs to be removed
+     * @param removedAnomalies List of anomalies that needs to be removed
+     * @return An object of type RemovedEntries that contains all the removed rules and anomalies
+     */
     private RemovedEntries performRemoval(Set<RuleType> removedRules, Set<AnomalyType> removedAnomalies) {
         removedRules.forEach(r -> rules.getRule().remove(r));
         removedRules.forEach(oneRule -> anomalies.getAnomaly().forEach(oneAnomaly -> {
@@ -267,12 +280,23 @@ public class ConflictResolver implements Resolver {
         return new RemovedEntries(removedRules, removedAnomalies);
     }
 
+    /**
+     * This function checks if a certain solveRequest is empty or not
+     * @param solveRequest The solveRequest that need to be checked
+     * @return true if the solveRequest is empty else returns false
+     */
     private boolean isEmpty(SolveRequest solveRequest) {
         return solveRequest.getShadowingConflictSolutions().size() == 0
                 && solveRequest.getCorrelationSolutions().size() == 0
                 && solveRequest.getContradictionSolutions().size() == 0;
     }
 
+    /**
+     *
+     * @param listOfRules get a certain rule using its ID
+     * @param ruleID Id of the request rule
+     * @return RuleType object that contains the rule information if the rule is found else it return an empty object
+     */
     private RuleType getRuleUsingRuleID(List<RuleType> listOfRules, BigInteger ruleID) {
         ObjectFactory rulesObjectFactory = new ObjectFactory();
         RuleType r = rulesObjectFactory.createRuleType();
@@ -283,6 +307,12 @@ public class ConflictResolver implements Resolver {
         return r;
     }
 
+    /**
+     *
+     * @param listOfAnomalies get a certain anomaly using its ID
+     * @param anomalyId Id of the request anomaly
+     * @return AnomalyType object that contains the anomaly information if the anomaly is found else it return an empty object
+     */
     private AnomalyType getAnomalyUsingAnomalyID(List<AnomalyType> listOfAnomalies, BigInteger anomalyId) {
         ofar.generated.classes.conflicts.ObjectFactory conflictsObjectFactory = new ofar.generated.classes.conflicts.ObjectFactory();
         AnomalyType a = conflictsObjectFactory.createAnomalyType();

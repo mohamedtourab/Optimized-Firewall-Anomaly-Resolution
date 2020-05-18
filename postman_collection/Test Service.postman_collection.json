@@ -20,14 +20,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/",
+					"raw": "http://localhost:8080/testProject/rest/optimizer/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"Optimized_Firewall_Anomaly_Resolution_war_exploded",
+						"testProject",
 						"rest",
 						"optimizer",
 						""
@@ -42,14 +42,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/0",
+					"raw": "http://localhost:8080/testProject/rest/optimizer/0",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"Optimized_Firewall_Anomaly_Resolution_war_exploded",
+						"testProject",
 						"rest",
 						"optimizer",
 						"0"
@@ -95,17 +95,17 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/0",
+					"raw": "http://localhost:8080/testProject/rest/optimizer/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"Optimized_Firewall_Anomaly_Resolution_war_exploded",
+						"testProject",
 						"rest",
 						"optimizer",
-						"0"
+						"1"
 					]
 				}
 			},
@@ -117,17 +117,17 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/0",
+					"raw": "http://localhost:8080/testProject/rest/optimizer/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"Optimized_Firewall_Anomaly_Resolution_war_exploded",
+						"testProject",
 						"rest",
 						"optimizer",
-						"0"
+						"1"
 					]
 				}
 			},
@@ -139,17 +139,27 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/optimizer/",
+					"raw": "http://localhost:8080/testProject/rest/optimizer/?page=1&itemsPerPage=3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"Optimized_Firewall_Anomaly_Resolution_war_exploded",
+						"testProject",
 						"rest",
 						"optimizer",
 						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "itemsPerPage",
+							"value": "3"
+						}
 					]
 				},
 				"description": "GET ALL"
@@ -162,14 +172,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/Optimized_Firewall_Anomaly_Resolution_war_exploded/rest/test",
+					"raw": "http://localhost:8080/testProject/rest/test",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"Optimized_Firewall_Anomaly_Resolution_war_exploded",
+						"testProject",
 						"rest",
 						"test"
 					]

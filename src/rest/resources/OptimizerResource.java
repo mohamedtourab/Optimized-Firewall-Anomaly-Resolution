@@ -57,8 +57,12 @@ public class OptimizerResource {
             @ApiResponse(code = 200, message = "OK", response = ServiceInput.class),
     })
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Collection<ServiceInput> getAllServiceInput() {
-        return Database.dbHashMap.values();
+    public Collection<ServiceInput> getAllServiceInput(@ApiParam("The page of results to be read")
+                                                       @QueryParam("page")
+                                                       @DefaultValue("1") int page, @ApiParam("The number of items per page that will be returned")
+                                                       @QueryParam("itemsPerPage")
+                                                       @DefaultValue("2") int itemsPerPage) {
+        return Database.getPage(page, itemsPerPage);
     }
 
     @DELETE
