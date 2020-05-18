@@ -68,7 +68,7 @@ public class ServiceClient {
                 .post(Entity.entity(serviceInput, MediaType.APPLICATION_XML));
         if (response.getStatus() == 201) {
             logger.log(Level.INFO, "--- Post executed correctly --- \n");
-            // convert response entity to Negotiate object
+            // convert response entity to ServiceInput object
             ServiceInput receivedServiceInput = response.readEntity(ServiceInput.class);
             URI uri = response.getLocation();
             logger.log(Level.INFO, "Received URI: " + uri);

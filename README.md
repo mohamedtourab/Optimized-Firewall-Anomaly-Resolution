@@ -141,7 +141,8 @@ You need to specify the name of your project in the projectName variable inside 
 
 
 Two ways to perform test:
-- [JUnit test](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/src/test/test/TestService.java)
+##### JUnit Test
+- [TestService.java](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/src/test/test/TestService.java)
 
 	It will perform some different kind of tests:
 
@@ -156,13 +157,25 @@ Two ways to perform test:
 	- *wrong_delete_request()* will perform delete on a wrong resource, the expected status code will be a *204 No Content*
 	
 	- *correct_delete_request()* will perform delete on an existing resource, the expected status code will be a *200 OK*
-
-
+	
+- [ConflictResolver.java](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/src/test/test/ConflictResolverTest.java)
+    It will perform some different kind of tests for the main algorithm used in this project:
+    - *testGetRules()* Check that getRules() correctly get the set of rules from the conflictResolver.
+    - *testGetAnomalies()* Check that getAnomalies() correctly get anomalies from the conflictResolver.
+    - *testResolveAnomalies()* Check that resolveAnomalies() correctly removes all sub-optimization anomalies and the rules involved without any interference from the network administrator.
+    - *testRemoveIrrelevanceAnomaly()* Check that removeIrrelevance() correctly remove irrelevance anomalies.
+    - *testRemoveUnnecessaryAnomaly()* Check that removeUnnecessaryAnomaly() correctly removed all the unnecessary anomalies and the involved rules. The data inside the paper contain 6 anomalies and 6 involved rules by applying the recommended solution the 6 rules should be removed and consequently the anomalies will be removed.
+    - *testUnnecessaryAnomalyChecker()* Check that the unnecessaryAnomalyChecker correctly capture the unnecessary anomalies between rules.
+    - *testRemoveDuplicationOrShadowingRedundancyAnomaly()* Check that removeDuplicationOrShadowingRedundancyAnomaly() correctly removes the desired type of anomalies based on the arguments sent to the function.
+    - *testGetConflictAnomalies()* Check that getConflictAnomalies() correctly return the list of conflict anomalies that needs to be solved by network admin.
+    - *testExecuteSolveRequest()* Check that executeSolveRequest is working properly and the solve request is applied correctly and all conflict anomalies are solved.
+    - *testAnomalyTypeToString()* Check that toString method inside the AnomalyType is working correctly.
+    
 - [Client test](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/src/rest/resources/client/ClientResource.java)
 
 	It is a resource that can be called by performing a GET to path `http://localhost:8080/project_name/rest/test`. 
 	
-	The resource will call a test client that will perform a combination of operations, to be sure each operation is correct the Client class will check whether the response of each operation is as expected or not: if yes it will log the result, otherwise it will throw an exception.
+	The resource will call a test [client](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/src/rest/resources/client/ServiceClient.java) that will perform a combination of operations, to be sure each operation is correct the Client class will check whether the response of each operation is as expected or not: if yes it will log the result, otherwise it will throw an exception.
 
 # Postman Collection
 
