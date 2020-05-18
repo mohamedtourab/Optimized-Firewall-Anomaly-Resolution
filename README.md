@@ -179,7 +179,7 @@ Two ways to perform test:
 
 # Postman Collection
 
-The postman folder contains a .json file (that can be imported in Postman) which contains predefined request to test the web service.
+The postman [folder](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/postman_collection) contains a .json file (that can be imported in Postman) which contains predefined request to test the web service.
 
 # Possible Issues
 
