@@ -13,11 +13,11 @@ Different methods allow you to get the list of updated set of rules after perfor
 # Overview
 
 - [Configuration](#configuration)
-	- [IntelliJ IDEA](#intellij-IDEA)
-	- [Eclipse](#Eclipse)
-- [Test](#Test)
-- [Postman Collection](https://github.com/MohamedMamdouh95/Optimized-Firewall-Anomaly-Resolution/tree/master/postman_collection)
-- [Possible Issues](#Possible-Issues)
+	- [IntelliJ IDEA](#intellij-idea)
+	- [Eclipse](#eclipse)
+- [Test](#test)
+- [Postman Collection](#postman-collection)
+- [Possible Issues](#possible-issues)
 
 # Configuration
 
