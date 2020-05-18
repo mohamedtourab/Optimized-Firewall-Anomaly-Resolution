@@ -63,7 +63,7 @@ public class ServiceClient {
 
     public URI performPost(ServiceInput serviceInput) {
         logger.log(Level.INFO, "--- Performing a Post --- \n");
-        // Perform a POST http request using Json
+        // Perform a POST to create a resource
         Response response = target.request(MediaType.APPLICATION_XML)
                 .post(Entity.entity(serviceInput, MediaType.APPLICATION_XML));
         if (response.getStatus() == 201) {
@@ -128,7 +128,7 @@ public class ServiceClient {
     public void performPutOnSingleResource(URI uri) {
         ServiceInput serviceInput = map.get(uri);
         if (serviceInput == null) {
-            logger.log(Level.INFO, " --- Cannot Perform PUT operations ServiceInput resouce not found --- ");
+            logger.log(Level.INFO, " --- Cannot Perform PUT operations ServiceInput resource not found --- ");
             return;
         }
         logger.log(Level.INFO, " --- Performing PUT operations on the single resource --- ");
@@ -142,8 +142,6 @@ public class ServiceClient {
     public void performGetAllResources() {
 
         logger.log(Level.INFO, " --- Performing GET operations on the main resource --- ");
-
-        // Get the response as json and convert it into list of Negotiate objects
         List<ServiceInput> xmlResponse = target.request().accept(MediaType.APPLICATION_XML)
                 .get(new GenericType<List<ServiceInput>>() {
                 });
