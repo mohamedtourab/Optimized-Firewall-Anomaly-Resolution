@@ -12,6 +12,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Database {
     public final static Map<Integer, ServiceInput> dbHashMap = new ConcurrentHashMap<>();
 
+    /**
+     * @param serviceInput The resource that need to be saved in database
+     * @return The saved resource or null if the saving process failed.
+     */
     public static synchronized ServiceInput insertEntry(ServiceInput serviceInput) {
         if (serviceInput == null) {
             return null;
@@ -21,10 +25,20 @@ public class Database {
         return serviceInput;
     }
 
+    /**
+     * @param key the key of the resource inside the hashmap
+     * @return the value to which the specified key is mapped, or
+     * {@code null} if this map contains no mapping for the key
+     */
     public static ServiceInput getEntry(int key) {
         return dbHashMap.get(key);
     }
 
+    /**
+     * @param page         page number that need to be fetched
+     * @param itemsPerPage specify the number of items per page.
+     * @return List<ServiceInputs> that corresponds to a certain page.
+     */
     public static List<ServiceInput> getPage(int page, int itemsPerPage) {
         int totalAvailableNumberOfPages = (dbHashMap.size() / itemsPerPage) + 1;
         if (page > totalAvailableNumberOfPages) {
@@ -41,6 +55,6 @@ public class Database {
             onePage = new ArrayList<>();
         }
         itemIndex = 0;
-        return pages.get(page-1);
+        return pages.get(page - 1);
     }
 }

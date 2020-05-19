@@ -46,6 +46,10 @@ public class ServiceClient {
         return UriBuilder.fromUri("http://localhost:8080/" + projectName + "/rest/optimizer/").build();
     }
 
+    /**
+     * This function perform different kinds of operations to check if the web service will exceute them correctly
+     * or throw an error while executing.
+     */
     public void runClient() {
         ServiceInput serviceInput = DataGenerator.createServiceInput();
         URI uri1 = performPost(serviceInput);
@@ -61,6 +65,10 @@ public class ServiceClient {
 
     }
 
+    /**
+     * @param serviceInput the resource to be created
+     * @return URI of the created resource
+     */
     public URI performPost(ServiceInput serviceInput) {
         logger.log(Level.INFO, "--- Performing a Post --- \n");
         // Perform a POST to create a resource
@@ -81,6 +89,9 @@ public class ServiceClient {
         }
     }
 
+    /**
+     * @param uri The URI of the item that needs to be deleted
+     */
     public void performDelete(URI uri) {
         logger.log(Level.INFO, "--- Performing a DELETE Request --- \n");
         WebTarget itemTarget = client.target(uri);
@@ -96,6 +107,11 @@ public class ServiceClient {
 
     }
 
+    /**
+     * @param uri    The URI of the item that needs to be fetched
+     * @param action Specify if there's any action needed to be performed (i.e perform certain type of anomaly
+     *               resolution before fetching the data).
+     */
     public void performGetSingleResource(URI uri, String action) {
         WebTarget itemTarget;
         ServiceInput serviceInput = null;
@@ -125,6 +141,9 @@ public class ServiceClient {
 
     }
 
+    /**
+     * @param uri URI of the resource that needs to be updated.
+     */
     public void performPutOnSingleResource(URI uri) {
         ServiceInput serviceInput = map.get(uri);
         if (serviceInput == null) {
@@ -139,6 +158,10 @@ public class ServiceClient {
 
     }
 
+    /***
+     * Perform a get request for all the items inside the database.
+     * This method use the default page setting which is page = 1, itemsPerPage = 2.
+     */
     public void performGetAllResources() {
 
         logger.log(Level.INFO, " --- Performing GET operations on the main resource --- ");

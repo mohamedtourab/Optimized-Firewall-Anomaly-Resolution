@@ -139,6 +139,7 @@ public class ConflictResolverTest {
 
     /**
      * Check that the unnecessaryAnomalyChecker correctly capture the unnecessary anomalies between rules
+     *
      * @throws Exception If the format of the IP address are incorrect or empty this exception is thrown
      */
     @Test
@@ -154,11 +155,11 @@ public class ConflictResolverTest {
         //Perform unnecessary anomaly check
         Anomalies newAnomalies = unnecessaryAnomalyChecker.checkForUnnecessaryAnomalies(conflictResolver.getAnomalies().getAnomaly().get(anomaliesListSize - 1).getAnomalyID().intValue());
         //In the paper there is a mistake, 2 unnecessary anomalies are missing so the total number of anomalies are 8
-        assertEquals("Unnecessary anomaly numbers are different than expected ",8, newAnomalies.getAnomaly().size());
+        assertEquals("Unnecessary anomaly numbers are different than expected ", 8, newAnomalies.getAnomaly().size());
     }
 
     /**
-     *Check that removeDuplicationOrShadowingRedundancyAnomaly() correctly removes the desired type of anomalies based on the arguments sent
+     * Check that removeDuplicationOrShadowingRedundancyAnomaly() correctly removes the desired type of anomalies based on the arguments sent
      */
     @Test
     public void testRemoveDuplicationOrShadowingRedundancyAnomaly() {
@@ -205,8 +206,8 @@ public class ConflictResolverTest {
         conflictResolver = new ConflictResolver(rules, anomalies);
         //remove shadowingRedundancy anomalies and the rule creating it.
         RemovedEntries removedEntries2 = conflictResolver.removeDuplicationOrShadowingRedundancyAnomaly(AnomalyNames.SHADOWING_REDUNDANCY);
-        assertEquals("The returned RemovedEntries doesn't match the expected one",1, removedEntries2.getRemovedAnomalies().size());
-        assertEquals("The returned RemovedEntries doesn't match the expected one",1, removedEntries2.getRemovedRules().size());
+        assertEquals("The returned RemovedEntries doesn't match the expected one", 1, removedEntries2.getRemovedAnomalies().size());
+        assertEquals("The returned RemovedEntries doesn't match the expected one", 1, removedEntries2.getRemovedRules().size());
     }
 
     /**
@@ -235,7 +236,7 @@ public class ConflictResolverTest {
     }
 
     /**
-     *Check that executeSolveRequest is working properly and the solve request is applied correctly
+     * Check that executeSolveRequest is working properly and the solve request is applied correctly
      */
     @Test
     public void testExecuteSolveRequest() {

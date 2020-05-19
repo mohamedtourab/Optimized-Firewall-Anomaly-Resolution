@@ -12,7 +12,13 @@ import java.io.File;
 import static javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI;
 
 public class DataMarshaller {
-
+    /**
+     *
+     * @param data The data that needs to be converted into XML.
+     * @param contextPath The classpath that contains the JAXB annotated classes for this data.
+     * @param outputFilePath The output path of the XML file.
+     * @param schemaPath The path of the XSD file that describes this XML file.
+     */
     public static void marshalData(Object data, String contextPath, String outputFilePath, String schemaPath) {
         // create a Marshaller and marshal to a file
         try {

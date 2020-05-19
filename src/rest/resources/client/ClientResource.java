@@ -13,6 +13,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+/**
+ * Client Resource is used to call the ServiceClient.java using GET REST call.
+ * This service will perform different set of operations and return <test>TEST ENDED SUCCESSFULLY</test> if
+ * all tests ran smoothly without any exceptions. If any exceptions are raised they will be forwarded to the client
+ */
 @Path("/test")
 @Api(value = "/test")
 public class ClientResource {
@@ -30,6 +35,6 @@ public class ClientResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response test() {
         service.runClient();
-        return  Response.status(Response.Status.OK).entity("<test>TEST ENDED SUCCESSFULLY</test>").build();
+        return Response.status(Response.Status.OK).entity("<test>TEST ENDED SUCCESSFULLY</test>").build();
     }
 }

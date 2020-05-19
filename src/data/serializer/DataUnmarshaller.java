@@ -12,7 +12,16 @@ import java.io.File;
 import static javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI;
 
 public class DataUnmarshaller {
-
+    /**
+     *
+     * @param fileName The file that needs to be converted into Java object
+     * @param schemaPath The path of the XSD schema of the XML file provided.
+     * @param contextPath The path of the generated JAXB annotated class of this XSD file.
+     * @param <T> The type of object the object that should be created
+     * @return
+     * @throws SAXException
+     * @throws JAXBException
+     */
     public static <T> T unmarshallSolveRequest(String fileName, String schemaPath, String contextPath) throws SAXException, JAXBException {
         T solveRequest;
         try {

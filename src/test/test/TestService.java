@@ -24,8 +24,10 @@ public class TestService {
     private static final Client client = ClientBuilder.newClient();
     private final WebTarget target = client.target(baseUrl);
 
+    /**
+     * Check that post request will correctly create a resource
+     */
     @Test
-    //Check that post request will correctly create a resource
     public void correct_post_request() {
         ServiceInput serviceInput = DataGenerator.createServiceInput();
         Assert.assertNotNull("The Generated Data is null", serviceInput);
@@ -40,8 +42,10 @@ public class TestService {
         logger.log(Level.FINEST, "OFAR{post} test [:Ended]");
     }
 
+    /**
+     * Check that the validator will throw 400 Bad request when the POST body doesn't validate against the schema
+     */
     @Test
-    //Check that the validator will throw 400 Bad request when the POST body doesn't validate against the schema
     public void wrong_post_request() {
         //Creating wrong object
         SolveRequest serviceInput = DataGenerator.createSolveRequest();
@@ -57,8 +61,10 @@ public class TestService {
         logger.log(Level.INFO, "OFAR POST test [:Ended]");
     }
 
+    /**
+     * Check that the put request is performed correctly and the resource is updated
+     */
     @Test
-    //Check that the put request is performed correctly and the resource is updated
     public void correct_put_request() {
         ServiceInput serviceInput = DataGenerator.createServiceInput();
         // Perform a POST to create a resource
@@ -77,8 +83,10 @@ public class TestService {
         logger.log(Level.INFO, "OFAR PUT test [:Ended]");
     }
 
+    /**
+     * Check that validation throw a 400 bad request when the put body doesn't match the schema
+     */
     @Test
-    //Check that validation throw a 400 bad request when the put body doesn't match the schema
     public void wrong_put_request() {
         logger.log(Level.INFO, "OFAR PUT (correct_put_request) test [:Started]");
         WebTarget itemTarget = target.path("0");
@@ -92,8 +100,10 @@ public class TestService {
         logger.log(Level.INFO, "OFAR PUT test [:Ended]");
     }
 
+    /**
+     * Check that delete() method will throw 204 when the target to be deleted doesn't exist
+     */
     @Test
-    //Check that delete() method will throw 204 when the target to be deleted doesn't exist
     public void wrong_delete_request() {
         logger.log(Level.INFO, "OFAR DELETE (wrong_delete_request) test [:Started]");
         //Creating a wrong target
@@ -106,8 +116,10 @@ public class TestService {
 
     }
 
+    /**
+     * Check that delete() method will correctly delete the resource
+     */
     @Test
-    //Check that delete() method will correctly delete the resource
     public void correct_delete_request() {
         ServiceInput serviceInput = DataGenerator.createServiceInput();
         logger.log(Level.INFO, "OFAR DELETE (correct_delete_request) test [:Started]");
