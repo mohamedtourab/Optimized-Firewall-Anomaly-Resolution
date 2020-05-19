@@ -27,26 +27,30 @@ import java.math.BigInteger;
 import static org.junit.Assert.*;
 
 public class ConflictResolverTest {
-
+    /**
+     * Check that getRules() correctly get rules
+     */
     @Test
-    //Check that getRules() correctly get rules
     public void testGetRules() {
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         assertNotNull("The created conflictResolver is null", conflictResolver);
         assertEquals("The two rules lists are different", DataGenerator.createRules().getRule(), conflictResolver.getRules().getRule());
     }
 
+    /**
+     * Check that getAnomalies() correctly get anomalies
+     */
     @Test
-    //Check that getAnomalies() correctly get anomalies
     public void testGetAnomalies() {
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         assertNotNull("The created conflictResolver is null", conflictResolver);
         assertEquals("The two anomalies lists are different", DataGenerator.createAnomalies().getAnomaly(), conflictResolver.getAnomalies().getAnomaly());
     }
 
-
+    /**
+     * Check that resolveAnomalies() correctly removes all sub-optimization anomalies and the rules involved
+     */
     @Test
-    //Check that resolveAnomalies() correctly removes all sub-optimization anomalies and the rules involved
     public void testResolveAnomalies() {
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         assertNotNull("The created conflictResolver is null", conflictResolver);
@@ -99,8 +103,10 @@ public class ConflictResolverTest {
 
     }
 
+    /**
+     * Check that removeIrrelevance() correctly remove irrelevance anomalies
+     */
     @Test
-    //Check that removeIrrelevance() correctly remove irrelevance anomalies
     public void testRemoveIrrelevanceAnomaly() {
         //There are 2 irrelevant rules and 6 anomalies caused by these rules inside the data provided inside the paper
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
@@ -113,8 +119,10 @@ public class ConflictResolverTest {
 
     }
 
+    /**
+     * Check that removeUnnecessaryAnomaly() correctly removed all the unnecessary anomalies and the involved rules
+     */
     @Test
-    //Check that removeUnnecessaryAnomaly() correctly removed all the unnecessary anomalies and the involved rules
     public void testRemoveUnnecessaryAnomaly() {
         //Create a conflict resolver that contains the list of rules and anomalies in the paper
         /*The data inside the paper contain 6 anomalies and 6 involved rules by applying the recommended solution
@@ -129,8 +137,12 @@ public class ConflictResolverTest {
         assertEquals("The removed data is not as expected", 6, removedEntries.getRemovedAnomalies().size());
     }
 
+    /**
+     * Check that the unnecessaryAnomalyChecker correctly capture the unnecessary anomalies between rules
+     * @throws Exception If the format of the IP address are incorrect or empty this exception is thrown
+     */
     @Test
-    //Check that the unnecessaryAnomalyChecker correctly capture the unnecessary anomalies between rules
+
     public void testUnnecessaryAnomalyChecker() throws Exception {
         //Create conflictResolver that contains the original list of rules
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
@@ -145,8 +157,10 @@ public class ConflictResolverTest {
         assertEquals("Unnecessary anomaly numbers are different than expected ",8, newAnomalies.getAnomaly().size());
     }
 
+    /**
+     *Check that removeDuplicationOrShadowingRedundancyAnomaly() correctly removes the desired type of anomalies based on the arguments sent
+     */
     @Test
-    //Check that removeDuplicationOrShadowingRedundancyAnomaly() correctly removes the desired type of anomalies based on the arguments sent
     public void testRemoveDuplicationOrShadowingRedundancyAnomaly() {
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         assertNotNull("The created conflictResolver is null", conflictResolver);
@@ -195,8 +209,10 @@ public class ConflictResolverTest {
         assertEquals("The returned RemovedEntries doesn't match the expected one",1, removedEntries2.getRemovedRules().size());
     }
 
+    /**
+     * Check that getConflictAnomalies() correctly return the list of conflict anomalies that needs to be solved by network admin
+     */
     @Test
-    //Check that getConflictAnomalies() correctly return the list of conflict anomalies that needs to be solved by network admin
     public void testGetConflictAnomalies() {
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         assertNotNull("The created conflictResolver is null", conflictResolver);
@@ -218,8 +234,10 @@ public class ConflictResolverTest {
 
     }
 
+    /**
+     *Check that executeSolveRequest is working properly and the solve request is applied correctly
+     */
     @Test
-    //Check that executeSolveRequest is working properly and the solve request is applied correctly
     public void testExecuteSolveRequest() {
         ConflictResolver conflictResolver = new ConflictResolver(DataGenerator.createRules(), DataGenerator.createAnomalies());
         assertNotNull("The created conflictResolver is null", conflictResolver);
@@ -283,8 +301,10 @@ public class ConflictResolverTest {
         assertNull(removedEntries);
     }
 
+    /**
+     * Check that toString method is working correctly
+     */
     @Test
-    //Check that toString method is working correctly
     public void testAnomalyTypeToString() {
         //Creating anomaly
         final AnomalyType anomalyType = new AnomalyType();
