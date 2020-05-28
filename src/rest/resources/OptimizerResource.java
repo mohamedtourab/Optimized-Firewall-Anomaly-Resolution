@@ -61,7 +61,14 @@ public class OptimizerResource {
                                                        @QueryParam("page")
                                                        @DefaultValue("1") int page, @ApiParam("The number of items per page that will be returned")
                                                        @QueryParam("itemsPerPage")
+
                                                        @DefaultValue("2") int itemsPerPage) {
+        if (page < 0 || itemsPerPage < 1) {
+            throw new BadRequestException("Invalid arguments. Page number cannot be less than zero and Item Per Page cannot be smaller than 1");
+        } else if (page == 0) {
+            //our paging system starts from 1 so if the user entered 0 it will be the same if entered 1
+            page = 1;
+        }
         return Database.getPage(page, itemsPerPage);
     }
 
